@@ -29,7 +29,7 @@ namespace DialogueSystem.Elements
 
             foreach (DSNodeChoiceSave choice in Choices)
             {
-                Port choicePort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
+                Port choicePort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
                 choicePort.portName = choice.Text;
                 choicePort.userData = choice;
 
