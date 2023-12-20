@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
+  m_Name: ef0b5fd8d1739b743a4aee8f48de5a95
+  m_EditorClassIdentifier: 
+  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4be7c3df4cdfee54e97bb83db6057bda, type: 2}
+  <Text>k__BackingField: Hello
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: OUT
+    <NextNode>k__BackingField: {fileID: 11400000, guid: ef3bb23e66ddb9b48b9c2d26575dae02, type: 2}
+  <DialogueType>k__BackingField: 0
+  <IsStartingDialogue>k__BackingField: 1
