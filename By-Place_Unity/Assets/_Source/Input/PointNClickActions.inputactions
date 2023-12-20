@@ -1,0 +1,74 @@
+{
+    "name": "PointNClickActions",
+    "maps": [
+        {
+            "name": "Main",
+            "id": "673070c7-32b9-4e01-b4aa-27bf4f7d1ffb",
+            "actions": [
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "bfa6dbc1-594a-4540-bb55-7498c764d400",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Stop",
+                    "type": "Button",
+                    "id": "58ae2dbb-2cb2-4537-8846-4511a390d383",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Point",
+                    "type": "Value",
+                    "id": "ba40acdc-4e23-4bd9-8f00-1e9533323832",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1bf594ce-ef25-45dd-a141-e282dc60b44c",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34d493a4-1765-4b44-94d7-704b72ac7b26",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Stop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7baad917-e27f-41bd-920e-a28d02d338fb",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
