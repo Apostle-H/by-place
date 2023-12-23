@@ -1,14 +1,12 @@
 using System.Collections.Generic;
-using DialogueSystem.Data;
-using DialogueSystem.Scripts.Data;
 using UnityEditor;
 using UnityEngine;
 
-namespace DialogueSystem.Scripts.ScriptableObjects
+namespace DialogueSystem.Data.Save
 {
     public class DialogueNodeSO : ScriptableObject
     {
-        [field: SerializeField] public GUID Guid { get; set; }
+        [field: SerializeField] public int Guid { get; set; } = -1;
         [field: SerializeField] public DialogueSpeakerSO SpeakerSO { get; set; }
         [field: SerializeField, TextArea()] public string Text { get; set; }
         [field: SerializeField] public List<DialogueNodeChoice> Choices { get; set; }

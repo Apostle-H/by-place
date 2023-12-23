@@ -1,5 +1,4 @@
 using DialogueSystem.Data;
-using DialogueSystem.Data.Save;
 using DialogueSystem.Utilities;
 using DialogueSystem.Utils.Extensions;
 using DialogueSystem.Windows;
@@ -16,7 +15,7 @@ namespace DialogueSystem.Elements
 
             DialogueType = DialogueType.SINGLE_CHOICE;
 
-            DSNodeChoiceSave nodeChoiceSaveData = new DSNodeChoiceSave() { Text = DEFAULT_OUTPUT_PORT_NAME };
+            DSNodeChoiceSave nodeChoiceSaveData = new DSNodeChoiceSave() { Text = "Next" };
 
             Choices.Add(nodeChoiceSaveData);
         }
@@ -30,7 +29,7 @@ namespace DialogueSystem.Elements
             foreach (DSNodeChoiceSave choice in Choices)
             {
                 Port choicePort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
-                choicePort.portName = choice.Text;
+                choicePort.portName = DEFAULT_OUTPUT_PORT_NAME;
                 choicePort.userData = choice;
 
                 outputContainer.Add(choicePort);

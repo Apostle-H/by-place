@@ -2,8 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DialogueSystem.Data;
-using DialogueSystem.Data.Save;
-using DialogueSystem.Utilities;
 using DialogueSystem.Utils;
 using DialogueSystem.Utils.Extensions;
 using DialogueSystem.Windows;
@@ -20,7 +18,7 @@ namespace DialogueSystem.Elements
         public static readonly string DEFAULT_INPUT_PORT_NAME = "IN";
         public static readonly string DEFAULT_OUTPUT_PORT_NAME = "OUT";
 
-        public GUID Guid { get; set; } = new();
+        public int Guid { get; set; } = -1;
         public List<DSNodeChoiceSave> Choices { get; set; }
         public string Text { get; set; }
         public DialogueType DialogueType { get; set; }
@@ -34,7 +32,7 @@ namespace DialogueSystem.Elements
         
         public virtual void Initialize(DSGraphView dsGraphView, Vector2 position)
         {
-            Guid = GUID.Generate();
+            Guid = IDGenerator.NewId();
 
             Choices = new List<DSNodeChoiceSave>();
             Text = "Dialogue text.";

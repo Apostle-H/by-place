@@ -1,8 +1,7 @@
 using System;
-using DialogueSystem.Scripts.ScriptableObjects;
 using UnityEngine;
 
-namespace DialogueSystem.Scripts.Data
+namespace DialogueSystem.Data.Save
 {
     [Serializable]
     public class DialogueNodeChoice

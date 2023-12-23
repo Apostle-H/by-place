@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DialogueSystem.Data.Save;
+using DialogueSystem.Data;
 using DialogueSystem.Elements;
 using DialogueSystem.Utilities;
 using DialogueSystem.Utils.Extensions;
@@ -19,9 +19,9 @@ namespace DialogueSystem.Windows
 
         private MiniMap _miniMap;
 
-        private Dictionary<GUID, DSNode> _ungroupedNodes = new();
-        private Dictionary<GUID, DSGroup> _groups = new();
-        private Dictionary<GUID, List<GUID>> _groupedNodes = new();
+        private Dictionary<int, DSNode> _ungroupedNodes = new();
+        private Dictionary<int, DSGroup> _groups = new();
+        private Dictionary<int, List<int>> _groupedNodes = new();
 
         public DSGraphView(DSEditorWindow dsEditorWindow)
         {
@@ -76,10 +76,10 @@ namespace DialogueSystem.Windows
             return contextualMenuManipulator;
         }
 
-        public DSGroup CreateGroup(string title, Vector2 position, GUID guid = new GUID())
+        public DSGroup CreateGroup(string title, Vector2 position, int guid = -1)
         {
             var group = new DSGroup(title, position);
-            if (!guid.Empty())
+            if (guid != -1)
                 group.Guid = guid;
             AddGroup(group);
             AddElement(group);
@@ -95,11 +95,11 @@ namespace DialogueSystem.Windows
             return group;
         }
 
-        public DSNode CreateNode(Type nodeType, Vector2 position, GUID guid = new GUID(), bool draw = true)
+        public DSNode CreateNode(Type nodeType, Vector2 position, int guid = -1, bool draw = true)
         {
             var node = (DSNode) Activator.CreateInstance(nodeType);
             node.Initialize(this, position);
-            if (!guid.Empty())
+            if (guid != -1)
                 node.Guid = guid;
             if (draw)
                 node.Draw();
@@ -209,7 +209,7 @@ namespace DialogueSystem.Windows
                         continue;
 
                     var choiceData = (DSNodeChoiceSave)edge.output.userData;
-                    choiceData.NextNodeGuid = new GUID();
+                    choiceData.NextNodeGuid = -1;
                 }
                 
                 return changes;
@@ -226,7 +226,7 @@ namespace DialogueSystem.Windows
         public void AddGroup(DSGroup group)
         {
             _groups.Add(group.Guid, group);
-            _groupedNodes.Add(group.Guid, new List<GUID>());
+            _groupedNodes.Add(group.Guid, new());
         }
 
         public void RemoveGroup(DSGroup group)

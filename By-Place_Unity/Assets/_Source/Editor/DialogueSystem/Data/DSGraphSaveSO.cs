@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DialogueSystem.Data.Save
+namespace DialogueSystem.Data
 {
     public class DSGraphSaveSO : ScriptableObject
     {
