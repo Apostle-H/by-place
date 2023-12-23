@@ -1,4 +1,5 @@
-﻿using InputSystem;
+﻿using DialogueSystem.View;
+using InputSystem;
 using Movement;
 using PointNClick;
 using PointNClick.Data;
@@ -18,10 +19,14 @@ namespace Core.DI
         [SerializeField] private NavMeshMover characterMover;
         [SerializeField] private PointNClickConfigSO pointNClickConfigSO;
         
+        [Header("DialogueSystem")]
+        [SerializeField] private DialogueResolver dialogueResolver;
+        
         protected override void Configure(IContainerBuilder builder)
         {
             ConfigureCommon(builder);
             ConfigurePointNClick(builder);
+            ConfigureDialogueSystem(builder);
         }
 
         private void ConfigureCommon(IContainerBuilder builder) => builder.RegisterComponent(coroutineRunner);
@@ -34,6 +39,11 @@ namespace Core.DI
             builder.Register<CharacterComponents>(Lifetime.Singleton);
             builder.RegisterInstance(pointNClickConfigSO);
             builder.RegisterEntryPoint<PointNClickInvoker>();
+        }
+
+        private void ConfigureDialogueSystem(IContainerBuilder builder)
+        {
+            builder.RegisterComponent(dialogueResolver);
         }
     }
 }

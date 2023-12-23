@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using InputSystem;
 using PointNClick.Data;
+using PointNClick.Interactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utils.Runners;
@@ -18,6 +19,10 @@ namespace PointNClick
         private readonly CoroutineRunner _coroutineRunner;
 
         private readonly WaitForSeconds _cursorToggleWaiter;
+
+        private IInteractable _targetInteractable;
+
+        private bool _canMove;
 
         [Inject]
         public PointNClickInvoker(PointNClickActions actions, CharacterComponents characterComponents, 
@@ -42,26 +47,77 @@ namespace PointNClick
         private void Bind()
         {
             _actions.Main.Interact.canceled += Clicked;
-            _actions.Main.Stop.performed += Stop;
+            _actions.Main.Stop.performed += Cancel;
         }
 
         private void Expose()
         {
             _actions.Main.Interact.canceled -= Clicked;
-            _actions.Main.Stop.performed -= Stop;
+            _actions.Main.Stop.performed -= Cancel;
         }
 
         private void Clicked(InputAction.CallbackContext ctx)
         {
             var screenPoint = _actions.Main.Point.ReadValue<Vector2>();
-            if (!PhysicsService.RayCastFromCamera(screenPoint, _configSO.WalkableMask, out RaycastHit hit))
-                return;
+            var hit = new RaycastHit();
             
-            _coroutineRunner.StartCoroutine(ToggleMoveCursor());
-            _characterComponents.Mover.Move(hit.point);
+            if (PhysicsService.RayCastFromCamera(screenPoint, _configSO.InteractableMask, out hit)
+                && hit.collider.TryGetComponent<IInteractable>(out var interactable))
+            {
+                Interact(interactable);
+                return;
+            }
+            
+            if (_canMove && PhysicsService.RayCastFromCamera(screenPoint, _configSO.WalkableMask, out hit))
+                Move(hit.point);
         }
 
-        private void Stop(InputAction.CallbackContext ctx) => _characterComponents.Mover.Stop();
+        private void Cancel(InputAction.CallbackContext ctx)
+        {
+            if (_targetInteractable != default)
+            {
+                _targetInteractable.OnFinished -= UnblockMovement;
+                _characterComponents.Mover.OnArrived += StartInteraction;
+                
+                UnblockMovement();
+            }
+            _characterComponents.Mover.Stop();
+        }
+
+        private void Move(Vector3 target)
+        {
+            _coroutineRunner.StartCoroutine(ToggleMoveCursor());
+            _characterComponents.Mover.Move(target);
+        }
+
+        private void Interact(IInteractable interactable)
+        {
+            _targetInteractable = interactable;
+            if (_targetInteractable.BlockMovement)
+            {
+                BlockMovement();
+                _targetInteractable.OnFinished += UnblockMovement;
+            }
+            _characterComponents.Mover.OnArrived += StartInteraction;
+                
+            _coroutineRunner.StartCoroutine(ToggleMoveCursor());
+            _characterComponents.Mover.Move(_targetInteractable.Position);
+            _canMove = !_targetInteractable.BlockMovement;
+        }
+
+        private void StartInteraction()
+        {
+            _characterComponents.Mover.OnArrived -= StartInteraction;
+            _targetInteractable.Interact();
+        }
+
+        private void BlockMovement() => _canMove = false;
+
+        private void UnblockMovement()
+        {
+            _canMove = true;
+            _targetInteractable.OnFinished -= UnblockMovement;
+        }
 
         private IEnumerator ToggleMoveCursor()
         {

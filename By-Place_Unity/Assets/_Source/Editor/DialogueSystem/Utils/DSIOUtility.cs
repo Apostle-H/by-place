@@ -4,8 +4,6 @@ using System.Linq;
 using DialogueSystem.Data;
 using DialogueSystem.Data.Save;
 using DialogueSystem.Elements;
-using DialogueSystem.Scripts.Data;
-using DialogueSystem.Scripts.ScriptableObjects;
 using DialogueSystem.Windows;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -55,19 +53,19 @@ namespace DialogueSystem.Utils
 
             DSEditorWindow.UpdateFileName(graphData.FileName);
 
-            var loadedGroups = new Dictionary<GUID, DSGroup>();
+            var loadedGroups = new Dictionary<int, DSGroup>();
             LoadGroups(graphData.Groups, graphView, ref loadedGroups);
-            var loadedNodes = new Dictionary<GUID, DSNode>();
+            var loadedNodes = new Dictionary<int, DSNode>();
             LoadNodes(graphData.Nodes, graphView, loadedGroups, ref loadedNodes);
             LoadNodesConnections(graphView, loadedNodes);
         }
         
         private static void SaveNodes(DSGraphSaveSO graphSaveSO, DialogueContainerSO dialogueContainerSO, 
-            string containerPath, List<DSNode> nodes, out Dictionary<GUID, List<DialogueNodeSO>> groupedNodesSOs)
+            string containerPath, List<DSNode> nodes, out Dictionary<int, List<DialogueNodeSO>> groupedNodesSOs)
         {
-            groupedNodesSOs = new Dictionary<GUID, List<DialogueNodeSO>>();
+            groupedNodesSOs = new Dictionary<int, List<DialogueNodeSO>>();
             
-            var nodesSOs = new Dictionary<GUID, DialogueNodeSO>();
+            var nodesSOs = new Dictionary<int, DialogueNodeSO>();
             foreach (var node in nodes)
             {
                 SaveNodeGraph(graphSaveSO, node);
@@ -83,14 +81,14 @@ namespace DialogueSystem.Utils
                 Guid = node.Guid,
                 Choices = CloneNodeChoices(node.Choices),
                 Text = node.Text,
-                GroupGuid = node.Group?.Guid ?? new GUID(),
+                GroupGuid = node.Group?.Guid ?? new int(),
                 DialogueType = node.DialogueType,
                 Position = node.GetPosition().position,
                 SpeakerSO = node.SpeakerSO
             });
 
         private static void SaveNodeContainer(DialogueContainerSO dialogueContainerSO, string containerPath, DSNode node,
-            ref Dictionary<GUID, DialogueNodeSO> nodesSOs, Dictionary<GUID, List<DialogueNodeSO>> groupedNodesSOs)
+            ref Dictionary<int, DialogueNodeSO> nodesSOs, Dictionary<int, List<DialogueNodeSO>> groupedNodesSOs)
         {
             var hasGroup = node.Group != default;
             var savePath = hasGroup
@@ -118,7 +116,7 @@ namespace DialogueSystem.Utils
             SaveAsset(nodeSO);
         }
 
-        private static void FilterDialogueChoices(List<DSNode> nodes, Dictionary<GUID, DialogueNodeSO> nodesSOs)
+        private static void FilterDialogueChoices(List<DSNode> nodes, Dictionary<int, DialogueNodeSO> nodesSOs)
         {
             foreach (var node in nodes)
             {
@@ -126,7 +124,7 @@ namespace DialogueSystem.Utils
                 for (var choiceIndex = 0; choiceIndex < node.Choices.Count; choiceIndex++)
                 {
                     var nodeChoice = node.Choices[choiceIndex];
-                    if (nodeChoice.NextNodeGuid.Empty())
+                    if (nodeChoice.NextNodeGuid == -1)
                         continue;
 
                     dialogue.Choices[choiceIndex].NextNode = nodesSOs[nodeChoice.NextNodeGuid];
@@ -148,7 +146,7 @@ namespace DialogueSystem.Utils
         }
         
         private static void SaveGroups(DSGraphSaveSO graphSaveSO, DialogueContainerSO dialogueContainerSO, 
-            string containerPath, List<DSGroup> groups, Dictionary<GUID, List<DialogueNodeSO>> groupedNodesSOs)
+            string containerPath, List<DSGroup> groups, Dictionary<int, List<DialogueNodeSO>> groupedNodesSOs)
         {
             foreach (var group in groups)
             {
@@ -166,7 +164,7 @@ namespace DialogueSystem.Utils
             });
 
         private static void SaveGroupContainer(DialogueContainerSO dialogueContainerSO, string containerPath,
-            DSGroup group, Dictionary<GUID, List<DialogueNodeSO>> groupedNodesSOs)
+            DSGroup group, Dictionary<int, List<DialogueNodeSO>> groupedNodesSOs)
         {
             var groupSO = CreateAsset<DialogueGroupSO>($"{containerPath}/{group.title}", group.title);
             groupSO.Guid = group.Guid;
@@ -175,10 +173,9 @@ namespace DialogueSystem.Utils
             {
                 foreach (var nodeSO in groupNodesSOs)
                 {
-                    if (nodeSO.IsStartingDialogue)
-                        groupSO.StartingNode = nodeSO;
-                    
-                    groupSO.NodesSOs.Add(nodeSO.Guid, nodeSO);
+                    if (!nodeSO.IsStartingDialogue)
+                        continue;
+                    groupSO.StartingNode = nodeSO;
                 }
             }
             
@@ -188,7 +185,7 @@ namespace DialogueSystem.Utils
         }
 
         private static void LoadGroups(List<DSGroupSave> groupsSaves, DSGraphView graphView, 
-            ref Dictionary<GUID, DSGroup> loadedGroups)
+            ref Dictionary<int, DSGroup> loadedGroups)
         {
             foreach (var groupData in groupsSaves)
             {
@@ -200,7 +197,7 @@ namespace DialogueSystem.Utils
         }
 
         private static void LoadNodes(List<DSNodeSave> nodesSaves, DSGraphView graphView, 
-            Dictionary<GUID, DSGroup> loadedGroups, ref Dictionary<GUID, DSNode> loadedNodes)
+            Dictionary<int, DSGroup> loadedGroups, ref Dictionary<int, DSNode> loadedNodes)
         {
             foreach (var nodeSave in nodesSaves)
             {
@@ -223,7 +220,7 @@ namespace DialogueSystem.Utils
                 graphView.AddElement(node);
                 loadedNodes.Add(node.Guid, node);
 
-                if (nodeSave.GroupGuid.Empty())
+                if (nodeSave.GroupGuid == -1)
                     continue;
 
                 var group = loadedGroups[nodeSave.GroupGuid];
@@ -233,16 +230,16 @@ namespace DialogueSystem.Utils
             }
         }
 
-        private static void LoadNodesConnections(DSGraphView graphView, Dictionary<GUID, DSNode> loadedNodes)
+        private static void LoadNodesConnections(DSGraphView graphView, Dictionary<int, DSNode> loadedNodes)
         {
-            foreach (KeyValuePair<GUID, DSNode> loadedNode in loadedNodes)
+            foreach (KeyValuePair<int, DSNode> loadedNode in loadedNodes)
             {
                 foreach (var visualElement in loadedNode.Value.outputContainer.Children())
                 {
                     var choicePort = (Port)visualElement;
                     var choiceData = (DSNodeChoiceSave)choicePort.userData;
 
-                    if (choiceData.NextNodeGuid.Empty())
+                    if (choiceData.NextNodeGuid == -1)
                         continue;
 
                     var nextNode = loadedNodes[choiceData.NextNodeGuid];

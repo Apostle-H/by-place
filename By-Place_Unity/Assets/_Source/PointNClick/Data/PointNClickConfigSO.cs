@@ -7,6 +7,7 @@ namespace PointNClick.Data
     {
         [field: Header("Logic")]
         [field: SerializeField] public LayerMask WalkableMask { get; private set; } 
+        [field: SerializeField] public LayerMask InteractableMask { get; private set; } 
         
         [field: Header("View")]
         [field: SerializeField] public float CursorToggleTime { get; private set; }

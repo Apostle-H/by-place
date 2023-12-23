@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0202a3095b7477a4091d56344f0af6b3, type: 3}
+  m_Name: SteveGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Steve
+  <Groups>k__BackingField:
+  - <Guid>k__BackingField: -790269537
+    <Name>k__BackingField: Greetings
+    <Position>k__BackingField: {x: 167, y: 161}
+  <Nodes>k__BackingField:
+  - <Guid>k__BackingField: -93056620
+    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4be7c3df4cdfee54e97bb83db6057bda, type: 2}
+    <Text>k__BackingField: Hi
+    <Choices>k__BackingField:
+    - <NextNodeGuid>k__BackingField: -538659499
+      <Text>k__BackingField: Next
+    <GroupGuid>k__BackingField: -790269537
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 192, y: 220}
+  - <Guid>k__BackingField: -538659499
+    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
+    <Text>k__BackingField: Hello
+    <Choices>k__BackingField:
+    - <NextNodeGuid>k__BackingField: 1071707732
+      <Text>k__BackingField: Next
+    <GroupGuid>k__BackingField: -790269537
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 645, y: 220}
+  - <Guid>k__BackingField: 1071707732
+    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4be7c3df4cdfee54e97bb83db6057bda, type: 2}
+    <Text>k__BackingField: I would like to ask you some questions
+    <Choices>k__BackingField:
+    - <NextNodeGuid>k__BackingField: -1025148588
+      <Text>k__BackingField: Your Name?
+    - <NextNodeGuid>k__BackingField: 1292795486
+      <Text>k__BackingField: Your Age?
+    - <NextNodeGuid>k__BackingField: -452844445
+      <Text>k__BackingField: Favourite Game?
+    - <NextNodeGuid>k__BackingField: -1
+      <Text>k__BackingField: NeverMind
+    <GroupGuid>k__BackingField: -790269537
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 1081, y: 220}
+  - <Guid>k__BackingField: -1025148588
+    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
+    <Text>k__BackingField: Steve
+    <Choices>k__BackingField:
+    - <NextNodeGuid>k__BackingField: 1071707732
+      <Text>k__BackingField: Next
+    <GroupGuid>k__BackingField: -790269537
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 1566, y: 220}
+  - <Guid>k__BackingField: 1292795486
+    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
+    <Text>k__BackingField: 29
+    <Choices>k__BackingField:
+    - <NextNodeGuid>k__BackingField: 1071707732
+      <Text>k__BackingField: Next
+    <GroupGuid>k__BackingField: -790269537
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 1566, y: 458}
+  - <Guid>k__BackingField: -452844445
+    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
+    <Text>k__BackingField: By-Place
+    <Choices>k__BackingField:
+    - <NextNodeGuid>k__BackingField: 1071707732
+      <Text>k__BackingField: Next
+    <GroupGuid>k__BackingField: -790269537
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 1566, y: 702}

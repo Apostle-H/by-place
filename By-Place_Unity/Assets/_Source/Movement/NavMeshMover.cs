@@ -7,20 +7,39 @@ namespace Movement
     public class NavMeshMover : MonoBehaviour, IMoveable
     {
         [SerializeField] private NavMeshAgent navMeshAgent;
-        [SerializeField] private float speed;
+        [field: SerializeField] public float Speed { get; private set; }
 
-        public float Speed => speed;
+        private bool _hasTarget;
+        
+        public event Action OnArrived;
 
-        private void Awake() => navMeshAgent.speed = speed;
+        private void Awake() => navMeshAgent.speed = Speed;
 
-        public void Move(Vector3 target) => navMeshAgent.SetDestination(target);
+        public void Move(Vector3 target)
+        {
+            navMeshAgent.SetDestination(target);
+            _hasTarget = true;
+        }
 
         public void Stop()
         {
-            if (navMeshAgent.isStopped)
+            if (!_hasTarget)
                 return;
             
             navMeshAgent.ResetPath();
+            _hasTarget = false;
+        }
+
+        private void FixedUpdate()
+        {
+            if (!_hasTarget 
+                || navMeshAgent.pathPending 
+                || navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance 
+                || (navMeshAgent.hasPath && navMeshAgent.velocity.sqrMagnitude != 0f))
+                return;
+            
+            OnArrived?.Invoke();
+            _hasTarget = false;
         }
     }
 }
