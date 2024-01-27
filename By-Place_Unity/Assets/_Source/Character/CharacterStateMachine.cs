@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using StateMachine;
+using VContainer;
+using VContainer.Unity;
+
+namespace Character
+{
+    public class CharacterStateMachine : IStateMachine, ITickable, IInitializable
+    {
+        private readonly Dictionary<Type, IState> _states;
+        private IState _currentState;
+
+        [Inject]
+        public CharacterStateMachine(IStatesProvider statesProvider)
+        {
+            _states = statesProvider.Get();
+            _currentState = statesProvider.StartingState;
+
+            foreach (var kvp in _states)
+                kvp.Value.Owner = this;
+        }
+
+        public void Initialize() => _currentState.Enter();
+
+        public void Switch(Type stateType)
+        {
+            if (!_states.ContainsKey(stateType))
+                return;
+            
+            _currentState.Exit();
+            _states[stateType].Enter();
+        }
+
+        public void Tick() => _currentState?.Update();
+    }
+}

@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: Steve
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: Steve
-  <GroupsSOs>k__BackingField:
-  - {fileID: 11400000, guid: b724ca8f40b7ae945b2f15b17a8c6a62, type: 2}
-  <UngroupedDialogues>k__BackingField: []
+  <Groups>k__BackingField:
+  - {fileID: 11400000, guid: b5930b7ebc5a3b74497d058a7c776f8f, type: 2}
+  <Nodes>k__BackingField:
+  - {fileID: 11400000, guid: e56a6e0bcf304ee44841946770dd8b6e, type: 2}
+  - {fileID: 11400000, guid: c2513fd33030932488e8d627106144b5, type: 2}
+  - {fileID: 11400000, guid: 054de1ad4c65b6f498d79e9807527077, type: 2}
+  - {fileID: 11400000, guid: e89510c9129786d46842272a1684b9e6, type: 2}

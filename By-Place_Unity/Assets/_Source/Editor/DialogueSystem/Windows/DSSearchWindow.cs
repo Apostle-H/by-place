@@ -22,17 +22,17 @@ namespace DialogueSystem.Windows
 
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
-            List<SearchTreeEntry> searchTreeEntries = new List<SearchTreeEntry>()
+            var searchTreeEntries = new List<SearchTreeEntry>()
             {
                 new SearchTreeGroupEntry(new GUIContent("Create")),
-                new SearchTreeEntry(new GUIContent("Single Choice", _indentationIcon))
-                {
-                    userData = DialogueType.SINGLE_CHOICE,
-                    level = 1
-                },
                 new SearchTreeEntry(new GUIContent("Multiple Choice", _indentationIcon))
                 {
-                    userData = DialogueType.MULTIPLE_CHOICE,
+                    userData = new DGDialogueNode(),
+                    level = 1
+                },
+                new SearchTreeEntry(new GUIContent("Action", _indentationIcon))
+                {
+                    userData = new DGActionNode(),
                     level = 1
                 },
                 new SearchTreeEntry(new GUIContent("Group", _indentationIcon))
@@ -47,21 +47,17 @@ namespace DialogueSystem.Windows
 
         public bool OnSelectEntry(SearchTreeEntry searchTreeEntry, SearchWindowContext context)
         {
-            Vector2 localMousePosition = _graphView.GetLocalMousePosition(context.screenMousePosition, true);
+            var localMousePosition = _graphView.GetLocalMousePosition(context.screenMousePosition, true);
 
             switch (searchTreeEntry.userData)
             {
-                case DialogueType.SINGLE_CHOICE:
-                    DSSingleChoiceNode singleChoiceNode = (DSSingleChoiceNode) _graphView
-                        .CreateNode(typeof(DSSingleChoiceNode), localMousePosition);
-
-                    _graphView.AddElement(singleChoiceNode);
+                case DGDialogueNode _:
+                    var dialogueNode = _graphView.CreateNode<DGDialogueNode>(localMousePosition);
+                    _graphView.AddElement(dialogueNode);
                     return true;
-                case DialogueType.MULTIPLE_CHOICE:
-                    DSMultipleChoiceNode multipleChoiceNode = (DSMultipleChoiceNode) _graphView
-                        .CreateNode(typeof(DSMultipleChoiceNode), localMousePosition);
-
-                    _graphView.AddElement(multipleChoiceNode);
+                case DGActionNode _:
+                    var actionNode = _graphView.CreateNode<DGActionNode>(localMousePosition);
+                    _graphView.AddElement(actionNode);
                     return true;
                 case Group _:
                     _graphView.CreateGroup("DialogueGroup", localMousePosition);

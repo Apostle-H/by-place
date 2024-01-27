@@ -20,25 +20,34 @@ namespace DialogueSystem.Utils
         {
             var containerPath = $"{DS_CONTAINER_SAVE_SO_PATH}/{graphName}";
             GetElementsFromGraphView(graphView, out var nodes, out var groups);
+
+            var eContainerSO = CreateAsset<DEContainerSO>(DS_GRAPH_SAVE_DATA_SO_PATH, $"{graphName}Graph");
+            eContainerSO.Groups.Clear();
+            eContainerSO.Nodes.Clear();
+            var rContainerSO = CreateAsset<DRContainerSO>(containerPath, graphName);
+            rContainerSO.Groups.Clear();
+            rContainerSO.Nodes.Clear();
             
-            AssetDatabase.DeleteAsset(containerPath);
-            var graphSaveSO = CreateAsset<DSGraphSaveSO>(DS_GRAPH_SAVE_DATA_SO_PATH, $"{graphName}Graph");
-            var dialogueContainerSO = CreateAsset<DialogueContainerSO>(containerPath, graphName);
+            RenameGroups(containerPath, groups.ToDictionary(group => group.Guid, group => group.title),
+                graphView.renamedGroups);
+            DeleteGroups(containerPath, graphView.deletedGroupsNames);
+            DeleteNodes(containerPath, graphView.deletedNodesGuids);
             
-            SaveNodes(graphSaveSO, dialogueContainerSO, containerPath, nodes, out var groupedNodes);
-            SaveGroups(graphSaveSO, dialogueContainerSO, containerPath, groups, groupedNodes);
+            eContainerSO.Save(groups, nodes);
+            SaveGroupsRContainer(rContainerSO, containerPath, groups);
+            SaveUngroupedRContainer(rContainerSO, containerPath, nodes);
             
-            graphSaveSO.FileName = graphName;
-            SaveAsset(graphSaveSO);
-            dialogueContainerSO.FileName = graphName;
-            SaveAsset(dialogueContainerSO);
+            eContainerSO.FileName = graphName;
+            SaveAsset(eContainerSO);
+            rContainerSO.FileName = graphName;
+            SaveAsset(rContainerSO);
         }
         
         public static void Load(DSGraphView graphView, string graphName)
         {
-            var graphData = LoadAsset<DSGraphSaveSO>(DS_GRAPH_SAVE_DATA_SO_PATH, graphName);
+            var graphSave = LoadAsset<DEContainerSO>(DS_GRAPH_SAVE_DATA_SO_PATH, graphName);
 
-            if (graphData == null)
+            if (graphSave == null)
             {
                 EditorUtility.DisplayDialog(
                     "Could not find the file!",
@@ -51,209 +60,121 @@ namespace DialogueSystem.Utils
                 return;
             }
 
-            DSEditorWindow.UpdateFileName(graphData.FileName);
+            DSEditorWindow.UpdateFileName(graphSave.FileName);
 
-            var loadedGroups = new Dictionary<int, DSGroup>();
-            LoadGroups(graphData.Groups, graphView, ref loadedGroups);
-            var loadedNodes = new Dictionary<int, DSNode>();
-            LoadNodes(graphData.Nodes, graphView, loadedGroups, ref loadedNodes);
-            LoadNodesConnections(graphView, loadedNodes);
+            graphSave.Load(graphView);
         }
         
-        private static void SaveNodes(DSGraphSaveSO graphSaveSO, DialogueContainerSO dialogueContainerSO, 
-            string containerPath, List<DSNode> nodes, out Dictionary<int, List<DialogueNodeSO>> groupedNodesSOs)
+        private static void RenameGroups(string containerPath, Dictionary<int, string> groupsNames,
+            Dictionary<int, string> renamedGroups)
         {
-            groupedNodesSOs = new Dictionary<int, List<DialogueNodeSO>>();
-            
-            var nodesSOs = new Dictionary<int, DialogueNodeSO>();
-            foreach (var node in nodes)
+            foreach (var kvp in renamedGroups)
             {
-                SaveNodeGraph(graphSaveSO, node);
-                SaveNodeContainer(dialogueContainerSO, containerPath, node, ref nodesSOs, groupedNodesSOs);
-            }
+                var groupFolderPath = $"{containerPath}/{kvp.Value}";
+                if (!AssetDatabase.IsValidFolder(groupFolderPath + "/"))
+                    continue;
 
-            FilterDialogueChoices(nodes, nodesSOs);
-        }
-
-        private static void SaveNodeGraph(DSGraphSaveSO graphSaveSO, DSNode node) =>
-            graphSaveSO.Nodes.Add(new DSNodeSave()
-            {
-                Guid = node.Guid,
-                Choices = CloneNodeChoices(node.Choices),
-                Text = node.Text,
-                GroupGuid = node.Group?.Guid ?? new int(),
-                DialogueType = node.DialogueType,
-                Position = node.GetPosition().position,
-                SpeakerSO = node.SpeakerSO
-            });
-
-        private static void SaveNodeContainer(DialogueContainerSO dialogueContainerSO, string containerPath, DSNode node,
-            ref Dictionary<int, DialogueNodeSO> nodesSOs, Dictionary<int, List<DialogueNodeSO>> groupedNodesSOs)
-        {
-            var hasGroup = node.Group != default;
-            var savePath = hasGroup
-                ? $"{containerPath}/{node.Group.title}/Nodes"
-                : $"{containerPath}/Ungrouped/";
-            
-            var nodeSO = CreateAsset<DialogueNodeSO>(savePath, node.Guid.ToString());
-            nodeSO.Guid = node.Guid;
-            nodeSO.SpeakerSO = node.SpeakerSO;
-            nodeSO.Text = node.Text;
-            nodeSO.Choices = ConvertNodeChoicesToDialogueChoices(node.Choices);
-            nodeSO.DialogueType = node.DialogueType;
-            nodeSO.IsStartingDialogue = node.IsStartingNode();
-            
-            nodesSOs.Add(node.Guid, nodeSO);
-            
-            if (hasGroup)
-            {
-                groupedNodesSOs.TryAdd(node.Group.Guid, new List<DialogueNodeSO>());
-                groupedNodesSOs[node.Group.Guid].Add(nodeSO);
-            }
-            else
-                dialogueContainerSO.UngroupedDialogues.Add(nodeSO);
-            
-            SaveAsset(nodeSO);
-        }
-
-        private static void FilterDialogueChoices(List<DSNode> nodes, Dictionary<int, DialogueNodeSO> nodesSOs)
-        {
-            foreach (var node in nodes)
-            {
-                var dialogue = nodesSOs[node.Guid];
-                for (var choiceIndex = 0; choiceIndex < node.Choices.Count; choiceIndex++)
-                {
-                    var nodeChoice = node.Choices[choiceIndex];
-                    if (nodeChoice.NextNodeGuid == -1)
-                        continue;
-
-                    dialogue.Choices[choiceIndex].NextNode = nodesSOs[nodeChoice.NextNodeGuid];
-                    SaveAsset(dialogue);
-                }
+                var groupName = groupsNames.First(group => group.Key == kvp.Key).Value;
+                AssetDatabase.RenameAsset($"{groupFolderPath}/{kvp.Value}.asset", $"{groupName}");
+                AssetDatabase.RenameAsset(groupFolderPath, groupName);
             }
         }
         
-        private static List<DialogueNodeChoice> ConvertNodeChoicesToDialogueChoices(List<DSNodeChoiceSave> nodeChoicesSaves)
+        private static void DeleteGroups(string containerPath, List<string> deletedGroupsNames)
         {
-            var dialogueChoices = new List<DialogueNodeChoice>();
-            foreach (var nodeChoiceSave in nodeChoicesSaves)
+            foreach (var deletedGroupName in deletedGroupsNames)
             {
-                var choiceData = new DialogueNodeChoice() { Text = nodeChoiceSave.Text };
-                dialogueChoices.Add(choiceData);
+                var groupFolderPath = $"{containerPath}/{deletedGroupName}";
+                if (AssetDatabase.IsValidFolder(groupFolderPath))
+                    AssetDatabase.DeleteAsset(groupFolderPath);
             }
-
-            return dialogueChoices;
         }
         
-        private static void SaveGroups(DSGraphSaveSO graphSaveSO, DialogueContainerSO dialogueContainerSO, 
-            string containerPath, List<DSGroup> groups, Dictionary<int, List<DialogueNodeSO>> groupedNodesSOs)
+        private static void DeleteNodes(string containerPath, List<int> deletedNodesGuid)
+        {
+            foreach (var deletedNodeGuid in deletedNodesGuid)
+            {
+                var node = AssetDatabase
+                    .FindAssets(deletedNodeGuid.ToString(), new[] { containerPath });
+                if (node.Length > 0)
+                    AssetDatabase.DeleteAsset(AssetDatabase.GUIDToAssetPath(node[0]));
+            }
+        }
+        
+        private static void SaveGroupsRContainer(DRContainerSO rContainerSO, string containerPath, 
+            List<DGGroup> groups)
         {
             foreach (var group in groups)
             {
-                SaveGroupGraph(graphSaveSO, group);
-                SaveGroupContainer(dialogueContainerSO, containerPath, group, groupedNodesSOs);
-            }
-        }
-
-        private static void SaveGroupGraph(DSGraphSaveSO graphSaveSO, DSGroup group) =>
-            graphSaveSO.Groups.Add(new DSGroupSave()
-            {
-                Guid = group.Guid,
-                Name = group.title,
-                Position = group.GetPosition().position
-            });
-
-        private static void SaveGroupContainer(DialogueContainerSO dialogueContainerSO, string containerPath,
-            DSGroup group, Dictionary<int, List<DialogueNodeSO>> groupedNodesSOs)
-        {
-            var groupSO = CreateAsset<DialogueGroupSO>($"{containerPath}/{group.title}", group.title);
-            groupSO.Guid = group.Guid;
-            groupSO.Name = group.title;
-            if (groupedNodesSOs.TryGetValue(group.Guid, out var groupNodesSOs))
-            {
-                foreach (var nodeSO in groupNodesSOs)
+                var groupSO = CreateAsset<DRGroupSO>($"{containerPath}/{group.title}", group.title);
+                groupSO.Guid = group.Guid;
+                groupSO.Name = group.title;
+                groupSO.Owner = rContainerSO;
+                
+                foreach (var kvp in group.Nodes)
                 {
-                    if (!nodeSO.IsStartingDialogue)
+                    var node = kvp.Value;
+
+                    var nodeSO = SaveNodeRContainer(rContainerSO, node, $"{containerPath}/{group.title}/Nodes");
+                    
+                    if (!nodeSO.IsStartingNode)
                         continue;
-                    groupSO.StartingNode = nodeSO;
+                    groupSO.StartingNodeGuid = nodeSO.Guid;
                 }
-            }
-            
-            dialogueContainerSO.GroupsSOs.Add(groupSO);
 
-            SaveAsset(groupSO);
-        }
+                rContainerSO.Groups.Add(groupSO);
 
-        private static void LoadGroups(List<DSGroupSave> groupsSaves, DSGraphView graphView, 
-            ref Dictionary<int, DSGroup> loadedGroups)
-        {
-            foreach (var groupData in groupsSaves)
-            {
-                var group = graphView.CreateGroup(groupData.Name, groupData.Position, groupData.Guid);
-                group.title = groupData.Name;
-                
-                loadedGroups.Add(group.Guid, group);
+                SaveAsset(groupSO);
             }
         }
 
-        private static void LoadNodes(List<DSNodeSave> nodesSaves, DSGraphView graphView, 
-            Dictionary<int, DSGroup> loadedGroups, ref Dictionary<int, DSNode> loadedNodes)
+        private static void SaveUngroupedRContainer(DRContainerSO rContainerSO, string containerPath,
+            List<DGNode> nodes)
         {
-            foreach (var nodeSave in nodesSaves)
+            foreach (var node in nodes)
             {
-                Type nodeType = default;
-                switch (nodeSave.DialogueType)
-                {
-                    case DialogueType.SINGLE_CHOICE:
-                        nodeType = typeof(DSSingleChoiceNode);
-                        break;
-                    case DialogueType.MULTIPLE_CHOICE:
-                        nodeType = typeof(DSMultipleChoiceNode);
-                        break;
-                }
-                var node = graphView.CreateNode(nodeType, nodeSave.Position, nodeSave.Guid, false);
-                node.SpeakerSO = nodeSave.SpeakerSO;
-                node.Choices = CloneNodeChoices(nodeSave.Choices);
-                node.Text = nodeSave.Text;
-                node.Draw();
-                
-                graphView.AddElement(node);
-                loadedNodes.Add(node.Guid, node);
-
-                if (nodeSave.GroupGuid == -1)
+                if (node.GroupGuid != -1)
                     continue;
 
-                var group = loadedGroups[nodeSave.GroupGuid];
-                node.Group = group;
-                
-                group.AddElement(node);
+                SaveNodeRContainer(rContainerSO, node, $"{containerPath}/Ungrouped");
             }
         }
 
-        private static void LoadNodesConnections(DSGraphView graphView, Dictionary<int, DSNode> loadedNodes)
+        private static DRNodeSO SaveNodeRContainer(DRContainerSO rContainerSO, DGNode node, string savePath)
         {
-            foreach (KeyValuePair<int, DSNode> loadedNode in loadedNodes)
+            DRNodeSO nodeSO;
+            if (node is DGDialogueNode dialogueNode)
             {
-                foreach (var visualElement in loadedNode.Value.outputContainer.Children())
-                {
-                    var choicePort = (Port)visualElement;
-                    var choiceData = (DSNodeChoiceSave)choicePort.userData;
-
-                    if (choiceData.NextNodeGuid == -1)
-                        continue;
-
-                    var nextNode = loadedNodes[choiceData.NextNodeGuid];
-                    var nextNodeInputPort = (Port)nextNode.inputContainer.Children().First();
-                    var edge = choicePort.ConnectTo(nextNodeInputPort);
-                    graphView.AddElement(edge);
-
-                    loadedNode.Value.RefreshPorts();
-                }
+                var dialogueNodeSO = CreateAsset<DRDialogueNodeSO>(savePath, dialogueNode.Guid.ToString());
+                dialogueNodeSO.SpeakerSO = dialogueNode.SpeakerSO;
+                dialogueNodeSO.Text = dialogueNode.Text;
+                dialogueNodeSO.ChoicesText = 
+                    dialogueNode.ChoicesTexts.ToList();
+                
+                nodeSO = dialogueNodeSO;
             }
+            else if (node is DGActionNode actionNode)
+            {
+                var actionNodeSO = CreateAsset<DRActionNodeSO>(savePath, actionNode.Guid.ToString());
+                actionNodeSO.TargetSO = actionNode.TargetSO;
+                
+                nodeSO = actionNodeSO;
+            }
+            else
+                throw new ArgumentException($"Unexpected node type {node.GetType()} in the graph");
+
+            nodeSO.Guid = node.Guid;
+            nodeSO.IsStartingNode = node.IsStartingNode();
+            nodeSO.NextGuids = node.NextGuids.ToList();
+
+            rContainerSO.Nodes.Add(nodeSO);
+            SaveAsset(nodeSO);
+
+            return nodeSO;
         }
 
-        private static void GetElementsFromGraphView(GraphView graphView, out List<DSNode> nodes,
-            out List<DSGroup> groups)
+        private static void GetElementsFromGraphView(GraphView graphView, out List<DGNode> nodes,
+            out List<DGGroup> groups)
         {
             nodes = new();
             groups = new();
@@ -262,10 +183,10 @@ namespace DialogueSystem.Utils
             {
                 switch (graphElement)
                 {
-                    case DSNode node:
+                    case DGNode node:
                         nodes.Add(node);
                         break;
-                    case DSGroup group:
+                    case DGGroup group:
                         groups.Add(group);
                         break;
                 }
@@ -275,7 +196,7 @@ namespace DialogueSystem.Utils
         private static T CreateAsset<T>(string path, string assetName) where T : ScriptableObject
         {
             var foldersNames = path.Split('/');
-            var parentFolderPath = String.Empty;
+            var parentFolderPath = string.Empty;
             foreach (var folderName in foldersNames)
             {
                 if (!AssetDatabase.IsValidFolder(parentFolderPath + folderName))
@@ -287,12 +208,12 @@ namespace DialogueSystem.Utils
             var fullPath = $"{path}/{assetName}.asset";
             var asset = LoadAsset<T>(path, assetName);
 
-            if (asset != null)
-                AssetDatabase.DeleteAsset(fullPath);
-                
+            if (asset != null) 
+                return asset;
+            
             asset = ScriptableObject.CreateInstance<T>();
             AssetDatabase.CreateAsset(asset, fullPath);
-            
+
             return asset;
         }
 
@@ -305,24 +226,6 @@ namespace DialogueSystem.Utils
 
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-        }
-
-        private static List<DSNodeChoiceSave> CloneNodeChoices(List<DSNodeChoiceSave> nodeChoices)
-        {
-            var choices = new List<DSNodeChoiceSave>();
-
-            foreach (var choice in nodeChoices)
-            {
-                var choiceData = new DSNodeChoiceSave()
-                {
-                    Text = choice.Text,
-                    NextNodeGuid = choice.NextNodeGuid
-                };
-
-                choices.Add(choiceData);
-            }
-
-            return choices;
         }
     }
 }

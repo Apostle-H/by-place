@@ -14,67 +14,54 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FileName>k__BackingField: Steve
   <Groups>k__BackingField:
-  - <Guid>k__BackingField: -790269537
-    <Name>k__BackingField: Greetings
-    <Position>k__BackingField: {x: 167, y: 161}
+  - <Guid>k__BackingField: 598897595
+    <Name>k__BackingField: DialogueGroup
+    <Position>k__BackingField: {x: 656, y: -26}
   <Nodes>k__BackingField:
-  - <Guid>k__BackingField: -93056620
-    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4be7c3df4cdfee54e97bb83db6057bda, type: 2}
-    <Text>k__BackingField: Hi
-    <Choices>k__BackingField:
-    - <NextNodeGuid>k__BackingField: -538659499
-      <Text>k__BackingField: Next
-    <GroupGuid>k__BackingField: -790269537
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 192, y: 220}
-  - <Guid>k__BackingField: -538659499
+  - <Guid>k__BackingField: 215361506
+    <GroupGuid>k__BackingField: 598897595
+    <Position>k__BackingField: {x: 681, y: 165}
+    <NextGuids>k__BackingField:
+    - <NextGuid>k__BackingField: -1922577023
+    - <NextGuid>k__BackingField: -1107577758
+    <NodeType>k__BackingField: 0
     <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
-    <Text>k__BackingField: Hello
-    <Choices>k__BackingField:
-    - <NextNodeGuid>k__BackingField: 1071707732
-      <Text>k__BackingField: Next
-    <GroupGuid>k__BackingField: -790269537
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 645, y: 220}
-  - <Guid>k__BackingField: 1071707732
-    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4be7c3df4cdfee54e97bb83db6057bda, type: 2}
-    <Text>k__BackingField: I would like to ask you some questions
-    <Choices>k__BackingField:
-    - <NextNodeGuid>k__BackingField: -1025148588
-      <Text>k__BackingField: Your Name?
-    - <NextNodeGuid>k__BackingField: 1292795486
-      <Text>k__BackingField: Your Age?
-    - <NextNodeGuid>k__BackingField: -452844445
-      <Text>k__BackingField: Favourite Game?
-    - <NextNodeGuid>k__BackingField: -1
-      <Text>k__BackingField: NeverMind
-    <GroupGuid>k__BackingField: -790269537
-    <DialogueType>k__BackingField: 1
-    <Position>k__BackingField: {x: 1081, y: 220}
-  - <Guid>k__BackingField: -1025148588
+    <Text>k__BackingField: Do you want to go to the shop?
+    <ChoicesTexts>k__BackingField:
+    - No
+    - Yes
+    <TargetSO>k__BackingField: {fileID: 0}
+  - <Guid>k__BackingField: -1107577758
+    <GroupGuid>k__BackingField: 598897595
+    <Position>k__BackingField: {x: 1166, y: 317}
+    <NextGuids>k__BackingField:
+    - <NextGuid>k__BackingField: 991068176
+    <NodeType>k__BackingField: 1
+    <SpeakerSO>k__BackingField: {fileID: 0}
+    <Text>k__BackingField: 
+    <ChoicesTexts>k__BackingField: []
+    <TargetSO>k__BackingField: {fileID: 11400000, guid: f9a17ec625bac934397e4be0d314dd34, type: 2}
+  - <Guid>k__BackingField: 991068176
+    <GroupGuid>k__BackingField: 598897595
+    <Position>k__BackingField: {x: 1564, y: 317}
+    <NextGuids>k__BackingField:
+    - <NextGuid>k__BackingField: -1
+    <NodeType>k__BackingField: 0
     <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
-    <Text>k__BackingField: Steve
-    <Choices>k__BackingField:
-    - <NextNodeGuid>k__BackingField: 1071707732
-      <Text>k__BackingField: Next
-    <GroupGuid>k__BackingField: -790269537
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 1566, y: 220}
-  - <Guid>k__BackingField: 1292795486
+    <Text>k__BackingField: You can now go)
+    <ChoicesTexts>k__BackingField:
+    - Thanks
+    <TargetSO>k__BackingField: {fileID: 0}
+  - <Guid>k__BackingField: -1922577023
+    <GroupGuid>k__BackingField: 598897595
+    <Position>k__BackingField: {x: 1166, y: 33}
+    <NextGuids>k__BackingField:
+    - <NextGuid>k__BackingField: 215361506
+    - <NextGuid>k__BackingField: -1
+    <NodeType>k__BackingField: 0
     <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
-    <Text>k__BackingField: 29
-    <Choices>k__BackingField:
-    - <NextNodeGuid>k__BackingField: 1071707732
-      <Text>k__BackingField: Next
-    <GroupGuid>k__BackingField: -790269537
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 1566, y: 458}
-  - <Guid>k__BackingField: -452844445
-    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
-    <Text>k__BackingField: By-Place
-    <Choices>k__BackingField:
-    - <NextNodeGuid>k__BackingField: 1071707732
-      <Text>k__BackingField: Next
-    <GroupGuid>k__BackingField: -790269537
-    <DialogueType>k__BackingField: 0
-    <Position>k__BackingField: {x: 1566, y: 702}
+    <Text>k__BackingField: You sure?
+    <ChoicesTexts>k__BackingField:
+    - No
+    - Yes
+    <TargetSO>k__BackingField: {fileID: 0}

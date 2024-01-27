@@ -5,7 +5,6 @@ using DialogueSystem.Data;
 using DialogueSystem.Elements;
 using DialogueSystem.Utilities;
 using DialogueSystem.Utils.Extensions;
-using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -19,9 +18,12 @@ namespace DialogueSystem.Windows
 
         private MiniMap _miniMap;
 
-        private Dictionary<int, DSNode> _ungroupedNodes = new();
-        private Dictionary<int, DSGroup> _groups = new();
-        private Dictionary<int, List<int>> _groupedNodes = new();
+        private Dictionary<int, DGGroup> _groups = new();
+
+        public List<int> deletedNodesGuids = new();
+        
+        public Dictionary<int, string> renamedGroups = new();
+        public List<string> deletedGroupsNames = new();
 
         public DSGraphView(DSEditorWindow dsEditorWindow)
         {
@@ -51,17 +53,29 @@ namespace DialogueSystem.Windows
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
 
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Single Choice)", typeof(DSSingleChoiceNode)));
-            this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)", typeof(DSMultipleChoiceNode)));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)", DNodeType.DIALOGUE));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (Action)", DNodeType.ACTION));
             this.AddManipulator(CreateGroupContextualMenu());
         }
 
-        private IManipulator CreateNodeContextualMenu(string actionTitle, Type nodeType)
+        private IManipulator CreateNodeContextualMenu(string actionTitle, DNodeType nodeType)
         {
             var contextualMenuManipulator = new ContextualMenuManipulator(menuEvent => menuEvent.menu
-                .AppendAction(actionTitle, actionEvent => 
-                    AddElement(CreateNode(nodeType, GetLocalMousePosition(actionEvent.eventInfo.localMousePosition))))
-            );
+                .AppendAction(actionTitle, actionEvent =>
+                {
+                    switch (nodeType)
+                    {
+                        case DNodeType.DIALOGUE:
+                            AddElement(CreateNode<DGDialogueNode>(GetLocalMousePosition(actionEvent.eventInfo.localMousePosition)));
+                            break;
+                        case DNodeType.ACTION:
+                            AddElement(CreateNode<DGActionNode>(GetLocalMousePosition(actionEvent.eventInfo.localMousePosition)));
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(nodeType), nodeType, null);
+                    }
+                }
+            ));
 
             return contextualMenuManipulator;
         }
@@ -76,9 +90,9 @@ namespace DialogueSystem.Windows
             return contextualMenuManipulator;
         }
 
-        public DSGroup CreateGroup(string title, Vector2 position, int guid = -1)
+        public DGGroup CreateGroup(string title, Vector2 position, int guid = -1)
         {
-            var group = new DSGroup(title, position);
+            var group = new DGGroup(title, position);
             if (guid != -1)
                 group.Guid = guid;
             AddGroup(group);
@@ -86,7 +100,7 @@ namespace DialogueSystem.Windows
 
             foreach (var selectedElement in selection)
             {
-                if (!(selectedElement is DSNode node))
+                if (!(selectedElement is DGNode node))
                     continue;
 
                 group.AddElement(node);
@@ -95,38 +109,35 @@ namespace DialogueSystem.Windows
             return group;
         }
 
-        public DSNode CreateNode(Type nodeType, Vector2 position, int guid = -1, bool draw = true)
+        public T CreateNode<T>(Vector2 position, int guid = -1, bool draw = true) where T : DGNode
         {
-            var node = (DSNode) Activator.CreateInstance(nodeType);
+            var node = Activator.CreateInstance<T>();
             node.Initialize(this, position);
             if (guid != -1)
                 node.Guid = guid;
             if (draw)
                 node.Draw();
 
-            AddUngroupedNode(node);
             return node;
         }
 
-        private void OnElementsDeleted()
-        {
-            deleteSelection = (operationName, askUser) =>
+        private void OnElementsDeleted() => deleteSelection = (operationName, askUser) =>
             {
-                var groupsToDelete = new List<DSGroup>();
-                var nodesToDelete = new List<DSNode>();
+                var groupsToDelete = new List<DGGroup>();
+                var nodesToDelete = new List<DGNode>();
                 var edgesToDelete = new List<Edge>();
 
                 foreach (var selectedElement in selection)
                 {
                     switch (selectedElement)
                     {
-                        case DSNode node:
+                        case DGNode node:
                             nodesToDelete.Add(node);
                             continue;
                         case Edge edge:
                             edgesToDelete.Add(edge);
                             continue;
-                        case DSGroup group:
+                        case DGGroup group:
                             groupsToDelete.Add(group);
                             continue;
                     }
@@ -136,14 +147,13 @@ namespace DialogueSystem.Windows
                 
                 foreach (var nodeToDelete in nodesToDelete)
                 {
-                    if (nodeToDelete.Group != null)
+                    if (nodeToDelete.GroupGuid != -1)
                     {
-                        _groupedNodes.Remove(nodeToDelete.Guid);
-                        nodeToDelete.Group.RemoveElement(nodeToDelete);
+                        _groups[nodeToDelete.GroupGuid].RemoveElement(nodeToDelete);
                     }
 
-                    _ungroupedNodes.Remove(nodeToDelete.Guid);
                     nodeToDelete.DisconnectAllPorts();
+                    deletedNodesGuids.Add(nodeToDelete.Guid);
                 }
                 DeleteElements(nodesToDelete);
 
@@ -153,50 +163,44 @@ namespace DialogueSystem.Windows
                     RemoveElement(groupToDelete);
                 }
             };
-        }
 
-        private void OnGroupElementsAdded()
-        {
-            elementsAddedToGroup = (group, elements) =>
+        private void OnGroupElementsAdded() => elementsAddedToGroup = (group, nodes) =>
             {
-                foreach (var element in elements)
+                foreach (var node in nodes)
                 {
-                    if (element is not DSNode node)
-                        continue;
-                    
-                    AddGroupedNode((DSGroup)group, node);
+                    var dNode = (DGNode)node;
+                    deletedNodesGuids.Add(dNode.Guid);
+                    ((DGGroup)group).AddNode((DGNode)dNode);
                 }
             };
-        }
 
-        private void OnGroupElementsRemoved()
-        {
-            elementsRemovedFromGroup = (group, elements) =>
+        private void OnGroupElementsRemoved() => elementsRemovedFromGroup = (group, nodes) =>
             {
-                foreach (var element in elements)
-                {
-                    if (element is not DSNode node)
-                        continue;
-                    
-                    AddUngroupedNode(node);
-                }
+                foreach (var node in nodes)
+                    ((DGGroup)group).RemoveNode((DGNode)node);
             };
-        }
 
-        private void OnGroupRenamed() => groupTitleChanged = (group, newTitle) => 
-            ((DSGroup)group).title = newTitle.RemoveWhitespaces().RemoveSpecialCharacters();
-
-        private void OnGraphViewChanged()
+        private void OnGroupRenamed() => groupTitleChanged = (group, newTitle) =>
         {
-            graphViewChanged = (changes) =>
+            var dsGroup = (DGGroup)group;
+            if (!renamedGroups.ContainsKey(dsGroup.Guid))
+                renamedGroups.Add(dsGroup.Guid, dsGroup.PreviousName);
+            else
+                renamedGroups[dsGroup.Guid] = dsGroup.PreviousName;
+            
+            dsGroup.title = newTitle.RemoveWhitespaces().RemoveSpecialCharacters();
+            if (deletedGroupsNames.Contains(dsGroup.title))
+                deletedGroupsNames.Remove(dsGroup.title);
+        };
+
+        private void OnGraphViewChanged() => graphViewChanged = (changes) =>
             {
                 if (changes.edgesToCreate != null)
                 {
                     foreach (var edge in changes.edgesToCreate)
                     {
-                        var nextNode = (DSNode)edge.input.node;
-                        var choiceData = (DSNodeChoiceSave)edge.output.userData;
-                        choiceData.NextNodeGuid = nextNode.Guid;
+                        var outputData = (DOutputData)edge.output.userData;
+                        outputData.NextGuid = ((DGNode)edge.input.node).Guid;
                     }
                 }
 
@@ -208,38 +212,26 @@ namespace DialogueSystem.Windows
                     if (element is not Edge edge)
                         continue;
 
-                    var choiceData = (DSNodeChoiceSave)edge.output.userData;
-                    choiceData.NextNodeGuid = -1;
+                    var choiceData = (DOutputData)edge.output.userData;
+                    choiceData.NextGuid = -1;
                 }
                 
                 return changes;
             };
-        }
-
-        public void AddUngroupedNode(DSNode node)
-        {
-            _groupedNodes.Remove(node.Guid);
-            node.Group = default;
-            _ungroupedNodes.Add(node.Guid, node);
-        }
-
-        public void AddGroup(DSGroup group)
+        
+        public void AddGroup(DGGroup group)
         {
             _groups.Add(group.Guid, group);
-            _groupedNodes.Add(group.Guid, new());
+            if (deletedGroupsNames.Contains(group.title))
+                deletedGroupsNames.Remove(group.title);
         }
 
-        public void RemoveGroup(DSGroup group)
+        public void RemoveGroup(DGGroup group)
         {
             _groups.Remove(group.Guid);
-            _groupedNodes.Remove(group.Guid);
-        }
-
-        public void AddGroupedNode(DSGroup group, DSNode node)
-        {
-            _ungroupedNodes.Remove(node.Guid);
-            node.Group = group;
-            _groupedNodes[group.Guid].Add(node.Guid);
+            if (renamedGroups.ContainsKey(group.Guid))
+                renamedGroups.Remove(group.Guid);
+            deletedGroupsNames.Add(group.title);
         }
 
         private void AddGridBackground()
@@ -282,8 +274,6 @@ namespace DialogueSystem.Windows
         {
             graphElements.ForEach(RemoveElement);
             _groups.Clear();
-            _groupedNodes.Clear();
-            _ungroupedNodes.Clear();
         }
     }
 }
