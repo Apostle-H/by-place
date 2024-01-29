@@ -1169,12 +1169,8 @@ MonoBehaviour:
   autoInjectGameObjects:
   - {fileID: 1530875941}
   - {fileID: 2138280224}
-  coroutineRunner: {fileID: 934191572}
   pointNClickConfigSO: {fileID: 11400000, guid: e5daeb0f155c9aa4d84b6a0ac9aaf558, type: 2}
   moverConfigSO: {fileID: 11400000, guid: dedd50e66bf402b48856900f933013db, type: 2}
-  uiElementsCursorManager: {fileID: 1020356571}
-  characterMover: {fileID: 1726678095}
-  dialogueResolver: {fileID: 1066853265}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,7 +1866,7 @@ MonoBehaviour:
   fromLocation: {fileID: 454863746}
   toLocation: {fileID: 680722579}
   targetPos: {fileID: 3734253}
-  isOpen: 0
+  isOpen: 1
 --- !u!114 &1433173666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1961,7 +1957,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1726678093}
   - component: {fileID: 1726678095}
+  - component: {fileID: 1726678097}
   - component: {fileID: 1726678094}
+  - component: {fileID: 1726678096}
   - component: {fileID: 1726678092}
   - component: {fileID: 1726678091}
   - component: {fileID: 1726678090}
@@ -2086,6 +2084,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 1726678094}
+--- !u!95 &1726678096
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726678089}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+--- !u!114 &1726678097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726678089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73b297891eb74d978628cdd3213fcaa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1726678096}
 --- !u!1 &1779585475
 GameObject:
   m_ObjectHideFlags: 0

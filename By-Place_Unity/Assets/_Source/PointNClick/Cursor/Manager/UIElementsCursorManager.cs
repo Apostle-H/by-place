@@ -10,7 +10,7 @@ using VContainer.Unity;
 
 namespace PointNClick.Cursor.Manager
 {
-    public class UIElementsCursorManager : MonoBehaviour, ICursorManager, IStartable, IDisposable
+    public class UIElementsCursorManager : MonoBehaviour, ICursorManager
     {
         [SerializeField] private UIDocument uiDocument;
         [SerializeField] private Vector2 textOffset;
@@ -31,7 +31,7 @@ namespace PointNClick.Cursor.Manager
             _cursorText = uiDocument.rootVisualElement.Q<Label>("CursorText");
         }
 
-        void IStartable.Start()
+        private void Start()
         {
             _actions.Main.Point.performed += UpdateTextPos;
             
@@ -39,7 +39,7 @@ namespace PointNClick.Cursor.Manager
             _cursorText.text = string.Empty;
         }
 
-        public void Dispose() => _actions.Main.Point.performed -= UpdateTextPos;
+        private void OnDestroy() => _actions.Main.Point.performed -= UpdateTextPos;
 
         public void AddSensitive(ICursorSensitive sensitive)
         {

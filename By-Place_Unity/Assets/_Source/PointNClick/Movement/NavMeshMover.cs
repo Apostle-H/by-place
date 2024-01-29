@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 namespace PointNClick.Movement
 {
-    public class NavMeshMover : MonoBehaviour, IInitializable, IMover
+    public class NavMeshMover : MonoBehaviour, IMover
     {
         [SerializeField] private NavMeshAgent navMeshAgent;
 
@@ -20,13 +20,16 @@ namespace PointNClick.Movement
         private Vector3 _targetPos;
 
         public float Speed => _configSO.Speed;
+
+        public float CurrentSpeed => navMeshAgent.velocity.magnitude;
         
         public event Action OnArrived;
+        public event Action<float> OnSpeedUpdate;
         
         [Inject]
         private void Inject(MoverConfigSO configSO) => _configSO = configSO;
 
-        public void Initialize() => navMeshAgent.speed = Speed;
+        public void Awake() => navMeshAgent.speed = Speed;
 
         public void Move(Vector3 target)
         {
@@ -46,6 +49,10 @@ namespace PointNClick.Movement
 
         private void FixedUpdate()
         {
+            if (navMeshAgent.isOnOffMeshLink)
+                navMeshAgent.CompleteOffMeshLink();
+            
+            OnSpeedUpdate?.Invoke(CurrentSpeed);
             if (!_hasTarget || (transform.position.ReplaceY(_targetPos) - _targetPos).magnitude > .05f)
                 return;
             

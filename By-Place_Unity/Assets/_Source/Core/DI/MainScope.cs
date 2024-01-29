@@ -1,6 +1,7 @@
 ﻿using System;
 using Character;
 using Character.States;
+using Character.View;
 using DialogueSystem;
 using DialogueSystem.ActionSystem;
 using Input;
@@ -21,28 +22,22 @@ namespace Core.DI
 {
     public class MainScope : LifetimeScope
     {
-        [Header("Common")] 
-        [SerializeField] private CoroutineRunner coroutineRunner;
-        
         [Header("PointNClick")]
         [SerializeField] private PointNClickConfigSO pointNClickConfigSO;
         [SerializeField] private MoverConfigSO moverConfigSO;
-        [SerializeField] private UIElementsCursorManager uiElementsCursorManager;
-        [SerializeField] private NavMeshMover characterMover;
-        
-        [Header("DialogueSystem")]
-        [SerializeField] private DialogueResolver dialogueResolver;
-        
+
         protected override void Configure(IContainerBuilder builder)
         {
             ConfigureCommon(builder);
             ConfigureInput(builder);
             ConfigurePointNClick(builder);
+            ConfigureCharacter(builder);
             ConfigureDialogueSystem(builder);
             ConfigureCharacterStateMachine(builder);
         }
 
-        private void ConfigureCommon(IContainerBuilder builder) => builder.RegisterComponent(coroutineRunner);
+        private void ConfigureCommon(IContainerBuilder builder) => 
+            builder.RegisterComponentInHierarchy<CoroutineRunner>();
 
         private void ConfigureInput(IContainerBuilder builder)
         {
@@ -55,18 +50,23 @@ namespace Core.DI
             builder.RegisterInstance(pointNClickConfigSO);
             builder.RegisterInstance(moverConfigSO);
 
-            builder.RegisterComponent(uiElementsCursorManager).AsImplementedInterfaces();
+            builder.RegisterComponentInHierarchy<UIElementsCursorManager>().As<ICursorManager>();
 
-            builder.RegisterComponent(characterMover).AsImplementedInterfaces();
+            builder.RegisterComponentInHierarchy<NavMeshMover>().As<IMover>();
 
-            builder.Register<Interacter>(Lifetime.Singleton).AsImplementedInterfaces();
+            builder.Register<IInteracter, Interacter>(Lifetime.Singleton);
             builder.Register<CharacterComponents>(Lifetime.Singleton);
+        }
+
+        private void ConfigureCharacter(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<CharacterAnimationParams>();
         }
 
         private void ConfigureDialogueSystem(IContainerBuilder builder)
         {
             builder.Register<ActionResolver>(Lifetime.Singleton);
-            builder.RegisterComponent(dialogueResolver);
+            builder.RegisterComponentInHierarchy<DialogueResolver>();
         }
 
         private void ConfigureCharacterStateMachine(IContainerBuilder builder)
