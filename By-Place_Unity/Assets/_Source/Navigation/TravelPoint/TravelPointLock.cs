@@ -24,7 +24,8 @@ namespace Navigation.TravelPoint
         [Inject]
         private void Inject(ActionResolver actionResolver) => _actionResolver = actionResolver;
 
-        public void Awake() => _actionResolver.AddAction(this);
+        public void Start() => _actionResolver.AddAction(this);
+
         public void OnDestroy() => _actionResolver.RemoveAction(this);
 
         public void Perform()
