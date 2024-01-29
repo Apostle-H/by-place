@@ -24,12 +24,9 @@ namespace PointNClick.Cursor.Manager
         private int _currentCursorId;
 
         [Inject]
-        public void Inject(PointNClickActions actions)
-        {
-            _actions = actions;
+        public void Inject(PointNClickActions actions) => _actions = actions;
 
-            _cursorText = uiDocument.rootVisualElement.Q<Label>("CursorText");
-        }
+        private void Awake() => _cursorText = uiDocument.rootVisualElement.Q<Label>("CursorText");
 
         private void Start()
         {
