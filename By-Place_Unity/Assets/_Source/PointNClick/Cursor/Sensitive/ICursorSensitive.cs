@@ -11,6 +11,6 @@ namespace PointNClick.Cursor.Sensitive
         public string Text { get; }
 
         public event Action<ICursorSensitive> OnEnter;
-        public event Action<ICursorSensitive> OnQuit;
+        public event Action<ICursorSensitive> OnExit;
     }
 }

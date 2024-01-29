@@ -1,10 +1,12 @@
-﻿using Character;
+﻿using System;
+using Character;
 using Character.States;
 using DialogueSystem;
 using DialogueSystem.ActionSystem;
 using Input;
 using InputSystem;
 using PointNClick.Cursor.Manager;
+using PointNClick.Cursor.Sensitive;
 using PointNClick.Data;
 using PointNClick.Interactions;
 using PointNClick.Movement;
@@ -54,6 +56,7 @@ namespace Core.DI
             builder.RegisterInstance(moverConfigSO);
 
             builder.RegisterComponent(uiElementsCursorManager).AsImplementedInterfaces();
+
             builder.RegisterComponent(characterMover).AsImplementedInterfaces();
 
             builder.Register<Interacter>(Lifetime.Singleton).AsImplementedInterfaces();

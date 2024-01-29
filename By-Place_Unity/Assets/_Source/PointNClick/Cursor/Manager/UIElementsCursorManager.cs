@@ -47,7 +47,7 @@ namespace PointNClick.Cursor.Manager
                 return;
             
             sensitive.OnEnter += UpdateCursor;
-            sensitive.OnQuit += ToDefaultCursor;
+            sensitive.OnExit += ToDefaultCursor;
         }
 
         public void RemoveSensitive(ICursorSensitive sensitive)
@@ -56,7 +56,7 @@ namespace PointNClick.Cursor.Manager
                 return;
             
             sensitive.OnEnter -= UpdateCursor;
-            sensitive.OnQuit -= ToDefaultCursor;
+            sensitive.OnExit -= ToDefaultCursor;
         }
 
         private void UpdateCursor(ICursorSensitive sensitive)
