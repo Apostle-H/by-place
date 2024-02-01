@@ -1,5 +1,4 @@
-﻿using System;
-using Character;
+﻿using Character;
 using Character.States;
 using Character.View;
 using DialogueSystem;
@@ -7,11 +6,11 @@ using DialogueSystem.ActionSystem;
 using Input;
 using InputSystem;
 using PointNClick.Cursor.Manager;
-using PointNClick.Cursor.Sensitive;
 using PointNClick.Data;
 using PointNClick.Interactions;
 using PointNClick.Movement;
 using PointNClick.Movement.Data;
+using QuestSystem;
 using StateMachine;
 using UnityEngine;
 using Utils.Runners;
@@ -33,6 +32,7 @@ namespace Core.DI
             ConfigurePointNClick(builder);
             ConfigureCharacter(builder);
             ConfigureDialogueSystem(builder);
+            ConfigureQuestSystem(builder);
             ConfigureCharacterStateMachine(builder);
         }
 
@@ -67,6 +67,11 @@ namespace Core.DI
         {
             builder.Register<ActionResolver>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<DialogueResolver>();
+        }
+
+        private void ConfigureQuestSystem(IContainerBuilder builder)
+        {
+            builder.Register<QuestManager>(Lifetime.Singleton);
         }
 
         private void ConfigureCharacterStateMachine(IContainerBuilder builder)

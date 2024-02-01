@@ -35,23 +35,12 @@ MonoBehaviour:
     <GroupGuid>k__BackingField: 598897595
     <Position>k__BackingField: {x: 1166, y: 317}
     <NextGuids>k__BackingField:
-    - <NextGuid>k__BackingField: 991068176
+    - <NextGuid>k__BackingField: 1401035972
     <NodeType>k__BackingField: 1
     <SpeakerSO>k__BackingField: {fileID: 0}
     <Text>k__BackingField: 
     <ChoicesTexts>k__BackingField: []
     <TargetSO>k__BackingField: {fileID: 11400000, guid: f9a17ec625bac934397e4be0d314dd34, type: 2}
-  - <Guid>k__BackingField: 991068176
-    <GroupGuid>k__BackingField: 598897595
-    <Position>k__BackingField: {x: 1564, y: 317}
-    <NextGuids>k__BackingField:
-    - <NextGuid>k__BackingField: -1
-    <NodeType>k__BackingField: 0
-    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
-    <Text>k__BackingField: You can now go)
-    <ChoicesTexts>k__BackingField:
-    - Thanks
-    <TargetSO>k__BackingField: {fileID: 0}
   - <Guid>k__BackingField: -1922577023
     <GroupGuid>k__BackingField: 598897595
     <Position>k__BackingField: {x: 1166, y: 33}
@@ -65,3 +54,24 @@ MonoBehaviour:
     - No
     - Yes
     <TargetSO>k__BackingField: {fileID: 0}
+  - <Guid>k__BackingField: 991068176
+    <GroupGuid>k__BackingField: 598897595
+    <Position>k__BackingField: {x: 1914, y: 317}
+    <NextGuids>k__BackingField:
+    - <NextGuid>k__BackingField: -1
+    <NodeType>k__BackingField: 0
+    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
+    <Text>k__BackingField: You can now go)
+    <ChoicesTexts>k__BackingField:
+    - Thanks
+    <TargetSO>k__BackingField: {fileID: 0}
+  - <Guid>k__BackingField: 1401035972
+    <GroupGuid>k__BackingField: 598897595
+    <Position>k__BackingField: {x: 1542, y: 317}
+    <NextGuids>k__BackingField:
+    - <NextGuid>k__BackingField: 991068176
+    <NodeType>k__BackingField: 1
+    <SpeakerSO>k__BackingField: {fileID: 0}
+    <Text>k__BackingField: 
+    <ChoicesTexts>k__BackingField: []
+    <TargetSO>k__BackingField: {fileID: 11400000, guid: 3cf5f632373a18a46b255ab009b18ce1, type: 2}
