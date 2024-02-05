@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:VisualElement name="Root" style="width: 100%; height: auto; background-color: rgb(51, 51, 51);">
+    <ui:VisualElement name="Quest" style="width: 100%; height: auto; background-color: rgb(51, 51, 51);">
         <ui:Label text="Title" display-tooltip-when-elided="true" name="TitleLabel" style="font-size: 25px; -unity-font-style: normal; color: rgb(241, 241, 241);" />
         <ui:Label text="Task" display-tooltip-when-elided="true" name="TaskLabel" style="font-size: 20px; -unity-font-style: normal; color: rgb(178, 178, 178);" />
     </ui:VisualElement>

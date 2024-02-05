@@ -14,7 +14,7 @@ namespace QuestSystem.View
 
         public QuestView(VisualTreeAsset questTree, int indexInManager)
         {
-            Root = questTree.CloneTree().Q<VisualElement>("Root");
+            Root = questTree.CloneTree().Q<VisualElement>("Quest");
             IndexInManager = indexInManager;
 
             _title = Root.Q<Label>("TitleLabel");

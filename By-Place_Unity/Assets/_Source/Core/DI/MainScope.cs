@@ -3,6 +3,7 @@ using Character.States;
 using Character.View;
 using DialogueSystem;
 using DialogueSystem.ActionSystem;
+using DialogueSystem.Data;
 using Input;
 using InputSystem;
 using PointNClick.Cursor.Manager;
@@ -65,6 +66,7 @@ namespace Core.DI
 
         private void ConfigureDialogueSystem(IContainerBuilder builder)
         {
+            builder.Register<DVariablesContainer>(Lifetime.Singleton);
             builder.Register<ActionResolver>(Lifetime.Singleton);
             builder.RegisterComponentInHierarchy<DialogueResolver>();
         }

@@ -21,7 +21,10 @@ namespace QuestSystem.View
         [Inject]
         private void Inject(QuestManager questManager) => _questManager = questManager;
 
-        private void Awake() => Root = questUI.rootVisualElement.Q<VisualElement>("QuestPanel");
+        private void Awake()
+        {
+            Root = questUI.rootVisualElement.Q<VisualElement>("QuestPanel");
+        }
 
         private void Start() => Bind();
 

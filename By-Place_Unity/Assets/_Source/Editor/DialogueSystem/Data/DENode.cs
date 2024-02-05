@@ -18,8 +18,8 @@ namespace DialogueSystem.Data
         
         [field: Header("DialogueNode")]
         [field: SerializeField] public DSpeakerSO SpeakerSO { get; set; } 
-        [field: SerializeField] public string Text { get; set; }
-        [field: SerializeField] public List<string> ChoicesTexts { get; set; }
+        [field: SerializeField] public List<DChoice> Choices { get; set; }
+        [field: SerializeField] public List<DText> Texts { get; set; }
         
         [field: Header("Action")]
         [field: SerializeField] public ActionSO TargetSO { get; set; }

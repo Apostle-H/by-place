@@ -49,9 +49,9 @@ namespace DialogueSystem.Data
                 if (node is DGDialogueNode dialogueNode)
                 {
                     nodeSave.NodeType = DNodeType.DIALOGUE;
-                    nodeSave.Text = dialogueNode.Text;
                     nodeSave.SpeakerSO = dialogueNode.SpeakerSO;
-                    nodeSave.ChoicesTexts = dialogueNode.ChoicesTexts.ToList();
+                    nodeSave.Choices = dialogueNode.Choices.ToList();
+                    nodeSave.Texts = dialogueNode.Texts.ToList();
                 
                     Nodes.Add(nodeSave);
                 }
@@ -99,8 +99,8 @@ namespace DialogueSystem.Data
                     {
                         var dialogueNode = graphView.CreateNode<DGDialogueNode>(nodeSave.Position, nodeSave.Guid, false);
                         dialogueNode.SpeakerSO = nodeSave.SpeakerSO;
-                        dialogueNode.ChoicesTexts = nodeSave.ChoicesTexts.ToList();
-                        dialogueNode.Text = nodeSave.Text;
+                        dialogueNode.Choices = nodeSave.Choices.ToList();
+                        dialogueNode.Texts = nodeSave.Texts.ToList();
 
                         node = dialogueNode;
                         break;

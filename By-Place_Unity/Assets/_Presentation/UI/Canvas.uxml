@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Panel" style="height: 30%; width: 60%; left: 20%; right: 20%; bottom: 5%; top: 65%; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); justify-content: space-between;">
+    <ui:VisualElement name="DialoguePanel" style="height: 30%; width: 60%; left: 5%; top: 65%; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); justify-content: space-between;">
         <ui:VisualElement name="Header" style="width: 100%; height: 30%; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-bottom-width: 1px; flex-direction: row; justify-content: flex-start; align-items: stretch; background-color: rgb(255, 255, 255);">
             <ui:VisualElement name="IconContainer" style="width: auto; height: 100%; transform-origin: left; border-right-width: 1px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255);" />
             <ui:VisualElement name="DialogueContainer" style="width: auto; height: 100%; align-items: stretch; justify-content: space-around; color: rgb(0, 0, 0);">
@@ -9,5 +9,6 @@
         </ui:VisualElement>
         <ui:VisualElement name="ChoiceBtnsContainer" style="width: 100%; height: 100%; background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);" />
     </ui:VisualElement>
-    <ui:Label text="Label" display-tooltip-when-elided="true" name="CursorText" style="font-size: 30px; width: 20%; height: 5%; position: absolute;" />
+    <ui:Label display-tooltip-when-elided="true" name="CursorText" text="some text" style="position: absolute; width: 20%; height: 5%; font-size: 25%; white-space: normal; -unity-text-align: middle-left;" />
+    <ui:VisualElement name="QuestPanel" style="position: absolute; top: 0; right: 0; width: 30%; height: 100%;" />
 </ui:UXML>
