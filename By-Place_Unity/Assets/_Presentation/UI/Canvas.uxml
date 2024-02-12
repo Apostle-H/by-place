@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="DialoguePanel" style="height: 30%; width: 60%; left: 5%; top: 65%; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); justify-content: space-between;">
+    <ui:VisualElement name="DialoguePanel" style="height: 30%; width: 60%; left: 2%; top: 40%; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); justify-content: space-between; position: absolute;">
         <ui:VisualElement name="Header" style="width: 100%; height: 30%; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); border-bottom-width: 1px; flex-direction: row; justify-content: flex-start; align-items: stretch; background-color: rgb(255, 255, 255);">
             <ui:VisualElement name="IconContainer" style="width: auto; height: 100%; transform-origin: left; border-right-width: 1px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255);" />
             <ui:VisualElement name="DialogueContainer" style="width: auto; height: 100%; align-items: stretch; justify-content: space-around; color: rgb(0, 0, 0);">
@@ -10,5 +10,9 @@
         <ui:VisualElement name="ChoiceBtnsContainer" style="width: 100%; height: 100%; background-color: rgb(0, 0, 0); color: rgb(255, 255, 255);" />
     </ui:VisualElement>
     <ui:Label display-tooltip-when-elided="true" name="CursorText" text="some text" style="position: absolute; width: 20%; height: 5%; font-size: 25%; white-space: normal; -unity-text-align: middle-left;" />
-    <ui:VisualElement name="QuestPanel" style="position: absolute; top: 0; right: 0; width: 30%; height: 100%;" />
+    <ui:VisualElement name="QuestPanel" picking-mode="Ignore" style="position: absolute; top: 0; right: 0; width: 30%; height: 100%;" />
+    <ui:VisualElement name="InventoryPanel" picking-mode="Ignore" style="position: absolute; bottom: 4%; right: 2%; height: 100px; width: 96%; flex-direction: row-reverse; align-items: center; left: 2%;">
+        <ui:VisualElement name="ToggleBtn" style="width: 100px; height: 100%; background-image: url(&apos;project://database/Assets/_Presentation/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=-1304905567622442630&amp;guid=f80f43eb02258ee4e85990dd9f16970c&amp;type=3#arrow-down@2x&apos;);" />
+        <ui:VisualElement name="ItemSlotsHolder" picking-mode="Ignore" style="flex-grow: 0; flex-direction: row-reverse; align-items: center; justify-content: flex-end;" />
+    </ui:VisualElement>
 </ui:UXML>

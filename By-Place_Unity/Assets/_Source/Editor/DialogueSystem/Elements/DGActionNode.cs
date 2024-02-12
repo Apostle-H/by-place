@@ -11,9 +11,9 @@ namespace DialogueSystem.Elements
 {
     public class DGActionNode : DGNode
     {
-        public ActionSO TargetSO { get; set; }
+        public ActionSO ActionSO { get; set; }
         
-        private ObjectField _actionTargetField;
+        private ObjectField _actionField;
         
         public override void Initialize(DSGraphView dsGraphView, Vector2 position)
         {
@@ -28,12 +28,11 @@ namespace DialogueSystem.Elements
             
             /* TITLE CONTAINER */
 
-            _actionTargetField = new ObjectField { objectType = typeof(ActionSO) };
-            _actionTargetField.RegisterValueChangedCallback(evt => 
-                UpdateTarget(evt.newValue == default ? GetDefaultAction() : (ActionSO)evt.newValue));
+            _actionField = new ObjectField { objectType = typeof(ActionSO) };
+            _actionField.RegisterValueChangedCallback(evt => UpdateAction((ActionSO)evt.newValue));
             
-            titleContainer.Insert(1, _actionTargetField);
-            UpdateTarget(TargetSO == default ? GetDefaultAction() : TargetSO);
+            titleContainer.Insert(1, _actionField);
+            UpdateAction(ActionSO);
 
             /* OUTPUT CONTAINER */
             
@@ -46,14 +45,11 @@ namespace DialogueSystem.Elements
             RefreshExpandedState();
         }
 
-        private void UpdateTarget(ActionSO newSO)
+        private void UpdateAction(ActionSO newSO)
         {
-            TargetSO = newSO;
+            ActionSO = newSO;
             
-            _actionTargetField.value = TargetSO;
+            _actionField.value = ActionSO;
         }
-
-        private ActionSO GetDefaultAction() => 
-            (ActionSO)EditorGUIUtility.Load("DialogueSystem/DefaultAction.asset");
     }
 }

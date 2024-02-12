@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4135783cec7f4a92988c80af78a7d12a, type: 3}
   m_Name: MoverConfigSO
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 4
+  <Speed>k__BackingField: 2.4
+  <AngularSpeed>k__BackingField: 90
+  <AngleToWait>k__BackingField: 10

@@ -1,9 +1,12 @@
 ﻿using InputSystem;
 using PointNClick.Data;
 using PointNClick.Interactions;
+using PointNClick.Movement;
 using StateMachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using Utils.Extensions;
 using Utils.Services;
 using VContainer;
 
@@ -11,19 +14,20 @@ namespace Character.States
 {
     public class CharacterFreeState : IState
     {
-        private PointNClickActions _actions;
-        private CharacterComponents _characterComponents;
         private PointNClickConfigSO _configSO;
         
+        private PointNClickActions _actions;
+        private CharacterComponents _characterComponents;
+
         public IStateMachine Owner { get; set; }
 
         [Inject]
-        public CharacterFreeState(PointNClickActions actions, CharacterComponents characterComponents, 
-            PointNClickConfigSO configSO)
+        public CharacterFreeState(PointNClickConfigSO configSO, PointNClickActions actions,
+            CharacterComponents characterComponents)
         {
+            _configSO = configSO;
             _actions = actions;
             _characterComponents = characterComponents;
-            _configSO = configSO;
         }
         
         public void Enter() => Bind();
@@ -48,16 +52,18 @@ namespace Character.States
         {
             var screenPoint = _actions.Main.Point.ReadValue<Vector2>();
             
-            RaycastHit hit;
-            if (PhysicsService.RayCastFromCamera(screenPoint, _configSO.InteractableMask, out hit)
-                && hit.collider.TryGetComponent<IInteractable>(out var interactable))
+            PhysicsService.RayCastFromCamera(screenPoint, out var hit);
+            if (hit.collider == default)
+                return;
+            
+            if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
             {
                 _characterComponents.TargetInteractable = interactable;
                 Owner.Switch(typeof(CharacterInteractingState));
                 return;
             }
             
-            if (PhysicsService.RayCastFromCamera(screenPoint, _configSO.WalkableMask, out hit))
+            if (_configSO.WalkableMask.Contains(hit.collider.gameObject.layer))
                 Move(hit.point);
         }
 

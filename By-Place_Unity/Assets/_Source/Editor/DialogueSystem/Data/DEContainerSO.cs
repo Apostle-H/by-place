@@ -58,8 +58,16 @@ namespace DialogueSystem.Data
                 else if (node is DGActionNode actionNode)
                 {
                     nodeSave.NodeType = DNodeType.ACTION;
-                    nodeSave.TargetSO = actionNode.TargetSO;
+                    nodeSave.ActionSO = actionNode.ActionSO;
                 
+                    Nodes.Add(nodeSave);
+                }
+                else if (node is DGSetVariableNode setVariableNode)
+                {
+                    nodeSave.NodeType = DNodeType.SET_VARIABLE;
+                    nodeSave.VariableSO = setVariableNode.VariableSO;
+                    nodeSave.SetValue = setVariableNode.SetValue;
+                    
                     Nodes.Add(nodeSave);
                 }
             }
@@ -108,9 +116,18 @@ namespace DialogueSystem.Data
                     case DNodeType.ACTION:
                     {
                         var actionNode = graphView.CreateNode<DGActionNode>(nodeSave.Position, nodeSave.Guid, false);
-                        actionNode.TargetSO = nodeSave.TargetSO;
+                        actionNode.ActionSO = nodeSave.ActionSO;
 
                         node = actionNode;
+                        break;
+                    }
+                    case DNodeType.SET_VARIABLE:
+                    {
+                        var setVariableNode = graphView.CreateNode<DGSetVariableNode>(nodeSave.Position, nodeSave.Guid, false);
+                        setVariableNode.VariableSO = nodeSave.VariableSO;
+                        setVariableNode.SetValue = nodeSave.SetValue;
+
+                        node = setVariableNode;
                         break;
                     }
                     default:

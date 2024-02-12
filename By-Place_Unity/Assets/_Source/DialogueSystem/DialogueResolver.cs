@@ -96,7 +96,7 @@ namespace DialogueSystem
                 var displayedChoices = 0;
                 for (var i = 0; i < dialogueNodeSO.NextGuids.Count; i++)
                 {
-                    if (!CheckVariable(dialogueNodeSO.Choices[i].CheckVariableSO))
+                    if (!CheckVariable(dialogueNodeSO.Choices[i].CheckVariableSO, dialogueNodeSO.Choices[i].ExpectedValue))
                         continue;
                     
                     if (_choiceBtns.Count <= displayedChoices)
@@ -106,11 +106,7 @@ namespace DialogueSystem
 
                     _choiceBtns[displayedChoices].clicked -= _choiceBtnsActions[displayedChoices];
                     var choiceNum = i;
-                    _choiceBtnsActions[displayedChoices] = () =>
-                    {
-                        SetVariable(dialogueNodeSO.Choices[choiceNum].SetVariableSO);
-                        Choose(dialogueNodeSO.NextGuids[choiceNum].NextGuid);
-                    };
+                    _choiceBtnsActions[displayedChoices] = () => Choose(dialogueNodeSO.NextGuids[choiceNum].NextGuid);
                     _choiceBtns[displayedChoices].clicked += _choiceBtnsActions[displayedChoices];
 
                     _choiceBtns[displayedChoices].visible = true;
@@ -123,7 +119,15 @@ namespace DialogueSystem
             else if (targetNodeSO is DRActionNodeSO actionNodeSO)
             {
                 _afterActionGuid = actionNodeSO.NextGuids[0].NextGuid;
-                _actionResolver.Resolve(actionNodeSO.TargetSO.Id);
+                _actionResolver.Resolve(actionNodeSO.ActionSO.Id);
+            }
+            else if (targetNodeSO is DRSetVariableNodeSO setVariableNodeSO)
+            {
+                if (setVariableNodeSO.VariableSO == default)
+                    return;
+            
+                _variablesContainer.Set(setVariableNodeSO.VariableSO.Id, setVariableNodeSO.SetValue);
+                Choose(setVariableNodeSO.NextGuids[0].NextGuid);
             }
         }
 
@@ -141,7 +145,7 @@ namespace DialogueSystem
             return text;
         }
 
-        private bool CheckVariable(DVariableSO variableSO)
+        private bool CheckVariable(DVariableSO variableSO, bool expectedValue)
         {
             if (variableSO == default)
                 return true;
@@ -149,15 +153,7 @@ namespace DialogueSystem
             if (!_variablesContainer.Get(variableSO.Id, out var variable))
                 return false;
             
-            return variable;
-        }
-
-        private void SetVariable(DVariableSO variableSO)
-        {
-            if (variableSO == default)
-                return;
-            
-            _variablesContainer.Set(variableSO.Id);
+            return variable == expectedValue;
         }
 
         private void Choose(int guid)

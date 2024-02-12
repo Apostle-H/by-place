@@ -155,9 +155,17 @@ namespace DialogueSystem.Utils
             else if (node is DGActionNode actionNode)
             {
                 var actionNodeSO = CreateAsset<DRActionNodeSO>(savePath, actionNode.Guid.ToString());
-                actionNodeSO.TargetSO = actionNode.TargetSO;
+                actionNodeSO.ActionSO = actionNode.ActionSO;
                 
                 nodeSO = actionNodeSO;
+            }
+            else if (node is DGSetVariableNode setVariableNode)
+            {
+                var setVariableNodeSO = CreateAsset<DRSetVariableNodeSO>(savePath, setVariableNode.Guid.ToString());
+                setVariableNodeSO.VariableSO = setVariableNode.VariableSO;
+                setVariableNodeSO.SetValue = setVariableNode.SetValue;
+
+                nodeSO = setVariableNodeSO;
             }
             else
                 throw new ArgumentException($"Unexpected node type {node.GetType()} in the graph");

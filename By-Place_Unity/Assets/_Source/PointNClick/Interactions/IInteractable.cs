@@ -7,6 +7,7 @@ namespace PointNClick.Interactions
     {
         public Vector3 Position { get; }
 
+        public event Action OnStarted;
         public event Action OnFinished;
 
         public void Interact();

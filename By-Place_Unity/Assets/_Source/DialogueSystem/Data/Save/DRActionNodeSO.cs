@@ -5,6 +5,6 @@ namespace DialogueSystem.Data.Save
 {
     public class DRActionNodeSO : DRNodeSO
     {
-        [field: SerializeField] public ActionSO TargetSO { get; set; }
+        [field: SerializeField] public ActionSO ActionSO { get; set; }
     }
 }
