@@ -3,7 +3,6 @@ using DialogueSystem.ActionSystem;
 using DialogueSystem.ActionSystem.Data;
 using UnityEngine;
 using VContainer;
-using VContainer.Unity;
 
 namespace Navigation.TravelPoint
 {
@@ -12,7 +11,7 @@ namespace Navigation.TravelPoint
         [SerializeField] private ActionSO actionSO;
         [SerializeField] private TravelPoint travelPoint;
 
-        [SerializeField] private bool lockUnlock;
+        [SerializeField] private bool isOpen;
 
         private ActionResolver _actionResolver;
 
@@ -30,7 +29,7 @@ namespace Navigation.TravelPoint
 
         public void Perform()
         {
-            if (lockUnlock)
+            if (isOpen)
                 travelPoint.Unlock();
             else
                 travelPoint.Lock();

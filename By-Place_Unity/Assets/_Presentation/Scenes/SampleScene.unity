@@ -1508,7 +1508,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionSO: {fileID: 11400000, guid: fb33a4f20d947b04a9bd04c380f99ef8, type: 2}
-  target: {fileID: 223597036}
+  targets:
+  - {fileID: 223597036}
 --- !u!114 &1130745433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1522,7 +1523,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionSO: {fileID: 11400000, guid: 4b9dfecb3510ce6449a2dd19a8fb5ad8, type: 2}
-  target: {fileID: 1433173662}
+  targets:
+  - {fileID: 1433173662}
 --- !u!1 &1183894095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2111,7 +2113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionSO: {fileID: 11400000, guid: 5fe587fd0e4f36e4c9014daf64588c9b, type: 2}
-  target: {fileID: 1766230390}
+  targets:
+  - {fileID: 1766230390}
 --- !u!1 &1779585475
 GameObject:
   m_ObjectHideFlags: 0
