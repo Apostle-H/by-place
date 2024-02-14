@@ -1,5 +1,5 @@
 ﻿using System;
-using DialogueSystem.ActionSystem.BasicActions.Data;
+using DialogueSystem.ActionSystem.Data;
 using UnityEngine;
 using VContainer;
 
@@ -7,8 +7,9 @@ namespace DialogueSystem.ActionSystem.BasicActions
 {
     public class OnOffGOAction : MonoBehaviour, IAction
     {
-        [SerializeField] private OnOffGOActionSO actionSO;
+        [SerializeField] private ActionSO actionSO;
         [SerializeField] private GameObject[] targets;
+        [SerializeField] private bool offOn;
 
         private ActionResolver _actionResolver;
 
@@ -27,7 +28,7 @@ namespace DialogueSystem.ActionSystem.BasicActions
         public void Perform()
         {
             foreach (var target in targets)
-                target.SetActive(actionSO.OffOn);
+                target.SetActive(offOn);
             Resolve = false;
             
             OnFinished?.Invoke(this);

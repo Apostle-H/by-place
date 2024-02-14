@@ -1510,6 +1510,7 @@ MonoBehaviour:
   actionSO: {fileID: 11400000, guid: fb33a4f20d947b04a9bd04c380f99ef8, type: 2}
   targets:
   - {fileID: 223597036}
+  offOn: 0
 --- !u!114 &1130745433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1522,9 +1523,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf74271b13e4adb9b12ddc0660057f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionSO: {fileID: 11400000, guid: 4b9dfecb3510ce6449a2dd19a8fb5ad8, type: 2}
+  actionSO: {fileID: 11400000, guid: 9d4c33f47d433bd498436bd9fa029536, type: 2}
   targets:
   - {fileID: 1433173662}
+  offOn: 1
 --- !u!1 &1183894095
 GameObject:
   m_ObjectHideFlags: 0
@@ -1982,7 +1984,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1766230391}
   - component: {fileID: 1766230396}
-  - component: {fileID: 1766230398}
+  - component: {fileID: 1766230397}
   - component: {fileID: 1766230395}
   - component: {fileID: 1766230394}
   - component: {fileID: 1766230393}
@@ -2100,7 +2102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ds: {fileID: 11400000, guid: cce793c3a5be99d439fc51804bd3a0a9, type: 2}
   interactPoint: {fileID: 2145151166}
---- !u!114 &1766230398
+--- !u!114 &1766230397
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2112,9 +2114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf74271b13e4adb9b12ddc0660057f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  actionSO: {fileID: 11400000, guid: 5fe587fd0e4f36e4c9014daf64588c9b, type: 2}
+  actionSO: {fileID: 11400000, guid: ed2460e121120ed45876328d5440e367, type: 2}
   targets:
   - {fileID: 1766230390}
+  offOn: 0
 --- !u!1 &1779585475
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ MonoBehaviour:
   <Groups>k__BackingField:
   - <Guid>k__BackingField: 320307985
     <Name>k__BackingField: PickUp
-    <Position>k__BackingField: {x: 346, y: 257.00006}
+    <Position>k__BackingField: {x: 346, y: 257}
   <Nodes>k__BackingField:
   - <Guid>k__BackingField: 344105825
     <GroupGuid>k__BackingField: 320307985
@@ -48,7 +48,7 @@ MonoBehaviour:
     <SpeakerSO>k__BackingField: {fileID: 0}
     <Choices>k__BackingField: []
     <Texts>k__BackingField: []
-    <ActionSO>k__BackingField: {fileID: 11400000, guid: 5fe587fd0e4f36e4c9014daf64588c9b, type: 2}
+    <ActionSO>k__BackingField: {fileID: 11400000, guid: ed2460e121120ed45876328d5440e367, type: 2}
     <VariableSO>k__BackingField: {fileID: 0}
     <SetValue>k__BackingField: 0
   - <Guid>k__BackingField: -194660597
