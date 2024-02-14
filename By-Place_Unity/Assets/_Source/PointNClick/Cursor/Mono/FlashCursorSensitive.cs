@@ -10,7 +10,7 @@ using VContainer.Unity;
 
 namespace PointNClick.Cursor.Sensitive
 {
-    public class FlashCursorSensitive : AMonoCursorSensitive, IStartable, IDisposable, IPointerDownHandler
+    public class FlashCursorSensitive : AMonoCursorSensitive
     {
         [SerializeField] private FlashCursorConfigSO configSO;
         
@@ -35,9 +35,9 @@ namespace PointNClick.Cursor.Sensitive
         
         public void Start() => _cursorManager.AddSensitive(this);
 
-        public void Dispose() => _cursorManager.RemoveSensitive(this);
+        public void OnDestroy() => _cursorManager.RemoveSensitive(this);
 
-        public void OnPointerDown(PointerEventData eventData)
+        private void OnMouseDown()
         {
             _coroutineRunner.StopCoroutine(Flash());
             _coroutineRunner.StartCoroutine(Flash());

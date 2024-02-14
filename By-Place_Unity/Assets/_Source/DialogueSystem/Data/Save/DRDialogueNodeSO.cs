@@ -6,7 +6,7 @@ namespace DialogueSystem.Data.Save
     public class DRDialogueNodeSO : DRNodeSO
     {
         [field: SerializeField] public DSpeakerSO SpeakerSO { get; set; }
-        [field: SerializeField, TextArea()] public string Text { get; set; }
-        [field: SerializeField] public List<string> ChoicesText { get; set; }
+        [field: SerializeField] public List<DChoice> Choices { get; set; }
+        [field: SerializeField] public List<DText> Texts { get; set; }
     }
 }

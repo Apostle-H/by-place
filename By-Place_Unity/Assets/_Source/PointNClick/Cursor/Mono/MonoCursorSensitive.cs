@@ -8,8 +8,7 @@ using VContainer.Unity;
 
 namespace PointNClick.Cursor.Sensitive
 {
-    public class MonoCursorSensitive : AMonoCursorSensitive, IStartable, IDisposable, 
-        IPointerEnterHandler, IPointerExitHandler
+    public class MonoCursorSensitive : AMonoCursorSensitive
     {
         [SerializeField] private CursorConfigSO configSO;
         
@@ -25,10 +24,10 @@ namespace PointNClick.Cursor.Sensitive
 
         public void Start() => _cursorManager.AddSensitive(this);
 
-        public void Dispose() => _cursorManager.RemoveSensitive(this);
+        public void OnDestroy() => _cursorManager.RemoveSensitive(this);
 
-        public void OnPointerEnter(PointerEventData eventData) => EnterInvoke();
+        private void OnMouseEnter() => EnterInvoke();
 
-        public void OnPointerExit(PointerEventData eventData) => ExitInvoke();
+        public void OnMouseExit() => ExitInvoke();
     }
 }

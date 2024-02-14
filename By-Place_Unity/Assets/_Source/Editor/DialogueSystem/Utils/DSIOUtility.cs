@@ -147,9 +147,8 @@ namespace DialogueSystem.Utils
             {
                 var dialogueNodeSO = CreateAsset<DRDialogueNodeSO>(savePath, dialogueNode.Guid.ToString());
                 dialogueNodeSO.SpeakerSO = dialogueNode.SpeakerSO;
-                dialogueNodeSO.Text = dialogueNode.Text;
-                dialogueNodeSO.ChoicesText = 
-                    dialogueNode.ChoicesTexts.ToList();
+                dialogueNodeSO.Texts = dialogueNode.Texts.ToList();
+                dialogueNodeSO.Choices = dialogueNode.Choices.ToList();
                 
                 nodeSO = dialogueNodeSO;
             }
