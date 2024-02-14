@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caaa76378291a144d849f29230be0a5a, type: 3}
+  m_Name: Johnopenshop
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Johnopenshop
+  <Groups>k__BackingField:
+  - {fileID: 11400000, guid: d23cac6c5706fd7499e2739609739e7c, type: 2}
+  <Nodes>k__BackingField:
+  - {fileID: 11400000, guid: e718e978305d6084f881eafb50d80618, type: 2}
+  - {fileID: 11400000, guid: 63c42b5d9935e384a8c70465ff7ba5c7, type: 2}
+  - {fileID: 11400000, guid: 14248b7063de75c49bf6a3227071dea5, type: 2}
+  - {fileID: 11400000, guid: c6cb39ba57909bf4dbe9a2d07fa3a305, type: 2}
+  - {fileID: 11400000, guid: 6272456e592a5cf48b6b2151bd0886aa, type: 2}
+  - {fileID: 11400000, guid: 172710daf06798440af4d65611a993b6, type: 2}
