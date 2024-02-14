@@ -113,49 +113,33 @@ namespace DialogueSystem.Elements
 
         private Port CreateChoicePort(int index)
         {
+            var outputData = NextGuids[index];
+            var choice = Choices[index];
+            
             var choicePort = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
             choicePort.portName = DEFAULT_OUTPUT_PORT_NAME;
             choicePort.userData = NextGuids[index];
-
-            var deleteChoiceButton = DSElementUtility.CreateButton("X", () =>
-            {
-                if (NextGuids.Count == 1)
-                    return;
-
-                if (choicePort.connected)
-                    graphView.DeleteElements(choicePort.connections);
-
-                NextGuids.RemoveAt(index);
-                Choices.RemoveAt(index);
-                
-                graphView.RemoveElement(choicePort);
-            });
+            
+            var deleteChoiceButton = DSElementUtility.CreateButton("X", () => 
+                DeleteChoicePort(choicePort, outputData, choice));
 
             deleteChoiceButton.AddToClassList("ds-node__button");
 
             var choiceTextField = DSElementUtility.CreateTextField(Choices[index].Text, null, 
                 callback => Choices[index].Text = callback.newValue);
 
-            choiceTextField.AddClasses(
-                "ds-node__text-field",
-                "ds-node__text-field__hidden",
-                "ds-node__choice-text-field"
-            );
-
-            var variableFoldout = DSElementUtility.CreateFoldout("V");
-            variableFoldout.style.flexDirection = FlexDirection.Row;
+            choiceTextField.AddClasses("ds-node__text-field", "ds-node__text-field__hidden", "ds-node__choice-text-field");
 
             var variableBox = new Box();
             
             var checkVariableField = new ObjectField() { objectType = typeof(DVariableSO), value = Choices[index].CheckVariableSO };
             checkVariableField.RegisterValueChangedCallback(evt =>
-                Choices[index].CheckVariableSO = (DVariableSO)evt.newValue);
+                UpdateVariable(choice, (DVariableSO)evt.newValue));
             checkVariableField.style.maxWidth = new Length(150, LengthUnit.Pixel);
 
             var checkVariableExpectedValue = new Toggle() { value = Choices[index].ExpectedValue };
             checkVariableExpectedValue.RegisterValueChangedCallback(evt =>
-                Choices[index].ExpectedValue = evt.newValue);
-            
+                UpdateVariableExpectedValue(choice, evt.newValue));
             
             variableBox.Add(checkVariableField);
             variableBox.Add(checkVariableExpectedValue);
@@ -168,34 +152,38 @@ namespace DialogueSystem.Elements
             return choicePort;
         }
 
+        private void UpdateVariable(DChoice choice, DVariableSO newValue) => choice.CheckVariableSO = newValue;
+        
+        private void UpdateVariableExpectedValue(DChoice choice, bool newValue) => choice.ExpectedValue = newValue;
+        
+        private void DeleteChoicePort(Port choicePort, DOutputData outputData, DChoice choice)
+        {
+            if (NextGuids.Count == 1)
+                return;
+
+            if (choicePort.connected)
+                graphView.DeleteElements(choicePort.connections);
+
+            NextGuids.Remove(outputData);
+            Choices.Remove(choice);
+                
+            graphView.RemoveElement(choicePort);
+        }
+
         private Foldout CreateDialogueText(int index)
         {
+            var text = Texts[index];
             var textFoldout = DSElementUtility.CreateFoldout("Text");
             
             var textVariableField = new ObjectField() { objectType = typeof(DVariableSO), value = Texts[index].VariableSO};
             textVariableField.RegisterValueChangedCallback(evt => 
-                Texts[index].VariableSO = (DVariableSO)evt.newValue);
+                UpdateTextVariable(text, (DVariableSO)evt.newValue));
             
-            var textField = DSElementUtility.CreateTextArea(Texts[index].Text, null, 
-                callback =>
-                {
-                    Texts[index].Text = callback.newValue;
-                    textFoldout.text = Texts[index].Text.Split(' ')[0];
-                });
-            textField.AddClasses(
-                "ds-node__text-field",
-                "ds-node__quote-text-field"
-            );
+            var textField = DSElementUtility.CreateTextArea(Texts[index].Text, null, evt =>
+                UpdateText(textFoldout, text, evt.newValue));
+            textField.AddClasses("ds-node__text-field", "ds-node__quote-text-field");
 
-            var deleteButton = DSElementUtility.CreateButton("Remove", () =>
-            {
-                if (index == 0)
-                    return;
-
-                Texts.RemoveAt(index);
-
-                textFoldout.parent.Remove(textFoldout);
-            });
+            var deleteButton = DSElementUtility.CreateButton("Remove", () => DeleteText(textFoldout, text));
 
             if (index != 0)
                 textFoldout.Add(textVariableField);
@@ -204,6 +192,24 @@ namespace DialogueSystem.Elements
                 textFoldout.Add(deleteButton);
 
             return textFoldout;
+        }
+
+        private void UpdateTextVariable(DText text, DVariableSO newValue) => text.VariableSO = newValue;
+
+        private void UpdateText(Foldout textFoldout, DText text, string newValue)
+        {
+            text.Text = newValue;
+            textFoldout.text = newValue;
+        }
+
+        private void DeleteText(Foldout textFoldout, DText text)
+        {
+            if (Texts.Count == 1)
+                return;
+
+            Texts.Remove(text);
+
+            textFoldout.parent.Remove(textFoldout);
         }
     }
 }
