@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DialogueSystem.Data;
+using DialogueSystem.Data.Save;
 using DialogueSystem.Elements;
 using DialogueSystem.Utilities;
 using DialogueSystem.Utils.Extensions;
@@ -55,6 +56,7 @@ namespace DialogueSystem.Windows
 
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Multiple Choice)", DNodeType.DIALOGUE));
             this.AddManipulator(CreateNodeContextualMenu("Add Node (Action)", DNodeType.ACTION));
+            this.AddManipulator(CreateNodeContextualMenu("Add Node (SetVariable)", DNodeType.SET_VARIABLE));
             this.AddManipulator(CreateGroupContextualMenu());
         }
 
@@ -70,6 +72,9 @@ namespace DialogueSystem.Windows
                             break;
                         case DNodeType.ACTION:
                             AddElement(CreateNode<DGActionNode>(GetLocalMousePosition(actionEvent.eventInfo.localMousePosition)));
+                            break;
+                        case DNodeType.SET_VARIABLE:
+                            AddElement(CreateNode<DGSetVariableNode>(GetLocalMousePosition(actionEvent.eventInfo.localMousePosition)));
                             break;
                         default:
                             throw new ArgumentOutOfRangeException(nameof(nodeType), nodeType, null);

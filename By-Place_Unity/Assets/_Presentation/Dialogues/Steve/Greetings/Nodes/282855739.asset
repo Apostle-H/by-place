@@ -15,22 +15,18 @@ MonoBehaviour:
   <Guid>k__BackingField: 282855739
   <IsStartingNode>k__BackingField: 1
   <NextGuids>k__BackingField:
-  - <NextGuid>k__BackingField: 1544431881
-  - <NextGuid>k__BackingField: 1544431881
-  - <NextGuid>k__BackingField: -1
+  - <NextGuid>k__BackingField: -1870119680
+  - <NextGuid>k__BackingField: -1870119680
   <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
   <Choices>k__BackingField:
-  - <Text>k__BackingField: Hi, sweetie
-    <CheckVariableSO>k__BackingField: {fileID: 0}
-    <SetVariableSO>k__BackingField: {fileID: 0}
   - <Text>k__BackingField: Hello, sir
     <CheckVariableSO>k__BackingField: {fileID: 0}
-    <SetVariableSO>k__BackingField: {fileID: 11400000, guid: c45fe0e953d53254a9fd93b7f2ba613c, type: 2}
+    <ExpectedValue>k__BackingField: 0
   - <Text>k__BackingField: Whats up dog
-    <CheckVariableSO>k__BackingField: {fileID: 11400000, guid: c45fe0e953d53254a9fd93b7f2ba613c, type: 2}
-    <SetVariableSO>k__BackingField: {fileID: 0}
+    <CheckVariableSO>k__BackingField: {fileID: 11400000, guid: 77a441c90a5caa942a61c4d10474d7df, type: 2}
+    <ExpectedValue>k__BackingField: 1
   <Texts>k__BackingField:
   - <Text>k__BackingField: Hi
     <VariableSO>k__BackingField: {fileID: 0}
   - <Text>k__BackingField: Whats up with you, man
-    <VariableSO>k__BackingField: {fileID: 11400000, guid: c45fe0e953d53254a9fd93b7f2ba613c, type: 2}
+    <VariableSO>k__BackingField: {fileID: 11400000, guid: 77a441c90a5caa942a61c4d10474d7df, type: 2}

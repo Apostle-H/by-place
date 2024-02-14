@@ -144,19 +144,24 @@ namespace DialogueSystem.Elements
 
             var variableFoldout = DSElementUtility.CreateFoldout("V");
             variableFoldout.style.flexDirection = FlexDirection.Row;
+
+            var variableBox = new Box();
             
             var checkVariableField = new ObjectField() { objectType = typeof(DVariableSO), value = Choices[index].CheckVariableSO };
             checkVariableField.RegisterValueChangedCallback(evt =>
                 Choices[index].CheckVariableSO = (DVariableSO)evt.newValue);
-            
-            var setVariableField = new ObjectField() { objectType = typeof(DVariableSO), value = Choices[index].SetVariableSO };
-            setVariableField.RegisterValueChangedCallback(evt =>
-                Choices[index].SetVariableSO = (DVariableSO)evt.newValue);
-            
-            variableFoldout.Add(checkVariableField);
-            variableFoldout.Add(setVariableField);
+            checkVariableField.style.maxWidth = new Length(150, LengthUnit.Pixel);
 
-            choicePort.Add(variableFoldout);
+            var checkVariableExpectedValue = new Toggle() { value = Choices[index].ExpectedValue };
+            checkVariableExpectedValue.RegisterValueChangedCallback(evt =>
+                Choices[index].ExpectedValue = evt.newValue);
+            
+            
+            variableBox.Add(checkVariableField);
+            variableBox.Add(checkVariableExpectedValue);
+            variableBox.style.flexDirection = FlexDirection.Row;
+            
+            choicePort.Add(variableBox);
             choicePort.Add(choiceTextField);
             choicePort.Add(deleteChoiceButton);
 

@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DialogueSystem.ActionSystem;
 using QuestSystem.Actions;
 using UnityEngine;
 using VContainer;
+using VContainer.Unity;
 
 namespace QuestSystem
 {
-    public class QuestActionsCollector : MonoBehaviour
+    public class QuestActionsCollector : IInitializable, IStartable, IDisposable
     {
         private List<QuestAction> _questActions = new();
 
@@ -21,8 +23,8 @@ namespace QuestSystem
             _questManager = questManager;
             _actionResolver = actionResolver;
         }
-
-        private void Awake()
+        
+        public void Initialize()
         {
             var questActionsSO = Resources.LoadAll<QuestActionSO>("QuestSystem/Actions").ToList();
 
@@ -37,7 +39,7 @@ namespace QuestSystem
                 _actionResolver.AddAction(questActionSO);
         }
 
-        public void OnDestroy()
+        public void Dispose()
         {
             foreach (var questActionSO in _questActions)
                 _actionResolver.RemoveAction(questActionSO);

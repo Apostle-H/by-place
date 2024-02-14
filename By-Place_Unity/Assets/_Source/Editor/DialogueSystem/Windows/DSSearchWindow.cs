@@ -35,6 +35,11 @@ namespace DialogueSystem.Windows
                     userData = new DGActionNode(),
                     level = 1
                 },
+                new SearchTreeEntry(new GUIContent("Set Variable", _indentationIcon))
+                {
+                    userData = new DGSetVariableNode(),
+                    level = 1
+                },
                 new SearchTreeEntry(new GUIContent("Group", _indentationIcon))
                 {
                     userData = new Group(),
@@ -58,6 +63,10 @@ namespace DialogueSystem.Windows
                 case DGActionNode _:
                     var actionNode = _graphView.CreateNode<DGActionNode>(localMousePosition);
                     _graphView.AddElement(actionNode);
+                    return true;
+                case DGSetVariableNode _:
+                    var setVariableNode = _graphView.CreateNode<DGSetVariableNode>(localMousePosition);
+                    _graphView.AddElement(setVariableNode);
                     return true;
                 case Group _:
                     _graphView.CreateGroup("DialogueGroup", localMousePosition);

@@ -12,7 +12,7 @@ namespace DialogueSystem.Data
         {
             var _variablesSOs = Resources.LoadAll<DVariableSO>("DS/Variables");
             foreach (var variable in _variablesSOs)
-                _variables.Add(variable.Id, variable.Obtained);
+                _variables.Add(variable.Id, variable.Value);
         }
 
         public bool Get(int id, out bool variable)

@@ -9,11 +9,14 @@ using InputSystem;
 using PointNClick.Cursor.Manager;
 using PointNClick.Data;
 using PointNClick.Interactions;
+using PointNClick.Items;
+using PointNClick.Items.View;
 using PointNClick.Movement;
 using PointNClick.Movement.Data;
 using QuestSystem;
 using StateMachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Utils.Runners;
 using VContainer;
 using VContainer.Unity;
@@ -34,6 +37,7 @@ namespace Core.DI
             ConfigureCharacter(builder);
             ConfigureDialogueSystem(builder);
             ConfigureQuestSystem(builder);
+            ConfigureInventory(builder);
             ConfigureCharacterStateMachine(builder);
         }
 
@@ -74,6 +78,21 @@ namespace Core.DI
         private void ConfigureQuestSystem(IContainerBuilder builder)
         {
             builder.Register<QuestManager>(Lifetime.Singleton);
+            
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<QuestActionsCollector>();
+            });
+        }
+        
+        private void ConfigureInventory(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<InventoryView>();
+            
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<ItemActionsCollector>();
+            });
         }
 
         private void ConfigureCharacterStateMachine(IContainerBuilder builder)

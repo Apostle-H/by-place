@@ -22,6 +22,10 @@ namespace DialogueSystem.Data
         [field: SerializeField] public List<DText> Texts { get; set; }
         
         [field: Header("Action")]
-        [field: SerializeField] public ActionSO TargetSO { get; set; }
+        [field: SerializeField] public ActionSO ActionSO { get; set; }
+        
+        [field: Header("Variable")]
+        [field: SerializeField] public DVariableSO VariableSO { get; set; }
+        [field: SerializeField] public bool SetValue { get; set; }
     }
 }
