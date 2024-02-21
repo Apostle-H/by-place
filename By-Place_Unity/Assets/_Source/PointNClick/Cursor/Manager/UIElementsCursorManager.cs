@@ -20,7 +20,7 @@ namespace PointNClick.Cursor.Manager
         private PointNClickActions _actions;
         private Label _cursorText;
 
-        private HashSet<ICursorSensitive> _cursorSensitives = new();
+        private List<ICursorSensitive> _cursorSensitives = new();
         private int _currentCursorId;
 
         [Inject]
@@ -40,8 +40,9 @@ namespace PointNClick.Cursor.Manager
 
         public void AddSensitive(ICursorSensitive sensitive)
         {
-            if (!_cursorSensitives.Add(sensitive)) 
+            if (_cursorSensitives.Contains(sensitive)) 
                 return;
+            _cursorSensitives.Add(sensitive);
             
             sensitive.OnEnter += UpdateCursor;
             sensitive.OnExit += ToDefaultCursor;

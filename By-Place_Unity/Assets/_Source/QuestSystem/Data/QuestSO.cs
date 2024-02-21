@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace QuestSystem
+namespace QuestSystem.Data
 {
     [CreateAssetMenu(menuName = "SO/QuestSystem/QuestSO", fileName = "NewQuestSO")]
     public class QuestSO : ScriptableObject

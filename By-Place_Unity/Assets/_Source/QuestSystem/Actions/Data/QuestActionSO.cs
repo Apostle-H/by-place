@@ -1,9 +1,8 @@
-﻿using System;
-using DialogueSystem.ActionSystem;
-using DialogueSystem.ActionSystem.Data;
+﻿using ActionSystem.Data;
+using QuestSystem.Data;
 using UnityEngine;
 
-namespace QuestSystem.Actions
+namespace QuestSystem.Actions.Data
 {
     [CreateAssetMenu(menuName = "SO/QuestSystem/Actions/QuestActionSO", fileName = "NewQuestActionSO")]
     public class QuestActionSO : ActionSO

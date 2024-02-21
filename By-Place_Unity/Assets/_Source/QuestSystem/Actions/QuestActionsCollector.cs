@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DialogueSystem.ActionSystem;
-using QuestSystem.Actions;
+using ActionSystem;
+using QuestSystem.Actions.Data;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace QuestSystem
+namespace QuestSystem.Actions
 {
     public class QuestActionsCollector : IInitializable, IStartable, IDisposable
     {

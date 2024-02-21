@@ -1,12 +1,10 @@
 ﻿using System;
 using PointNClick.Cursor.Manager;
 using PointNClick.Cursor.Sensitive.Data;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using VContainer;
 
-namespace PointNClick.Cursor.Sensitive.UI
+namespace PointNClick.Cursor.Sensitive
 {
     public class UICursorSensitive : ICursorSensitive
     {

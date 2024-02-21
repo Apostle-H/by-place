@@ -1300,7 +1300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1066853269}
   - component: {fileID: 1066853263}
-  - component: {fileID: 1066853265}
+  - component: {fileID: 1066853270}
   - component: {fileID: 1066853267}
   - component: {fileID: 1066853266}
   - component: {fileID: 1066853268}
@@ -1327,20 +1327,6 @@ MonoBehaviour:
   m_ParentUI: {fileID: 0}
   sourceAsset: {fileID: 9197481963319205126, guid: f5541795dc9659748ae569e6573c8dd6, type: 3}
   m_SortingOrder: 0
---- !u!114 &1066853265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1066853262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc6f7c414794426682e3831b8a96c369, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 1066853263}
-  choiceBtnAsset: {fileID: 9197481963319205126, guid: a4119edcdbff07c4aa3ce9d0a693683e, type: 3}
 --- !u!114 &1066853266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1408,6 +1394,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1066853270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066853262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4e7ad2403cd4611aadf4fecd06661c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 1066853263}
+  choiceBtnAsset: {fileID: 9197481963319205126, guid: a4119edcdbff07c4aa3ce9d0a693683e, type: 3}
 --- !u!1 &1120124375
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,6 +2543,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Steve
       objectReference: {fileID: 0}
+    - target: {fileID: 3221605752829335560, guid: 5ee0fce0550367d49b0a1ecfe8911a90, type: 3}
+      propertyPath: ds
+      value: 
+      objectReference: {fileID: 11400000, guid: 85191c8daee21e842a9b17964456ae0e, type: 2}
     - target: {fileID: 3221605752829335560, guid: 5ee0fce0550367d49b0a1ecfe8911a90, type: 3}
       propertyPath: interactPoint
       value: 

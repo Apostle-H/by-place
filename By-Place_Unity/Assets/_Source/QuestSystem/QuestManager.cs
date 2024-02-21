@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using QuestSystem.Data;
 
 namespace QuestSystem
 {

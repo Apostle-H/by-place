@@ -1,8 +1,8 @@
-﻿using Character;
+﻿using ActionSystem;
+using Character;
 using Character.States;
 using Character.View;
 using DialogueSystem;
-using DialogueSystem.ActionSystem;
 using DialogueSystem.Data;
 using Input;
 using InputSystem;
@@ -10,10 +10,12 @@ using PointNClick.Cursor.Manager;
 using PointNClick.Data;
 using PointNClick.Interactions;
 using PointNClick.Items;
+using PointNClick.Items.Actions;
 using PointNClick.Items.View;
 using PointNClick.Movement;
 using PointNClick.Movement.Data;
 using QuestSystem;
+using QuestSystem.Actions;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -70,9 +72,12 @@ namespace Core.DI
 
         private void ConfigureDialogueSystem(IContainerBuilder builder)
         {
+            builder.RegisterComponentInHierarchy<DialogueView>();
+            
             builder.Register<DVariablesContainer>(Lifetime.Singleton);
             builder.Register<ActionResolver>(Lifetime.Singleton);
-            builder.RegisterComponentInHierarchy<DialogueResolver>();
+            builder.Register<DialogueData>(Lifetime.Singleton);
+            builder.Register<DialogueController>(Lifetime.Singleton);
         }
 
         private void ConfigureQuestSystem(IContainerBuilder builder)
