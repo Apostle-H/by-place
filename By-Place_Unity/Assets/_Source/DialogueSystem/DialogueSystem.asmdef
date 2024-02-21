@@ -1,0 +1,19 @@
+{
+    "name": "DialogueSystem",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:66accfebb3ef11f4ea5c7d53fda6d747",
+        "GUID:a96c5ee47bc2db248887551ded1db46f",
+        "GUID:764c9605a193bbd49977ec3fd6607d65"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

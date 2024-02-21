@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using PointNClick.Cursor.Manager;
+using PointNClick.Cursor.Sensitive;
 using PointNClick.Cursor.Sensitive.Data;
-using PointNClick.Cursor.Sensitive.UI;
+using PointNClick.Items.Data;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;

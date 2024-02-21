@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DialogueSystem.ActionSystem;
-using PointNClick.Items.Actions;
+using ActionSystem;
 using PointNClick.Items.Actions.Data;
 using PointNClick.Items.View;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace PointNClick.Items
+namespace PointNClick.Items.Actions
 {
     public class ItemActionsCollector : IInitializable, IStartable, IDisposable
     {

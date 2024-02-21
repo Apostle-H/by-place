@@ -1,5 +1,5 @@
 ﻿using System;
-using DialogueSystem.ActionSystem;
+using ActionSystem;
 
 namespace QuestSystem.Actions
 {

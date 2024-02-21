@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DialogueSystem.Data
+namespace DialogueSystem.Data.NodeParams
 {
     [CreateAssetMenu(menuName = "SO/DS/SpeakerSO", fileName = "NewDSpeakerSO")]
     public class DSpeakerSO : ScriptableObject

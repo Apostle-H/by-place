@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using PointNClick.Cursor.Manager;
 using PointNClick.Cursor.Sensitive.Data;
 using UnityEngine;
@@ -9,7 +10,7 @@ using VContainer;
 
 namespace PointNClick.Cursor.Sensitive
 {
-    public class FlashCursorSensitive : AMonoCursorSensitive, IPointerDownHandler
+    public class FlashCursorSensitive : MonoBehaviour, ICursorSensitive
     {
         [SerializeField] private FlashCursorConfigSO configSO;
         
@@ -18,10 +19,13 @@ namespace PointNClick.Cursor.Sensitive
 
         private WaitForSeconds _flashDelay;
 
-        public override int Id => configSO.Id;
-        public override Texture2D Cursor => configSO.Cursor;
-        public override Vector2 HotSpot => configSO.HotSpot;
-        public override string Text => configSO.Text;
+        public int Id => configSO.Id;
+        public Texture2D Cursor => configSO.Cursor;
+        public Vector2 HotSpot => configSO.HotSpot;
+        public string Text => configSO.Text;
+        
+        public event Action<ICursorSensitive> OnEnter;
+        public event Action<ICursorSensitive> OnExit;
 
         [Inject]
         public void Inject(ICursorManager cursorManager, CoroutineRunner coroutineRunner)
@@ -36,17 +40,17 @@ namespace PointNClick.Cursor.Sensitive
 
         private void OnDestroy() => _cursorManager.RemoveSensitive(this);
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnMouseDown()
         {
             _coroutineRunner.StopCoroutine(Flash());
             _coroutineRunner.StartCoroutine(Flash());
         }
-        
+
         private IEnumerator Flash()
         {
-            EnterInvoke();
+            OnEnter?.Invoke(this);
             yield return _flashDelay;
-            ExitInvoke();
+            OnExit?.Invoke(this);
         }
     }
 }

@@ -1,9 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using DialogueSystem.Data.Save;
+using DialogueSystem.Data.NodeParams;
 using DialogueSystem.Elements;
+using DialogueSystem.Elements.Nodes;
 using DialogueSystem.Windows;
+using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -15,6 +17,19 @@ namespace DialogueSystem.Data
         [field: SerializeField] public List<DEGroup> Groups { get; private set; } = new();
         [field: SerializeField] public List<DENode> Nodes { get; private set; } = new();
 
+        [OnOpenAsset]
+        public static bool Open(int instanceId, int line)
+        {
+            var graph = EditorUtility.InstanceIDToObject(instanceId) as DEContainerSO;
+            if (graph != null)
+            {
+                
+                return true;
+            }
+
+            return false;
+        }
+        
         public void Save(List<DGGroup> groups, List<DGNode> nodes)
         {
             SaveGroups(groups);
@@ -25,12 +40,10 @@ namespace DialogueSystem.Data
         {
             foreach (var group in groups)
             {
-                Groups.Add(new DEGroup()
-                {
-                    Guid = group.Guid,
-                    Name = group.title,
-                    Position = group.GetPosition().position
-                });
+                var groupSave = new DEGroup();
+                groupSave.Save(group);
+                
+                Groups.Add(groupSave);
             }
         }
         
@@ -38,38 +51,10 @@ namespace DialogueSystem.Data
         {
             foreach (var node in nodes)
             {
-                var nodeSave = new DENode()
-                {
-                    Guid = node.Guid,
-                    GroupGuid = node.GroupGuid,
-                    Position = node.GetPosition().position,
-                    NextGuids = node.NextGuids.ToList()
-                };
-            
-                if (node is DGDialogueNode dialogueNode)
-                {
-                    nodeSave.NodeType = DNodeType.DIALOGUE;
-                    nodeSave.SpeakerSO = dialogueNode.SpeakerSO;
-                    nodeSave.Choices = dialogueNode.Choices.ToList();
-                    nodeSave.Texts = dialogueNode.Texts.ToList();
+                var nodeSave = new DENode();
+                nodeSave.Save(node);
                 
-                    Nodes.Add(nodeSave);
-                }
-                else if (node is DGActionNode actionNode)
-                {
-                    nodeSave.NodeType = DNodeType.ACTION;
-                    nodeSave.ActionSO = actionNode.ActionSO;
-                
-                    Nodes.Add(nodeSave);
-                }
-                else if (node is DGSetVariableNode setVariableNode)
-                {
-                    nodeSave.NodeType = DNodeType.SET_VARIABLE;
-                    nodeSave.VariableSO = setVariableNode.VariableSO;
-                    nodeSave.SetValue = setVariableNode.SetValue;
-                    
-                    Nodes.Add(nodeSave);
-                }
+                Nodes.Add(nodeSave);
             }
         }
         
@@ -88,8 +73,8 @@ namespace DialogueSystem.Data
         {
             foreach (var groupSave in Groups)
             {
-                var group = graphView.CreateGroup(groupSave.Name, groupSave.Position, groupSave.Guid);
-                group.title = groupSave.Name;
+                var group = groupSave.Load();
+                graphView.AddGroup(group);
                 
                 loadedGroups.Add(group.Guid, group);
             }
@@ -100,44 +85,9 @@ namespace DialogueSystem.Data
         {
             foreach (var nodeSave in Nodes)
             {
-                DGNode node;
-                switch (nodeSave.NodeType)
-                {
-                    case DNodeType.DIALOGUE:
-                    {
-                        var dialogueNode = graphView.CreateNode<DGDialogueNode>(nodeSave.Position, nodeSave.Guid, false);
-                        dialogueNode.SpeakerSO = nodeSave.SpeakerSO;
-                        dialogueNode.Choices = nodeSave.Choices.ToList();
-                        dialogueNode.Texts = nodeSave.Texts.ToList();
-
-                        node = dialogueNode;
-                        break;
-                    }
-                    case DNodeType.ACTION:
-                    {
-                        var actionNode = graphView.CreateNode<DGActionNode>(nodeSave.Position, nodeSave.Guid, false);
-                        actionNode.ActionSO = nodeSave.ActionSO;
-
-                        node = actionNode;
-                        break;
-                    }
-                    case DNodeType.SET_VARIABLE:
-                    {
-                        var setVariableNode = graphView.CreateNode<DGSetVariableNode>(nodeSave.Position, nodeSave.Guid, false);
-                        setVariableNode.VariableSO = nodeSave.VariableSO;
-                        setVariableNode.SetValue = nodeSave.SetValue;
-
-                        node = setVariableNode;
-                        break;
-                    }
-                    default:
-                        throw new ArgumentException($"Unexpected node type {nodeSave.GetType()} in the save");
-                }
-
-                node.NextGuids = nodeSave.NextGuids.ToList();
-                node.Draw();
+                var node = nodeSave.Load(graphView);
                 
-                graphView.AddElement(node);
+                graphView.AddNode(node);
                 loadedNodes.Add(node.Guid, node);
 
                 if (nodeSave.GroupGuid == -1)

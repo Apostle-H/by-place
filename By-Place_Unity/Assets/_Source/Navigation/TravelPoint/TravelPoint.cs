@@ -1,7 +1,7 @@
 ﻿using System;
+using Movement;
 using Navigation.Location;
 using PointNClick.Interactions;
-using PointNClick.Movement;
 using UnityEngine;
 using VContainer;
 

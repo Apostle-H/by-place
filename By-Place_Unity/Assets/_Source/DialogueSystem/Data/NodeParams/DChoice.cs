@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace DialogueSystem.Data
+namespace DialogueSystem.Data.NodeParams
 {
     [Serializable]
     public class DChoice

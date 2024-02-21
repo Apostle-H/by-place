@@ -1,18 +1,19 @@
 ﻿using System;
 using Character.View;
-using DialogueSystem;
 using DialogueSystem.Data.Save;
+using DialogueSystem.Resolve;
+using PointNClick.Interactions;
 using UnityEngine;
 using VContainer;
 
-namespace PointNClick.Interactions
+namespace DialogueSystem
 {
     public class DialogueInteractable : MonoBehaviour, IInteractable
     {
         [SerializeField] private DRGroupSO ds;
         [SerializeField] private Transform interactPoint;
 
-        private DialogueResolver _dialogueResolver;
+        private DialogueController _dialogueController;
         
         private CharacterAnimationParams _characterAnimationParams;
         
@@ -22,18 +23,18 @@ namespace PointNClick.Interactions
         public event Action OnFinished;
 
         [Inject]
-        public void Inject(DialogueResolver dialogueResolver) => _dialogueResolver = dialogueResolver;
+        public void Inject(DialogueController dialogueController) => _dialogueController = dialogueController;
 
         public void Interact()
         {
-            _dialogueResolver.Load(ds);
-            _dialogueResolver.OnQuit += Finished;
+            _dialogueController.Load(ds);
+            _dialogueController.OnQuit += Finished;
             OnStarted?.Invoke();
         }
 
         private void Finished()
         {
-            _dialogueResolver.OnQuit -= Finished;
+            _dialogueController.OnQuit -= Finished;
             OnFinished?.Invoke();
         }
     }

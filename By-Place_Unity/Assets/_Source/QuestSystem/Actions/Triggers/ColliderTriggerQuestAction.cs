@@ -1,8 +1,9 @@
-﻿using DialogueSystem.ActionSystem;
+﻿using ActionSystem;
+using QuestSystem.Actions.Data;
 using UnityEngine;
 using VContainer;
 
-namespace QuestSystem.Actions
+namespace QuestSystem.Actions.Triggers
 {
     public class ColliderTriggerQuestAction : MonoBehaviour
     {

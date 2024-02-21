@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using QuestSystem.Data;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
