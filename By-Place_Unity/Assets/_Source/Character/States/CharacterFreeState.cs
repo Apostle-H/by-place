@@ -59,7 +59,7 @@ namespace Character.States
             if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
             {
                 _characterComponents.TargetInteractable = interactable;
-                Owner.Switch(typeof(CharacterInteractingState));
+                Owner.Switch<CharacterInteractingState>();
                 return;
             }
             

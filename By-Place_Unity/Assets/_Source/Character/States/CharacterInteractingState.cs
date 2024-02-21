@@ -49,6 +49,6 @@ namespace Character.States
             ToFreeState();
         }
         
-        private void ToFreeState() => Owner.Switch(typeof(CharacterFreeState));
+        private void ToFreeState() => Owner.Switch<CharacterFreeState>();
     }
 }
