@@ -1,7 +1,7 @@
 ﻿using ActionSystem.Data;
 using UnityEngine;
 
-namespace DialogueSystem.Data.Save
+namespace DialogueSystem.Data.Save.Nodes
 {
     public class DRActionNodeSO : DRNodeSO
     {

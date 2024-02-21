@@ -1,14 +1,12 @@
 using System;
+using Movement.Data;
 using PointNClick.Cursor.Manager;
-using PointNClick.Movement.Data;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using Utils.Extensions;
 using VContainer;
-using VContainer.Unity;
 
-namespace PointNClick.Movement
+namespace Movement
 {
     public class NavMeshMover : MonoBehaviour, IMover
     {

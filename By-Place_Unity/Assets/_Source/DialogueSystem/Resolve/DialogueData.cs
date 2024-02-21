@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ActionSystem;
 using DialogueSystem.Data;
 using DialogueSystem.Data.NodeParams;
 using DialogueSystem.Data.Save;
-using UnityEngine;
+using DialogueSystem.Data.Save.Nodes;
+using DialogueSystem.Resolve.Data;
 using VContainer;
 
-namespace DialogueSystem
+namespace DialogueSystem.Resolve
 {
     public class DialogueData
     {

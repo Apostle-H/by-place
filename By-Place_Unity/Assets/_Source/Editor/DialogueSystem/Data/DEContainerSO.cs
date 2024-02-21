@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DialogueSystem.Data.NodeParams;
 using DialogueSystem.Elements;
+using DialogueSystem.Elements.Nodes;
 using DialogueSystem.Windows;
 using UnityEditor;
 using UnityEditor.Callbacks;

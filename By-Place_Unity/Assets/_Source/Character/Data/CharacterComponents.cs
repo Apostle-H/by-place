@@ -1,8 +1,8 @@
-﻿using PointNClick.Interactions;
-using PointNClick.Movement;
+﻿using Movement;
+using PointNClick.Interactions;
 using VContainer;
 
-namespace PointNClick.Data
+namespace Character.Data
 {
     public class CharacterComponents
     {

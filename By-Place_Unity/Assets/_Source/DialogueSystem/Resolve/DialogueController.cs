@@ -4,9 +4,10 @@ using ActionSystem;
 using DialogueSystem.Data;
 using DialogueSystem.Data.NodeParams;
 using DialogueSystem.Data.Save;
+using DialogueSystem.Resolve.Data;
 using VContainer;
 
-namespace DialogueSystem
+namespace DialogueSystem.Resolve
 {
     public class DialogueController
     {

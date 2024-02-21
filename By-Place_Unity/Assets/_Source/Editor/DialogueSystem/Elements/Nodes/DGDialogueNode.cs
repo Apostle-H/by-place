@@ -1,17 +1,15 @@
 using System.Collections.Generic;
 using DialogueSystem.Data;
 using DialogueSystem.Data.NodeParams;
-using DialogueSystem.Utils;
 using DialogueSystem.Utils.Extensions;
 using DialogueSystem.Windows;
-using Unity.Profiling;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace DialogueSystem.Elements
+namespace DialogueSystem.Elements.Nodes
 {
     public class DGDialogueNode : DGNode
     {

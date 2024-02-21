@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using DialogueSystem.Data.NodeParams;
 using UnityEngine;
 
-namespace DialogueSystem.Data
+namespace DialogueSystem.Resolve.Data
 {
     public class DDialogue
     {

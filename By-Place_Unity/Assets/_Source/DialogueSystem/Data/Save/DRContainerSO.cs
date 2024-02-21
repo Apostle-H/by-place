@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DialogueSystem.Data.Save.Nodes;
 using UnityEngine;
 
 namespace DialogueSystem.Data.Save

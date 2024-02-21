@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PointNClick.Movement.Data
+namespace Movement.Data
 {
     [CreateAssetMenu(menuName = "SO/Movement/MoverConfigSO", fileName = "NewMoverConfigSO")]
     public class MoverConfigSO : ScriptableObject

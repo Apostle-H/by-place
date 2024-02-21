@@ -1,4 +1,5 @@
-﻿using InputSystem;
+﻿using Character.Data;
+using InputSystem;
 using PointNClick.Data;
 using StateMachine;
 using UnityEngine.InputSystem;

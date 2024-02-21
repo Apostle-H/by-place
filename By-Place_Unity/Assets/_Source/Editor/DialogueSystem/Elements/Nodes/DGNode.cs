@@ -7,7 +7,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace DialogueSystem.Elements
+namespace DialogueSystem.Elements.Nodes
 {
     public abstract class DGNode : Node
     {

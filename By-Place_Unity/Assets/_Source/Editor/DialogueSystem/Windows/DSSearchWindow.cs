@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DialogueSystem.Data;
 using DialogueSystem.Elements;
+using DialogueSystem.Elements.Nodes;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 

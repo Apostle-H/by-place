@@ -1,15 +1,11 @@
-﻿using System.Collections.Generic;
-using ActionSystem.Data;
-using DialogueSystem.Data;
+﻿using ActionSystem.Data;
 using DialogueSystem.Data.NodeParams;
-using DialogueSystem.Windows;
-using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace DialogueSystem.Elements
+namespace DialogueSystem.Elements.Nodes
 {
     public class DGActionNode : DGNode
     {

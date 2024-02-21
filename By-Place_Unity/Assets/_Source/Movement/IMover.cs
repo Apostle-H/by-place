@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace PointNClick.Movement
+namespace Movement
 {
     public interface IMover
     {

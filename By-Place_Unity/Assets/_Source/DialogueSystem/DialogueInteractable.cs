@@ -1,6 +1,7 @@
 ﻿using System;
 using Character.View;
 using DialogueSystem.Data.Save;
+using DialogueSystem.Resolve;
 using PointNClick.Interactions;
 using UnityEngine;
 using VContainer;

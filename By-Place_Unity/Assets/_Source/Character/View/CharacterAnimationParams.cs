@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using PointNClick.Movement;
+using Movement;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

@@ -1,7 +1,7 @@
-﻿using InputSystem;
+﻿using Character.Data;
+using InputSystem;
 using PointNClick.Data;
 using PointNClick.Interactions;
-using PointNClick.Movement;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.EventSystems;

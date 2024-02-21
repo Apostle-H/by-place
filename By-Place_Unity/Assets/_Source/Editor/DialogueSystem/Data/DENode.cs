@@ -4,6 +4,7 @@ using System.Linq;
 using ActionSystem.Data;
 using DialogueSystem.Data.NodeParams;
 using DialogueSystem.Elements;
+using DialogueSystem.Elements.Nodes;
 using DialogueSystem.Windows;
 using UnityEngine;
 

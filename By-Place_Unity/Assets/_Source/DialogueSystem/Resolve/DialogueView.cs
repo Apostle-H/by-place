@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using DialogueSystem.Data;
+using DialogueSystem.Resolve.Data;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace DialogueSystem
+namespace DialogueSystem.Resolve
 {
     public class DialogueView : MonoBehaviour
     {
