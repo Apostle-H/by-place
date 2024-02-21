@@ -4,6 +4,6 @@ namespace StateMachine
 {
     public interface IStateMachine
     {
-        public void Switch(Type stateType);
+        public void Switch<T>() where T : IState;
     }
 }

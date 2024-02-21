@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PointNClick.Items
+namespace PointNClick.Items.Data
 {
     [CreateAssetMenu(menuName = "SO/Inventory/ItemSO", fileName = "NewItemSO")]
     public class ItemSO : ScriptableObject

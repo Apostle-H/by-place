@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using QuestSystem.Data;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace QuestSystem.View

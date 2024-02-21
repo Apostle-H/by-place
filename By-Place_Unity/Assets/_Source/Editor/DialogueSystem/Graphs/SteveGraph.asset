@@ -17,30 +17,15 @@ MonoBehaviour:
   - <Guid>k__BackingField: 1616371648
     <Name>k__BackingField: Greetings
     <Position>k__BackingField: {x: 404, y: 149}
+    <RuntimeAssetId>k__BackingField: -28744
   <Nodes>k__BackingField:
-  - <Guid>k__BackingField: -1870119680
-    <GroupGuid>k__BackingField: 1616371648
-    <Position>k__BackingField: {x: 1038, y: 208}
-    <NextGuids>k__BackingField:
-    - <NextGuid>k__BackingField: 2128462039
-    <NodeType>k__BackingField: 0
-    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
-    <Choices>k__BackingField:
-    - <Text>k__BackingField: Do you know how to go to the shop?
-      <CheckVariableSO>k__BackingField: {fileID: 0}
-      <ExpectedValue>k__BackingField: 0
-    <Texts>k__BackingField:
-    - <Text>k__BackingField: How can I help you
-      <VariableSO>k__BackingField: {fileID: 0}
-    <ActionSO>k__BackingField: {fileID: 0}
-    <VariableSO>k__BackingField: {fileID: 0}
-    <SetValue>k__BackingField: 0
   - <Guid>k__BackingField: 1544431881
     <GroupGuid>k__BackingField: 1616371648
     <Position>k__BackingField: {x: 2179, y: 208}
     <NextGuids>k__BackingField:
     - <NextGuid>k__BackingField: -1
-    - <NextGuid>k__BackingField: 2079874370
+    - <NextGuid>k__BackingField: 929417629
+    <RuntimeAssetId>k__BackingField: -29822
     <NodeType>k__BackingField: 0
     <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
     <Choices>k__BackingField:
@@ -62,6 +47,7 @@ MonoBehaviour:
     <NextGuids>k__BackingField:
     - <NextGuid>k__BackingField: 1544431881
     - <NextGuid>k__BackingField: -1
+    <RuntimeAssetId>k__BackingField: -29824
     <NodeType>k__BackingField: 0
     <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 74c19b69e41fceb4b9961a922fa70285, type: 2}
     <Choices>k__BackingField:
@@ -85,6 +71,7 @@ MonoBehaviour:
     <NextGuids>k__BackingField:
     - <NextGuid>k__BackingField: -1870119680
     - <NextGuid>k__BackingField: -1870119680
+    <RuntimeAssetId>k__BackingField: -29826
     <NodeType>k__BackingField: 0
     <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
     <Choices>k__BackingField:
@@ -102,11 +89,44 @@ MonoBehaviour:
     <ActionSO>k__BackingField: {fileID: 0}
     <VariableSO>k__BackingField: {fileID: 0}
     <SetValue>k__BackingField: 0
-  - <Guid>k__BackingField: 2079874370
+  - <Guid>k__BackingField: -1870119680
     <GroupGuid>k__BackingField: 1616371648
-    <Position>k__BackingField: {x: 2778, y: 257}
+    <Position>k__BackingField: {x: 1070, y: 208}
+    <NextGuids>k__BackingField:
+    - <NextGuid>k__BackingField: 2128462039
+    <RuntimeAssetId>k__BackingField: -29828
+    <NodeType>k__BackingField: 0
+    <SpeakerSO>k__BackingField: {fileID: 11400000, guid: f317e3a1336701b418d83d8fcd0c8811, type: 2}
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Do you know how to go to the shop?
+      <CheckVariableSO>k__BackingField: {fileID: 0}
+      <ExpectedValue>k__BackingField: 0
+    <Texts>k__BackingField:
+    - <Text>k__BackingField: How can I help you
+      <VariableSO>k__BackingField: {fileID: 0}
+    <ActionSO>k__BackingField: {fileID: 0}
+    <VariableSO>k__BackingField: {fileID: 0}
+    <SetValue>k__BackingField: 0
+  - <Guid>k__BackingField: 929417629
+    <GroupGuid>k__BackingField: 1616371648
+    <Position>k__BackingField: {x: 2729, y: 256}
     <NextGuids>k__BackingField:
     - <NextGuid>k__BackingField: -1
+    - <NextGuid>k__BackingField: 2079874370
+    <RuntimeAssetId>k__BackingField: -29830
+    <NodeType>k__BackingField: 3
+    <SpeakerSO>k__BackingField: {fileID: 0}
+    <Choices>k__BackingField: []
+    <Texts>k__BackingField: []
+    <ActionSO>k__BackingField: {fileID: 0}
+    <VariableSO>k__BackingField: {fileID: 11400000, guid: 77a441c90a5caa942a61c4d10474d7df, type: 2}
+    <SetValue>k__BackingField: 0
+  - <Guid>k__BackingField: 2079874370
+    <GroupGuid>k__BackingField: 1616371648
+    <Position>k__BackingField: {x: 3012, y: 278}
+    <NextGuids>k__BackingField:
+    - <NextGuid>k__BackingField: -1
+    <RuntimeAssetId>k__BackingField: -29832
     <NodeType>k__BackingField: 2
     <SpeakerSO>k__BackingField: {fileID: 0}
     <Choices>k__BackingField: []

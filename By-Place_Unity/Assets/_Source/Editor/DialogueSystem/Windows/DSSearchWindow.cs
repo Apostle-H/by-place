@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using DialogueSystem.Data;
 using DialogueSystem.Elements;
+using DialogueSystem.Elements.Nodes;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -27,22 +28,27 @@ namespace DialogueSystem.Windows
                 new SearchTreeGroupEntry(new GUIContent("Create")),
                 new SearchTreeEntry(new GUIContent("Multiple Choice", _indentationIcon))
                 {
-                    userData = new DGDialogueNode(),
+                    userData = new DGDialogueNode(default, default),
                     level = 1
                 },
                 new SearchTreeEntry(new GUIContent("Action", _indentationIcon))
                 {
-                    userData = new DGActionNode(),
+                    userData = new DGActionNode(default, default),
                     level = 1
                 },
                 new SearchTreeEntry(new GUIContent("Set Variable", _indentationIcon))
                 {
-                    userData = new DGSetVariableNode(),
+                    userData = new DGSetVariableNode(default, default),
+                    level = 1
+                },
+                new SearchTreeEntry(new GUIContent("Branch", _indentationIcon))
+                {
+                    userData = new DGBranchNode(default, default),
                     level = 1
                 },
                 new SearchTreeEntry(new GUIContent("Group", _indentationIcon))
                 {
-                    userData = new Group(),
+                    userData = new DGGroup(default, default),
                     level = 1
                 }
             };
@@ -57,19 +63,25 @@ namespace DialogueSystem.Windows
             switch (searchTreeEntry.userData)
             {
                 case DGDialogueNode _:
-                    var dialogueNode = _graphView.CreateNode<DGDialogueNode>(localMousePosition);
-                    _graphView.AddElement(dialogueNode);
+                    var dialogueNode = new DGDialogueNode(localMousePosition);
+                    dialogueNode.GraphView = _graphView;
+                    _graphView.AddNode(dialogueNode);
                     return true;
                 case DGActionNode _:
-                    var actionNode = _graphView.CreateNode<DGActionNode>(localMousePosition);
-                    _graphView.AddElement(actionNode);
+                    var actionNode = new DGActionNode(localMousePosition);
+                    _graphView.AddNode(actionNode);
                     return true;
                 case DGSetVariableNode _:
-                    var setVariableNode = _graphView.CreateNode<DGSetVariableNode>(localMousePosition);
-                    _graphView.AddElement(setVariableNode);
+                    var setVariableNode = new DGSetVariableNode(localMousePosition);
+                    _graphView.AddNode(setVariableNode);
                     return true;
-                case Group _:
-                    _graphView.CreateGroup("DialogueGroup", localMousePosition);
+                case DGBranchNode _:
+                    var branchNode = new DGBranchNode(localMousePosition);
+                    _graphView.AddNode(branchNode);
+                    return true;
+                case DGGroup _:
+                    var group = new DGGroup("Dialogue Group", localMousePosition);
+                    _graphView.AddGroup(group);
                     return true;
                 default:
                     return false;

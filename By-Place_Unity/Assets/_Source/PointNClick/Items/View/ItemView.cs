@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using PointNClick.Items.Data;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PointNClick.Items.View

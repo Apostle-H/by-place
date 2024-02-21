@@ -1,8 +1,6 @@
 ﻿using System;
-using DialogueSystem.ActionSystem;
-using UnityEngine;
 
-namespace QuestSystem
+namespace QuestSystem.Data
 {
     public class Quest
     {

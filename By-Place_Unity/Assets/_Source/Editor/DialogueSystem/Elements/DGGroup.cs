@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DialogueSystem.Elements.Nodes;
 using DialogueSystem.Utils;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -7,17 +8,17 @@ namespace DialogueSystem.Elements
 {
     public class DGGroup : Group
     {
-        public int Guid { get; set; } = -1;
+        public int Guid { get; private set; }
         public Dictionary<int, DGNode> Nodes { get; private set; } = new();
 
-        public string PreviousName { get; set; }
-
-        public DGGroup(string groupTitle, Vector2 position)
+        public int RuntimeAssetId { get; set; }
+        
+        public DGGroup(string groupTitle, Vector2 position, int guid = -1, int runtimeAssetId = 0)
         {
-            Guid = IDGenerator.NewId();
-
+            Guid = guid == -1 ? IDGenerator.NewId() : guid;
+            RuntimeAssetId = runtimeAssetId;
+            
             title = groupTitle;
-            PreviousName = groupTitle;
             SetPosition(new Rect(position, Vector2.zero));
         }
 

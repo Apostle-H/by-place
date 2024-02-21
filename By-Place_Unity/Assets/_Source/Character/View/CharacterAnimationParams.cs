@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using PointNClick.Movement;
+using Movement;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -13,12 +13,10 @@ namespace Character.View
 
         private IMover _mover;
 
-        private int _speedParamId;
+        private readonly int _speedParamId = Animator.StringToHash("speed");
         
         [Inject]
         private void Inject(IMover mover) => _mover = mover;
-
-        public void Awake() => _speedParamId = Animator.StringToHash("speed");
 
         public void Start() => Bind();
 

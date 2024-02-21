@@ -23,8 +23,9 @@ namespace Character
 
         public void Initialize() => _currentState.Enter();
 
-        public void Switch(Type stateType)
+        public void Switch<T>() where T : IState
         {
+            var stateType = typeof(T);
             if (!_states.ContainsKey(stateType))
                 return;
             

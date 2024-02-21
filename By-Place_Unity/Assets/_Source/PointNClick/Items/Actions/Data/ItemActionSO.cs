@@ -1,4 +1,5 @@
-﻿using DialogueSystem.ActionSystem.Data;
+﻿using ActionSystem.Data;
+using PointNClick.Items.Data;
 using UnityEngine;
 
 namespace PointNClick.Items.Actions.Data

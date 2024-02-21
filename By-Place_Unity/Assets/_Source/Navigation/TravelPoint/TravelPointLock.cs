@@ -1,6 +1,6 @@
 ﻿using System;
-using DialogueSystem.ActionSystem;
-using DialogueSystem.ActionSystem.Data;
+using ActionSystem;
+using ActionSystem.Data;
 using UnityEngine;
 using VContainer;
 
