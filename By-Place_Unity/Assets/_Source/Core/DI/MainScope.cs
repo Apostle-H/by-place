@@ -10,6 +10,7 @@ using Input;
 using InputSystem;
 using Movement;
 using Movement.Data;
+using NPC.View;
 using PointNClick.Cursor.Manager;
 using PointNClick.Data;
 using PointNClick.Interactions;
@@ -42,6 +43,7 @@ namespace Core.DI
             ConfigureDialogueSystem(builder);
             ConfigureQuestSystem(builder);
             ConfigureInventory(builder);
+            ConfigureNPC(builder);
             ConfigureCharacterStateMachine(builder);
         }
 
@@ -100,6 +102,11 @@ namespace Core.DI
             {
                 entryPoints.Add<ItemActionsCollector>();
             });
+        }
+
+        private void ConfigureNPC(IContainerBuilder builder)
+        {
+            builder.Register<NPCsAnimators>(Lifetime.Singleton);
         }
 
         private void ConfigureCharacterStateMachine(IContainerBuilder builder)

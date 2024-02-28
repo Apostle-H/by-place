@@ -1,23 +1,21 @@
 using System;
 using System.IO;
-using DialogueSystem.Data;
+using DialogueSystem.Data.Save;
 using DialogueSystem.Utilities;
 using DialogueSystem.Utils;
 using DialogueSystem.Utils.Extensions;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
+using Utils.Services;
 
 namespace DialogueSystem.Windows
 {
     public class DGEditorWindow : EditorWindow
     {
         private const string DEFAULT_FILE_NAME = "DialoguesFileName";
-        private const string DEFAULT_GRAPH_SAVE_PATH = "Assets/_Source/Editor/DialogueSystem/Graphs";
         
-        private DSGraphView _graphView;
-
-        private static DEContainerSO _targetGraph;
+        private DGraphView _graphView;
 
         private TextField _fileName;
         private Button _saveBtn;
@@ -25,17 +23,17 @@ namespace DialogueSystem.Windows
         private Button _clearBtn;
 
         [MenuItem("Window/Dialogue Graph")]
-        public static void Open()
+        public static void Open() => GetWindow<DGEditorWindow>("Dialogue Graph");
+
+        private void OpenGraph(DContainerSO graph)
         {
-            GetWindow<DGEditorWindow>("Dialogue Graph");
-            _targetGraph = default;
+            Clear();
+            DGSaveLoad.Load(_graphView, Path.GetFileNameWithoutExtension(AssetsService.InstanceIdToPath(graph.GetInstanceID())));
         }
 
-        public static void OpenGraph(DEContainerSO graph)
-        {
-            GetWindow<DGEditorWindow>($"Dialogue Graph {graph.FileName}");
-            _targetGraph = graph;
-        }
+        public void Awake() => DContainerSO.OnOpen += OpenGraph;
+
+        public void OnDestroy() => DContainerSO.OnOpen -= OpenGraph;
         
         private void OnEnable()
         {
@@ -53,14 +51,9 @@ namespace DialogueSystem.Windows
 
         private void AddGraphView()
         {
-            _graphView = new DSGraphView(this);
+            _graphView = new DGraphView(this);
             _graphView.StretchToParentSize();
             rootVisualElement.Add(_graphView);
-
-            if (_targetGraph == default)
-                return;
-            
-            DGSaveLoad.Load(_graphView, _targetGraph.FileName);
         }
 
         private void AddToolbar()
@@ -129,12 +122,10 @@ namespace DialogueSystem.Windows
 
         private void Load()
         {
-            var filePath = EditorUtility.OpenFilePanel("Dialogue Graphs", DEFAULT_GRAPH_SAVE_PATH, "asset");
+            var filePath = EditorUtility.OpenFilePanel("Dialogue Graphs", DGSaveLoad.DS_CONTAINER_SAVE_SO_PATH, "asset");
 
             if (string.IsNullOrEmpty(filePath))
-            {
                 return;
-            }
 
             Clear();
             DGSaveLoad.Load(_graphView, Path.GetFileNameWithoutExtension(filePath));

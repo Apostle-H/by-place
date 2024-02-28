@@ -1,9 +1,11 @@
 {
-    "name": "NPC",
+    "name": "Dialogue.Resolve",
     "rootNamespace": "",
     "references": [
         "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
-        "GUID:7694e40bd5d7b6b469d02bce720635a3"
+        "GUID:a96c5ee47bc2db248887551ded1db46f",
+        "GUID:7694e40bd5d7b6b469d02bce720635a3",
+        "GUID:651d71ac199d25248933d1f40ead6af6"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,13 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DialogueSystem.Data;
+using DialogueSystem.Data.NodeParams;
 using DialogueSystem.Data.Save;
 using DialogueSystem.Data.Save.Nodes;
 using DialogueSystem.Elements;
 using DialogueSystem.Elements.Nodes;
 using DialogueSystem.Windows;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Utils.Services;
 
@@ -15,20 +16,16 @@ namespace DialogueSystem.Utils
 {
     public static class DGSaveLoad
     {
-        private static readonly string DS_GRAPH_SAVE_DATA_SO_PATH = "Assets/_Source/Editor/DialogueSystem/Graphs";
-        private static readonly string DS_CONTAINER_SAVE_SO_PATH = "Assets/_Presentation/Dialogues";
+        public static readonly string DS_CONTAINER_SAVE_SO_PATH = "Assets/_Presentation/Dialogues";
 
         public static DGEditorWindow EditorWindow { get; set; }
 
-        public static void Save(DSGraphView graphView, string graphName)
+        public static void Save(DGraphView graphView, string graphName)
         {
             var containerPath = $"{DS_CONTAINER_SAVE_SO_PATH}/{graphName}";
             graphView.GetElements(out var nodes, out var groups);
 
-            var eContainerSO = AssetsService.CreateAsset<DEContainerSO>(DS_GRAPH_SAVE_DATA_SO_PATH, $"{graphName}Graph");
-            eContainerSO.Groups.Clear();
-            eContainerSO.Nodes.Clear();
-            var rContainerSO = AssetsService.CreateAsset<DRContainerSO>(containerPath, graphName);
+            var rContainerSO = AssetsService.CreateAsset<DContainerSO>(containerPath, graphName);
             rContainerSO.Groups.Clear();
             rContainerSO.Nodes.Clear();
             
@@ -37,26 +34,22 @@ namespace DialogueSystem.Utils
             RenameGroups(groups, graphView.renamedGroupsGuids);
             DeleteGroups(graphView.deletedGroupGuids);
             
-            SaveGroupsRContainer(rContainerSO, containerPath, groups);
-            SaveUngroupedRContainer(rContainerSO, nodes);
-            eContainerSO.Save(groups, nodes);
+            SaveGroups(rContainerSO, containerPath, groups);
+            SaveUngrouped(rContainerSO, nodes);
             
-            eContainerSO.FileName = graphName;
-            AssetsService.SaveAsset(eContainerSO);
             rContainerSO.FileName = graphName;
             AssetsService.SaveAsset(rContainerSO);
         }
         
-        public static void Load(DSGraphView graphView, string graphName)
+        public static void Load(DGraphView graphView, string graphName)
         {
-            var graphSave = AssetsService.LoadAsset<DEContainerSO>(DS_GRAPH_SAVE_DATA_SO_PATH, graphName);
-
-            if (graphSave == null)
+            var containerSO = AssetsService.LoadAsset<DContainerSO>($"{DS_CONTAINER_SAVE_SO_PATH}/{graphName}", graphName);
+            
+            if (containerSO == null)
             {
-                EditorUtility.DisplayDialog(
-                    "Could not find the file!",
+                EditorUtility.DisplayDialog("Could not find the file!",
                     "The file at the following path could not be found:\n\n" +
-                    $"\"Assets/Editor/DialogueSystem/Graphs/{graphName}\".\n\n" +
+                    $"{DS_CONTAINER_SAVE_SO_PATH}/{graphName}\n" +
                     "Make sure you chose the right file and it's placed at the folder path mentioned above.",
                     "Thanks!"
                 );
@@ -64,11 +57,16 @@ namespace DialogueSystem.Utils
                 return;
             }
 
-            graphSave.Load(graphView);
-            EditorWindow.UpdateFileName(graphName[0..^5]);
+            var loadedNodes = new Dictionary<int, DNode>();
+            LoadNodes(containerSO, graphView, ref loadedNodes);
+            LoadGroups(containerSO, graphView, loadedNodes);
+            
+            LoadNodesConnections(graphView, loadedNodes);
+            
+            EditorWindow.UpdateFileName(graphName);
         }
         
-        private static void RenameGroups(List<DGGroup> groups, HashSet<int> renamedGroupsGuids)
+        private static void RenameGroups(List<DGroup> groups, HashSet<int> renamedGroupsGuids)
         {
             foreach (var guid in renamedGroupsGuids)
             {
@@ -87,7 +85,7 @@ namespace DialogueSystem.Utils
             deletedGroupsRuntimeIds.Clear();
         }
 
-        private static void MoveNodes(List<DGNode> nodes, List<DGGroup> groups, DRContainerSO container, HashSet<int> movedNodesGuids)
+        private static void MoveNodes(List<DNode> nodes, List<DGroup> groups, DContainerSO container, HashSet<int> movedNodesGuids)
         {
             foreach (var guid in movedNodesGuids)
             {
@@ -107,20 +105,22 @@ namespace DialogueSystem.Utils
             deletedNodesRuntimeIds.Clear();
         }
         
-        private static void SaveGroupsRContainer(DRContainerSO rContainerSO, string containerPath, List<DGGroup> groups)
+        private static void SaveGroups(DContainerSO rContainerSO, string containerPath, List<DGroup> groups)
         {
             foreach (var group in groups)
             {
-                var groupSO = AssetsService.CreateAsset<DRGroupSO>(containerPath, group.title);
+                var groupSO = AssetsService.CreateAsset<DGroupSO>(containerPath, group.title);
                 groupSO.Guid = group.Guid;
                 groupSO.Name = group.title;
                 groupSO.Owner = rContainerSO;
                 
+                groupSO.NodesSOs.Clear();
                 foreach (var kvp in group.Nodes)
                 {
                     var node = kvp.Value;
 
-                    var nodeSO = SaveNodeRContainer(rContainerSO, node, groupSO);
+                    var nodeSO = SaveNode(rContainerSO, node, groupSO);
+                    groupSO.NodesSOs.Add(nodeSO);
                     
                     if (!nodeSO.IsStartingNode)
                         continue;
@@ -134,47 +134,47 @@ namespace DialogueSystem.Utils
             }
         }
 
-        private static void SaveUngroupedRContainer(DRContainerSO rContainerSO, List<DGNode> nodes)
+        private static void SaveUngrouped(DContainerSO rContainerSO, List<DNode> nodes)
         {
             foreach (var node in nodes)
             {
                 if (node.GroupGuid != -1)
                     continue;
 
-                SaveNodeRContainer(rContainerSO, node, rContainerSO);
+                SaveNode(rContainerSO, node, rContainerSO);
             }
         }
 
-        private static DRNodeSO SaveNodeRContainer(DRContainerSO rContainerSO, DGNode node, ScriptableObject parent)
+        private static DNodeSO SaveNode(DContainerSO rContainerSO, DNode node, ScriptableObject parent)
         {
-            DRNodeSO nodeSO;
-            if (node is DGDialogueNode dialogueNode)
+            DNodeSO nodeSO;
+            if (node is DDialogueNode dialogueNode)
             {
-                var dialogueNodeSO = AssetsService.CreateSubAsset<DRDialogueNodeSO>(parent, dialogueNode.Guid.ToString());
+                var dialogueNodeSO = AssetsService.CreateSubAsset<DDialogueSO>(parent, dialogueNode.Guid.ToString());
                 dialogueNodeSO.SpeakerSO = dialogueNode.SpeakerSO;
                 dialogueNodeSO.Texts = dialogueNode.Texts.ToList();
                 dialogueNodeSO.Choices = dialogueNode.Choices.ToList();
                 
                 nodeSO = dialogueNodeSO;
             }
-            else if (node is DGActionNode actionNode)
+            else if (node is DActionNode actionNode)
             {
-                var actionNodeSO = AssetsService.CreateSubAsset<DRActionNodeSO>(parent, actionNode.Guid.ToString());
+                var actionNodeSO = AssetsService.CreateSubAsset<DActionSO>(parent, actionNode.Guid.ToString());
                 actionNodeSO.ActionSO = actionNode.ActionSO;
                 
                 nodeSO = actionNodeSO;
             }
-            else if (node is DGSetVariableNode setVariableNode)
+            else if (node is DSetVariableNode setVariableNode)
             {
-                var setVariableNodeSO = AssetsService.CreateSubAsset<DRSetVariableNodeSO>(parent, setVariableNode.Guid.ToString());
+                var setVariableNodeSO = AssetsService.CreateSubAsset<DSetVariableSO>(parent, setVariableNode.Guid.ToString());
                 setVariableNodeSO.VariableSO = setVariableNode.VariableSO;
                 setVariableNodeSO.SetValue = setVariableNode.SetValue;
 
                 nodeSO = setVariableNodeSO;
             }
-            else if (node is DGBranchNode branchNode)
+            else if (node is DBranchNode branchNode)
             {
-                var branchNodeSO = AssetsService.CreateSubAsset<DRBranchNodeSO>(parent, branchNode.Guid.ToString());
+                var branchNodeSO = AssetsService.CreateSubAsset<DBranchSO>(parent, branchNode.Guid.ToString());
                 branchNodeSO.VariableSO = branchNode.VariableSO;
 
                 nodeSO = branchNodeSO;
@@ -184,13 +184,116 @@ namespace DialogueSystem.Utils
             
             nodeSO.Guid = node.Guid;
             nodeSO.IsStartingNode = node.IsStartingNode();
-            nodeSO.NextGuids = node.NextGuids.ToList();
+            nodeSO.OutputData = node.NextGuids.ToList();
+            
+            nodeSO.Position = node.GetPosition().position;
 
             rContainerSO.Nodes.Add(nodeSO);
             AssetsService.SaveAsset(nodeSO);
             node.RuntimeAssetId = nodeSO.GetInstanceID();
             
             return nodeSO;
+        }
+        
+        private static void LoadGroups(DContainerSO containerSO, DGraphView graphView, Dictionary<int, DNode> loadedNodes)
+        {
+            foreach (var groupSave in containerSO.Groups)
+            {
+                var group = new DGroup(groupSave.Name, Vector2.zero, groupSave.Guid, groupSave.GetInstanceID());
+                graphView.AddGroup(group);
+                
+                foreach (var nodeSO in groupSave.NodesSOs)
+                {
+                    var loadedNode = loadedNodes[nodeSO.Guid];
+                    
+                    loadedNode.GroupGuid = group.Guid;
+                    group.AddElement(loadedNode);
+                }
+            }
+        }
+        
+        private static void LoadNodes(DContainerSO containerSO, DGraphView graphView, ref Dictionary<int, DNode> loadedNodes)
+        {
+            foreach (var nodeSave in containerSO.Nodes)
+            {
+                var node = LoadNode(nodeSave, graphView);
+                
+                graphView.AddNode(node);
+                loadedNodes.Add(node.Guid, node);
+            }
+        }
+
+        private static DNode LoadNode(DNodeSO nodeSO, DGraphView graphView)
+        {
+            DNode node;
+            switch (nodeSO)
+            {
+                case DDialogueSO dialogueNodeSO:
+                {
+                    var dialogueNode = new DDialogueNode(nodeSO.Position, dialogueNodeSO.Guid);
+                    dialogueNode.SpeakerSO = dialogueNodeSO.SpeakerSO;
+                    dialogueNode.Choices = dialogueNodeSO.Choices.ToList();
+                    dialogueNode.Texts = dialogueNodeSO.Texts.ToList();
+                    dialogueNode.GraphView = graphView;
+
+                    node = dialogueNode;
+                    break;
+                }
+                case DActionSO actionNodeSO:
+                {
+                    var actionNode = new DActionNode(nodeSO.Position, actionNodeSO.Guid);
+                    actionNode.ActionSO = actionNodeSO.ActionSO;
+
+                    node = actionNode;
+                    break;
+                }
+                case DSetVariableSO setVariableNodeSO:
+                {
+                    var setVariableNode = new DSetVariableNode(nodeSO.Position, setVariableNodeSO.Guid);
+                    setVariableNode.VariableSO = setVariableNodeSO.VariableSO;
+                    setVariableNode.SetValue = setVariableNodeSO.SetValue;
+
+                    node = setVariableNode;
+                    break;
+                }
+                case DBranchSO branchNodeSO:
+                {
+                    var branchNode = new DBranchNode(nodeSO.Position, branchNodeSO.Guid);
+                    branchNode.VariableSO = branchNodeSO.VariableSO;
+
+                    node = branchNode;
+                    break;
+                }
+                default:
+                    throw new ArgumentException($"Unexpected node type in the save");
+            }
+
+            node.NextGuids = nodeSO.OutputData.ToList();
+            node.RuntimeAssetId = nodeSO.GetInstanceID();
+
+            return node;
+        }
+        
+        private static void LoadNodesConnections(DGraphView graphView, Dictionary<int, DNode> loadedNodes)
+        {
+            foreach (KeyValuePair<int, DNode> loadedNode in loadedNodes)
+            {
+                foreach (var visualElement in loadedNode.Value.outputContainer.Children())
+                {
+                    var choicePort = (Port)visualElement;
+                    var outputData = (DOutputData)choicePort.userData;
+
+                    if (outputData.NextGuid == -1)
+                        continue;
+
+                    var nextNode = loadedNodes[outputData.NextGuid];
+                    var nextNodeInputPort = (Port)nextNode.inputContainer.Children().First();
+                    var edge = choicePort.ConnectTo(nextNodeInputPort);
+                    graphView.AddElement(edge);
+
+                    loadedNode.Value.RefreshPorts();
+                }
+            }
         }
     }
 }

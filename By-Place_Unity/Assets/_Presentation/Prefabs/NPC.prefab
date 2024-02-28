@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ds: {fileID: 11400000, guid: 953146fe624c6ed40a2e31942047ebe2, type: 2}
-  speakPoint: {fileID: 3221605753068141321}
+  interactPoint: {fileID: 0}
 --- !u!114 &3221605752829335561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,8 +239,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cddfdf5d26445baa5c8f6634008879c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcAnimator: {fileID: 3106084833509596536}
-  lootAtTarget: {fileID: 0}
-  lootAtMinDistance: 4
-  lootAtRotationChecker: {fileID: 7186281437187233132}
-  maxLookRotation: 0.6
+  <Speaker>k__BackingField: {fileID: 0}
+  animator: {fileID: 3106084833509596536}
