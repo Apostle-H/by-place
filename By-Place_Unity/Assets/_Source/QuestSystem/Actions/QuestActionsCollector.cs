@@ -11,16 +11,16 @@ namespace QuestSystem.Actions
 {
     public class QuestActionsCollector : IInitializable, IStartable, IDisposable
     {
-        private List<QuestAction> _questActions = new();
+        private List<IAction> _questActions = new();
 
-        private QuestManager _questManager;
-        private ActionResolver _actionResolver;
+        private IObjectResolver _container;
         
+        private ActionResolver _actionResolver;
 
         [Inject]
-        private void Inject(QuestManager questManager, ActionResolver actionResolver)
+        private void Inject(IObjectResolver container, ActionResolver actionResolver)
         {
-            _questManager = questManager;
+            _container = container;
             _actionResolver = actionResolver;
         }
         
@@ -29,8 +29,12 @@ namespace QuestSystem.Actions
             var questActionsSO = Resources.LoadAll<QuestActionSO>("QuestSystem/Actions").ToList();
 
             foreach (var questActionSO in questActionsSO)
-                _questActions.Add(new QuestAction(questActionSO.Id, questActionSO.QuestId, questActionSO.Title,
-                    questActionSO.Task, _questManager));
+            {
+                var action = questActionSO.Build();
+                _container.Inject(action);
+                
+                _questActions.Add(action);
+            }
         }
 
         public void Start()

@@ -23,6 +23,8 @@ namespace PointNClick.Cursor.Manager
         private List<ICursorSensitive> _cursorSensitives = new();
         private int _currentCursorId;
 
+        private bool _captured;
+
         [Inject]
         public void Inject(PointNClickActions actions) => _actions = actions;
 
@@ -59,16 +61,21 @@ namespace PointNClick.Cursor.Manager
 
         private void UpdateCursor(ICursorSensitive sensitive)
         {
+            if (_captured)
+                return;
+            
             UnityEngine.Cursor.SetCursor(sensitive.Cursor, sensitive.HotSpot, CursorMode.ForceSoftware);
             _cursorText.text = sensitive.Text;
 
             _currentCursorId = sensitive.Id;
+            _captured = sensitive.Capture;
         }
 
         private void ToDefaultCursor(ICursorSensitive sensitive)
         {
             if (_currentCursorId != sensitive.Id)
                 return;
+            _captured = false;
             
             UnityEngine.Cursor.SetCursor(defaultCursor, defaultHotSpot, CursorMode.ForceSoftware);
             _cursorText.text = string.Empty;

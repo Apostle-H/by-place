@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Presentation/UI/Journal/JournalStyleSheet.uss?fileID=7433441132597879392&amp;guid=dcde76d5190c3bf4fbfa9bf0bc0bb98b&amp;type=3#JournalStyleSheet" />
+    <ui:Foldout text="Foldout" name="QuestFoldout" style="font-size: 20px;" />
+</ui:UXML>

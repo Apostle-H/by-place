@@ -7,22 +7,15 @@ namespace QuestSystem.Data
         public int Id { get; private set; }
         public string Title { get; private set; }
         public string Task { get; private set; }
+        public string Conclusion { get; private set; }
 
-        public event Action OnUpdate;
+        public Quest(int id) => Id = id;
 
-        public Quest(int id, string title, string task)
-        {
-            Id = id;
-            Title = title;
-            Task = task;
-        }
-
-        public void Update(string title, string task)
+        public void Update(string title, string task, string conclusion)
         {
             Title = title;
             Task = task;
-            
-            OnUpdate?.Invoke();
+            Conclusion = conclusion;
         }
     }
 }

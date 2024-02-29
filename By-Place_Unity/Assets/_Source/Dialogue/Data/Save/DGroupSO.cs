@@ -12,6 +12,6 @@ namespace DialogueSystem.Data.Save
         [field: SerializeField] public string Name { get; set; }
         
         [field: SerializeField] public int StartingNodeGuid { get; set; }
-        [field: SerializeField] public List<DNodeSO> NodesSOs { get; private set; }
+        [field: SerializeField] public List<DNodeSO> NodesSOs { get; private set; } = new();
     }
 }

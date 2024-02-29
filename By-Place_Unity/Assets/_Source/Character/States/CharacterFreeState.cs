@@ -4,8 +4,8 @@ using PointNClick.Data;
 using PointNClick.Interactions;
 using StateMachine;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 using Utils.Extensions;
 using Utils.Services;
 using VContainer;
@@ -19,15 +19,19 @@ namespace Character.States
         private PointNClickActions _actions;
         private CharacterComponents _characterComponents;
 
+        private UIService _uiService;
+
         public IStateMachine Owner { get; set; }
 
         [Inject]
         public CharacterFreeState(PointNClickConfigSO configSO, PointNClickActions actions,
-            CharacterComponents characterComponents)
+            CharacterComponents characterComponents, UIService uiService)
         {
             _configSO = configSO;
             _actions = actions;
             _characterComponents = characterComponents;
+
+            _uiService = uiService;
         }
         
         public void Enter() => Bind();
@@ -52,8 +56,9 @@ namespace Character.States
         {
             var screenPoint = _actions.Main.Point.ReadValue<Vector2>();
             
-            PhysicsService.RayCastFromCamera(screenPoint, out var hit);
-            if (hit.collider == default)
+            if (_uiService.IsOverUIElement(screenPoint) 
+                || !PhysicsService.RayCastFromCamera(screenPoint, out var hit) 
+                || hit.collider == default)
                 return;
             
             if (hit.collider.TryGetComponent<IInteractable>(out var interactable))

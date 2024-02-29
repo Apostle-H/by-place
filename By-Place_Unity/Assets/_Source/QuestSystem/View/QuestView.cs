@@ -1,5 +1,4 @@
 ﻿using QuestSystem.Data;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace QuestSystem.View
@@ -9,14 +8,11 @@ namespace QuestSystem.View
         private Label _title;
         private Label _task;
         
-        public Quest TargetQuest { get; private set; }
         public VisualElement Root { get; private set; }
-        public int IndexInManager { get; private set; }
 
-        public QuestView(VisualTreeAsset questTree, int indexInManager)
+        public QuestView(VisualTreeAsset questTree)
         {
             Root = questTree.CloneTree().Q<VisualElement>("Quest");
-            IndexInManager = indexInManager;
 
             _title = Root.Q<Label>("TitleLabel");
             _task = Root.Q<Label>("TaskLabel");
@@ -26,19 +22,10 @@ namespace QuestSystem.View
 
         public void Hide() => Root.style.display = DisplayStyle.None;
 
-        public void SetTargetQuest(Quest quest)
+        public void Update(string title, string task)
         {
-            if (TargetQuest != default)
-                TargetQuest.OnUpdate -= Update;
-            TargetQuest = quest;
-            if (TargetQuest != default)
-                TargetQuest.OnUpdate += Update;
-        }
-
-        private void Update()
-        {
-            _title.text = TargetQuest.Title;
-            _task.text = TargetQuest.Task;
+            _title.text = title;
+            _task.text = task;
         }
     }
 }

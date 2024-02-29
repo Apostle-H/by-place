@@ -10,5 +10,6 @@ namespace PointNClick.Cursor.Sensitive.Data
         [field: SerializeField] public Texture2D Cursor { get; private set; }
         [field: SerializeField] public Vector2 HotSpot { get; private set; }
         [field: SerializeField] public string Text { get; private set; }
+        [field: SerializeField] public bool Capture { get; private set; }
     }
 }

@@ -3,8 +3,6 @@ using System.Collections;
 using PointNClick.Cursor.Manager;
 using PointNClick.Cursor.Sensitive.Data;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 using Utils.Runners;
 using VContainer;
 
@@ -23,6 +21,7 @@ namespace PointNClick.Cursor.Sensitive
         public Texture2D Cursor => configSO.Cursor;
         public Vector2 HotSpot => configSO.HotSpot;
         public string Text => configSO.Text;
+        public bool Capture => configSO.Capture;
         
         public event Action<ICursorSensitive> OnEnter;
         public event Action<ICursorSensitive> OnExit;

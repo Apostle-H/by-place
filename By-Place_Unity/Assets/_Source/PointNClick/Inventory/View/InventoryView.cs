@@ -17,7 +17,7 @@ namespace PointNClick.Items.View
         [SerializeField] private Sprite closedInventorySprite;
         [SerializeField] private Sprite openedInventorySprite;
 
-        private ICursorManager _cursorManager;
+        private UICursorSensitive.Factory _cursorSensitiveFactory;
         private UICursorSensitive _toggleCursorSensitive;
         
         private VisualElement _root;
@@ -31,7 +31,8 @@ namespace PointNClick.Items.View
         private bool _showItems;
 
         [Inject]
-        private void Inject(ICursorManager cursorManager) => _cursorManager = cursorManager;
+        private void Inject(UICursorSensitive.Factory cursorSensitiveFactory) => 
+            _cursorSensitiveFactory = cursorSensitiveFactory;
 
         private void Awake()
         {
@@ -40,7 +41,7 @@ namespace PointNClick.Items.View
             _toggleBtn = _root.Q<VisualElement>("ToggleBtn");
             _itemSlotsHolder = _root.Q<VisualElement>("ItemSlotsHolder");
 
-            _toggleCursorSensitive = new UICursorSensitive(toggleCursorConfigSO, _cursorManager, _toggleBtn);
+            _toggleCursorSensitive = _cursorSensitiveFactory.Build(toggleCursorConfigSO, _toggleBtn);
             _toggleBtn.style.backgroundImage = Background.FromSprite(closedInventorySprite);
         }
 

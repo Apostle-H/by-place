@@ -3,6 +3,7 @@ using PointNClick.Cursor.Manager;
 using PointNClick.Cursor.Sensitive.Data;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VContainer;
 
 namespace PointNClick.Cursor.Sensitive
 {
@@ -17,6 +18,7 @@ namespace PointNClick.Cursor.Sensitive
         public Texture2D Cursor => _configSO.Cursor;
         public Vector2 HotSpot => _configSO.HotSpot;
         public string Text => _configSO.Text;
+        public bool Capture => _configSO.Capture;
         
         public event Action<ICursorSensitive> OnEnter;
         public event Action<ICursorSensitive> OnExit;
@@ -47,5 +49,22 @@ namespace PointNClick.Cursor.Sensitive
         private void Enter(MouseEnterEvent evt) => OnEnter?.Invoke(this);
 
         private void Exit(MouseLeaveEvent evt) => OnExit?.Invoke(this);
+        
+        public class Factory
+        {
+            private ICursorManager _cursorManager;
+
+            private IObjectResolver _container;
+
+            [Inject]
+            public Factory(ICursorManager cursorManager, IObjectResolver container)
+            {
+                _cursorManager = cursorManager;
+                _container = container;
+            }
+
+            public UICursorSensitive Build(CursorConfigSO configSO, VisualElement targetVisualElement) =>
+                new UICursorSensitive(configSO, _cursorManager, targetVisualElement);
+        }
     }
 }

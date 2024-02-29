@@ -6,6 +6,7 @@ using DialogueSystem.Data.NodeParams;
 using DialogueSystem.Data.Save;
 using DialogueSystem.Resolve.Data;
 using NPC.View;
+using UnityEngine;
 using VContainer;
 
 namespace DialogueSystem.Resolve
@@ -77,12 +78,12 @@ namespace DialogueSystem.Resolve
                             _npcsAnimators.PlayClip(_dialogue.SpeakerId, _dialogue.AnimationName);
                         return;
                     case DNodeType.ACTION:
-                        _actionResolver.Resolve(actionId);
                         _afterActionGuid = _nextGuids[0];
+                        _actionResolver.Resolve(actionId);   
                         return;
                     case DNodeType.SET_VARIABLE:
-                        _variablesContainer.Set(variableId, variableSet);
                         guid = _nextGuids[0];
+                        _variablesContainer.Set(variableId, variableSet);
                         break;
                     case DNodeType.BRANCH:
                         _variablesContainer.Get(variableId, out var variable);

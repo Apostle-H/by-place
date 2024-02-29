@@ -15,17 +15,15 @@ namespace QuestSystem.View
 
         private QuestManager _questManager;
 
-        private List<QuestView> _questViews = new();
+        private Dictionary<int, QuestView> _questViews = new();
+        private List<QuestView> _freeQuestViews = new();
 
         public VisualElement Root { get; private set; }
 
         [Inject]
         private void Inject(QuestManager questManager) => _questManager = questManager;
 
-        private void Awake()
-        {
-            Root = questUI.rootVisualElement.Q<VisualElement>("QuestPanel");
-        }
+        private void Awake() => Root = questUI.rootVisualElement.Q<VisualElement>("QuestPanel");
 
         private void Start() => Bind();
 
@@ -33,37 +31,50 @@ namespace QuestSystem.View
 
         private void Bind()
         {
-            _questManager.OnAdd += Add;
-            _questManager.OnRemove += Remove;
+            _questManager.OnOpen += Open;
+            _questManager.OnUpdate += UpdateQuest;
+            _questManager.OnClose += Close;
         }
-        
+
         private void Expose()
         {
-            _questManager.OnAdd -= Add;
-            _questManager.OnRemove -= Remove;
+            _questManager.OnOpen -= Open;
+            _questManager.OnUpdate -= UpdateQuest;
+            _questManager.OnClose -= Close;
         }
 
-        private void Add(Quest quest)
+        private void Open(int questId)
         {
-            if (_questViews.All(questView => questView.TargetQuest != default))
+            if (_freeQuestViews.Count < 1)
             {
-                var newQuestView = new QuestView(questVisualTree, _questViews.Count);
-                Root.Add(newQuestView.Root);
-            
-                _questViews.Add(newQuestView);
+                Add();
             }
-
-            var questView = _questViews.First(questView => questView.TargetQuest == default);
-            questView.SetTargetQuest(quest);
+            
+            var questView = _freeQuestViews[^1];
+            _freeQuestViews.RemoveAt(_freeQuestViews.Count - 1);
+            
+            _questViews.Add(questId, questView);
             questView.Show();
         }
         
-        private void Remove(Quest quest)
+        private void UpdateQuest(int questId, string title, string task) => _questViews[questId].Update(title, task);
+
+        private void Close(int questId)
         {
-            var questView= _questViews.First(view => view.TargetQuest == quest);
+            var questView = _questViews[questId];
+            _questViews.Remove(questId);
             
-            questView.SetTargetQuest(default);
+            _freeQuestViews.Add(questView);
             questView.Hide();
+        }
+
+        private void Add()
+        {
+            var freeQuestView = new QuestView(questVisualTree);
+            Root.Add(freeQuestView.Root);
+            freeQuestView.Hide();
+                
+            _freeQuestViews.Add(freeQuestView);
         }
     }
 }

@@ -1,0 +1,18 @@
+.quest-foldout {
+    color: rgb(30, 30, 30);
+}
+
+.quest-foldout > .unity-foldout__toggle > .unity-toggle__input:focus > .unity-label {
+    color: black;
+    -unity-font-style: bold;
+}
+
+.completed-quest-foldout {
+    color: green;
+    -unity-font-style: bold;
+}
+
+.completed-quest-foldout > .unity-foldout__toggle > .unity-toggle__input:focus > .unity-label {
+    color: darkgreen;
+    -unity-font-style: bold;
+}

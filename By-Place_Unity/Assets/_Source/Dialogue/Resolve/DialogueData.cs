@@ -6,6 +6,7 @@ using DialogueSystem.Data.NodeParams;
 using DialogueSystem.Data.Save;
 using DialogueSystem.Data.Save.Nodes;
 using DialogueSystem.Resolve.Data;
+using UnityEngine;
 using VContainer;
 
 namespace DialogueSystem.Resolve
@@ -53,7 +54,14 @@ namespace DialogueSystem.Resolve
             dialogue.SpeakerId = nodeSO.SpeakerSO.Id;
             dialogue.SpeakerName = nodeSO.SpeakerSO.Name;
             dialogue.SpeakerIcon = nodeSO.SpeakerSO.Icon;
+            
             dialogue.SpeakerText = nodeSO.Texts[0].Text;
+            if (nodeSO.Texts[0].Animation != default)
+            {
+                dialogue.PlayAnimation = true;
+                dialogue.AnimationName = nodeSO.Texts[0].Animation.name;
+            }
+            
             for (var i = 1; i < nodeSO.Texts.Count; i++)
             {
                 if (!_variablesContainer.Get(nodeSO.Texts[i].VariableSO.Id, out var variable)
