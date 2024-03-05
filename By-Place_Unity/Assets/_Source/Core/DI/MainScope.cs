@@ -3,6 +3,7 @@ using Character;
 using Character.Data;
 using Character.States;
 using Character.View;
+using Core.Loaders;
 using DialogueSystem.Data;
 using DialogueSystem.Resolve;
 using Input;
@@ -23,6 +24,8 @@ using PointNClick.Items.Actions;
 using PointNClick.Items.View;
 using QuestSystem;
 using QuestSystem.Actions;
+using QuestSystem.View;
+using QuestSystem.View.Data;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
@@ -39,6 +42,9 @@ namespace Core.DI
         [Header("PointNClick")]
         [SerializeField] private PointNClickConfigSO pointNClickConfigSO;
         [SerializeField] private MoverConfigSO moverConfigSO;
+        
+        [Header("QuestSystem")]
+        [SerializeField] private QuestManagerViewConfigSO questManagerViewConfigSO;
         
         [Header("Journal")]
         [SerializeField] private JournalViewConfigSO journalViewConfigSO;
@@ -63,6 +69,8 @@ namespace Core.DI
         {
             builder.RegisterComponentInHierarchy<CoroutineRunner>();
             builder.RegisterComponentInHierarchy<UIDocument>();
+            
+            builder.Register<ILoader<Object>, ResourcesLoader>(Lifetime.Singleton);
         }
 
         private void ConfigureServices(IContainerBuilder builder)
@@ -113,11 +121,14 @@ namespace Core.DI
 
         private void ConfigureQuestSystem(IContainerBuilder builder)
         {
+            builder.RegisterInstance(questManagerViewConfigSO);
+            
             builder.Register<QuestManager>(Lifetime.Singleton);
             
             builder.UseEntryPoints(entryPoints =>
             {
                 entryPoints.Add<QuestActionsCollector>();
+                entryPoints.Add<QuestManagerView>();
             });
         }
         
@@ -127,6 +138,7 @@ namespace Core.DI
             
             builder.UseEntryPoints(entryPoints =>
             {
+                entryPoints.Add<ItemInfoView>().AsSelf();
                 entryPoints.Add<ItemActionsCollector>();
             });
         }

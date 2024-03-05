@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using DialogueSystem.Data.Save.Nodes;
+#if UNITY_EDITOR
 using UnityEditor.Callbacks;
+#endif
 using UnityEngine;
 using Utils.Services;
 
@@ -15,6 +17,7 @@ namespace DialogueSystem.Data.Save
 
         public static event Action<DContainerSO> OnOpen;
 
+#if UNITY_EDITOR
         [OnOpenAsset]
         private static bool Open(int instanceID, int line)
         {
@@ -25,5 +28,6 @@ namespace DialogueSystem.Data.Save
             OnOpen?.Invoke(asset);
             return true;
         }
+#endif
     }
 }

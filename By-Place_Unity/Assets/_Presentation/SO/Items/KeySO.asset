@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: KeySO
   m_EditorClassIdentifier: 
   <Icon>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  <Name>k__BackingField: "\u041A\u043B\u044E\u0447"
+  <Description>k__BackingField: "\u041A\u043B\u044E\u0447\u0438\u043A"

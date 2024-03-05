@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caaa76378291a144d849f29230be0a5a, type: 3}
+  m_Name: Sanya
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: Sanya
+  <Groups>k__BackingField:
+  - {fileID: 11400000, guid: 6a93072755e66d04f81f3d15a9a04a5b, type: 2}
+  <Nodes>k__BackingField:
+  - {fileID: 3985492971504907630, guid: 6a93072755e66d04f81f3d15a9a04a5b, type: 2}
+  - {fileID: -8417951880767656684, guid: 6a93072755e66d04f81f3d15a9a04a5b, type: 2}
+  - {fileID: 2504220721571669670, guid: 6a93072755e66d04f81f3d15a9a04a5b, type: 2}
+  - {fileID: -126741892460291132, guid: 6a93072755e66d04f81f3d15a9a04a5b, type: 2}
+  - {fileID: 1076522480830151090, guid: 6a93072755e66d04f81f3d15a9a04a5b, type: 2}
+  - {fileID: 5402978107759928084, guid: 6a93072755e66d04f81f3d15a9a04a5b, type: 2}

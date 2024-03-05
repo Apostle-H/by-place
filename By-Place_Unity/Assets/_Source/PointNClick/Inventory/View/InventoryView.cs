@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using PointNClick.Cursor.Manager;
 using PointNClick.Cursor.Sensitive;
 using PointNClick.Cursor.Sensitive.Data;
 using PointNClick.Items.Data;
@@ -17,6 +16,8 @@ namespace PointNClick.Items.View
         [SerializeField] private Sprite closedInventorySprite;
         [SerializeField] private Sprite openedInventorySprite;
 
+        private ItemInfoView _itemInfoView;
+        
         private UICursorSensitive.Factory _cursorSensitiveFactory;
         private UICursorSensitive _toggleCursorSensitive;
         
@@ -31,8 +32,12 @@ namespace PointNClick.Items.View
         private bool _showItems;
 
         [Inject]
-        private void Inject(UICursorSensitive.Factory cursorSensitiveFactory) => 
+        private void Inject(ItemInfoView itemInfoView, UICursorSensitive.Factory cursorSensitiveFactory)
+        {
+            _itemInfoView = itemInfoView;
+            
             _cursorSensitiveFactory = cursorSensitiveFactory;
+        }
 
         private void Awake()
         {
@@ -61,6 +66,22 @@ namespace PointNClick.Items.View
             _toggleCursorSensitive.Expose();
         }
 
+        private void BindItemView(ItemView itemView)
+        {
+            itemView.Bind();
+
+            itemView.OnHover += ShowItemInfo;
+            itemView.OnUnhover += HideItemInfo;
+        }
+
+        private void ExposeItemView(ItemView itemView)
+        {
+            itemView.Expose();
+
+            itemView.OnHover -= ShowItemInfo;
+            itemView.OnUnhover -= HideItemInfo;
+        }
+
         private void ToggleItems(MouseDownEvent evt)
         {
             if (!_showItems)
@@ -73,8 +94,11 @@ namespace PointNClick.Items.View
         {
             _toggleBtn.style.backgroundImage = Background.FromSprite(openedInventorySprite);
             foreach (var kvp in _itemsViews)
+            {
                 kvp.Value.Show();
-            
+                BindItemView(kvp.Value);
+            }
+
             _showItems = true;
         }
 
@@ -82,8 +106,11 @@ namespace PointNClick.Items.View
         {
             _toggleBtn.style.backgroundImage = Background.FromSprite(closedInventorySprite);
             foreach (var kvp in _itemsViews)
+            {
                 kvp.Value.Hide();
-            
+                ExposeItemView(kvp.Value);
+            }
+
             _showItems = false;
         }
 
@@ -104,9 +131,15 @@ namespace PointNClick.Items.View
             
             _itemsViews.Add(itemSO.Id, itemView);
             if (_showItems)
+            {
                 itemView.Show();
+                BindItemView(itemView);
+            }
             else
+            {
                 itemView.Hide();
+                ExposeItemView(itemView);
+            }
         }
 
         public void RemoveItem(ItemSO itemSO)
@@ -117,7 +150,20 @@ namespace PointNClick.Items.View
             var itemView = _itemsViews[itemSO.Id];
             _freeItemViews.Add(itemView);
             _itemsViews.Remove(itemSO.Id);
+            
             itemView.Hide();
+            ExposeItemView(itemView);
         }
+
+        public void ShowItemInfo(ItemView itemView)
+        {
+            _itemInfoView.Show();
+            _itemInfoView.UpdateInfo(itemView.TargetItem.Name, itemView.TargetItem.Description);
+
+            var translate = new Vector2(itemView.Root.layout.position.x + itemView.Root.layout.width / 2, 0);
+            _itemInfoView.SetTransform(translate);
+        }
+
+        public void HideItemInfo(ItemView itemView) => _itemInfoView.Hide();
     }
 }

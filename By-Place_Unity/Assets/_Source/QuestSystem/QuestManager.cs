@@ -38,7 +38,6 @@ namespace QuestSystem
         public void Close(int questId, string result)
         {
             _quests.Remove(questId);
-            
             _journalQuests.Close(questId, result);
             
             OnClose?.Invoke(questId);

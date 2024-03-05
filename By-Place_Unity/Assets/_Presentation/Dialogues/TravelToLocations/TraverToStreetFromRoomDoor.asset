@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4580287982116854190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
+  m_Name: 1011931109
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: 1011931109
+  <IsStartingNode>k__BackingField: 1
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: -1384952148
+  - <NextGuid>k__BackingField: -1
+  - <NextGuid>k__BackingField: -1
+  <Position>k__BackingField: {x: 408, y: 167}
+  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4be7c3df4cdfee54e97bb83db6057bda, type: 2}
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: "\u041F\u043E\u0433\u043D\u0430\u043B\u0438"
+    <CheckVariableSO>k__BackingField: {fileID: 11400000, guid: 6d8e9247c02cafb49b298cf09ae8a84b, type: 2}
+    <ExpectedValue>k__BackingField: 1
+  - <Text>k__BackingField: "\u042F \u0432\u0441\u0435 \u0435\u0449\u0435 \u043D\u0435
+      \u043D\u0430\u0448\u0435\u043B \u0432\u0438\u043B\u043A\u0438"
+    <CheckVariableSO>k__BackingField: {fileID: 11400000, guid: 25e69c13558c66b42b323bad85cac92b, type: 2}
+    <ExpectedValue>k__BackingField: 0
+  - <Text>k__BackingField: "\u041F\u043E\u0442\u043E\u043C"
+    <CheckVariableSO>k__BackingField: {fileID: 0}
+    <ExpectedValue>k__BackingField: 0
+  <Texts>k__BackingField:
+  - <Text>k__BackingField: "\u041F\u043E\u0445\u043E\u0436\u0435 \u043D\u0430 \u0432\u0445\u043E\u0434\u043D\u0443\u044E
+      \u0434\u0432\u0435\u0440\u044C"
+    <VariableSO>k__BackingField: {fileID: 0}
+    <Animation>k__BackingField: {fileID: 7400000, guid: 52d8b1fffaf009b4899b6f7428434a36, type: 2}
+--- !u!114 &-2125844237837698828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018763a5676a422b80c06febeeab0287, type: 3}
+  m_Name: -1384952148
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: -1384952148
+  <IsStartingNode>k__BackingField: 0
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: -980247405
+  <Position>k__BackingField: {x: 1010, y: 208}
+  <ActionSO>k__BackingField: {fileID: 11400000, guid: 1391d3fe7da88dc4a80952f722ee4771, type: 2}
+--- !u!114 &-475282045461249393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018763a5676a422b80c06febeeab0287, type: 3}
+  m_Name: -980247405
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: -980247405
+  <IsStartingNode>k__BackingField: 0
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: -1
+  <Position>k__BackingField: {x: 1315, y: 208}
+  <ActionSO>k__BackingField: {fileID: 11400000, guid: 0a3fc32e62866544bb00e5fd074d6fef, type: 2}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4553f56b2363b9d4b924dda785b05977, type: 3}
+  m_Name: TraverToStreetFromRoomDoor
+  m_EditorClassIdentifier: 
+  <Owner>k__BackingField: {fileID: 11400000, guid: 37c7cee489a25ab4f912402afa5b22d4, type: 2}
+  <Guid>k__BackingField: -1333934685
+  <Name>k__BackingField: TraverToStreetFromRoomDoor
+  <StartingNodeGuid>k__BackingField: 1011931109
+  <NodesSOs>k__BackingField:
+  - {fileID: -4580287982116854190}
+  - {fileID: -2125844237837698828}
+  - {fileID: -475282045461249393}

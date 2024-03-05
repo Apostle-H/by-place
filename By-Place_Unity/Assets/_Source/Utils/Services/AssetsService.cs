@@ -6,7 +6,8 @@ namespace Utils.Services
 {
     public class AssetsService
     {
-        public static string InstanceIdToPath(int instanceId) => 
+#if UNITY_EDITOR
+      public static string InstanceIdToPath(int instanceId) => 
             AssetDatabase.GetAssetPath(EditorUtility.InstanceIDToObject(instanceId));
         
         public static T CreateAsset<T>(string path, string assetName) where T : ScriptableObject
@@ -84,6 +85,7 @@ namespace Utils.Services
         }
 
         public static void MoveAsset(int instanceId, string newPath) => 
-            AssetDatabase.MoveAsset(InstanceIdToPath(instanceId), newPath);
+            AssetDatabase.MoveAsset(InstanceIdToPath(instanceId), newPath);  
+#endif
     }
 }

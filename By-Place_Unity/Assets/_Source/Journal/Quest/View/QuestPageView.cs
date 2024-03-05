@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace Journal.Quest.View
 {
-    public class QuestPageView : IInitializable, IStartable, IDisposable
+    public class QuestPageView : IStartable, IDisposable
     {
         private QuestPageViewConfigSO _configSO;
         private UIDocument _canvas;
@@ -27,13 +27,13 @@ namespace Journal.Quest.View
             _quests = quests;
         }
 
-        public void Initialize()
+        public void Start()
         {
             _root = _canvas.rootVisualElement.Q<VisualElement>("QuestPagePanel");
             _questsContainer = _root.Q<ScrollView>("QuestsContainer");
+            
+            Bind();
         }
-        
-        public void Start() => Bind();
 
         public void Dispose() => Expose();
 

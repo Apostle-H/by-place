@@ -1,13 +1,12 @@
 ﻿using System;
 using Journal.View.Data;
-using PointNClick.Cursor.Manager;
 using PointNClick.Cursor.Sensitive;
 using UnityEngine.UIElements;
 using VContainer.Unity;
 
 namespace Journal.View
 {
-    public class JournalView : IInitializable, IStartable, IDisposable
+    public class JournalView : IStartable, IDisposable
     {
         private JournalViewConfigSO _configSO;
         
@@ -31,7 +30,7 @@ namespace Journal.View
             _cursorSensitiveFactory = cursorSensitiveFactory;
         }
 
-        public void Initialize()
+        public void Start()
         {
             _root = _canvas.rootVisualElement.Q<VisualElement>("JournalPanel");
 
@@ -41,9 +40,9 @@ namespace Journal.View
             _toggleCursorSensitive = _cursorSensitiveFactory.Build(_configSO.ToggleCursorConfigSO, _toggleBtn);
             
             HidePage();
+            
+            Bind();
         }
-
-        public void Start() => Bind();
 
         public void Dispose() => Expose();
 
