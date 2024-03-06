@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace DialogueSystem.Data.NodeParams
+namespace Dialogue.Data.NodeParams
 {
     [Serializable]
     public class DText

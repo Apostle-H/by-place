@@ -1,12 +1,9 @@
 ﻿using System;
 using ActionSystem;
-using PointNClick.Items.Actions.Data;
-using PointNClick.Items.Data;
-using PointNClick.Items.View;
-using UnityEngine;
-using VContainer;
+using PointNClick.Inventory.Data;
+using PointNClick.Inventory.View;
 
-namespace PointNClick.Items.Actions
+namespace PointNClick.Inventory.Actions
 {
     public class ItemAction : IAction
     {

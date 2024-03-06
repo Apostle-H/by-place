@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using DialogueSystem.Resolve.Data;
-using UnityEngine;
+using Dialogue.Resolve.Data;
 using UnityEngine.UIElements;
+using VContainer.Unity;
 
-namespace DialogueSystem.Resolve
+namespace Dialogue.Resolve
 {
-    public class DialogueView : MonoBehaviour
+    public class DialogueView : IStartable
     {
-        [SerializeField] private UIDocument canvas;
-        [SerializeField] private VisualTreeAsset choiceBtnAsset;
+        private DialogueViewConfigSO _configSO;
+        private UIDocument _canvas;
         
         private Image _speakerIcon;
         private Label _speakerName;
@@ -24,9 +24,15 @@ namespace DialogueSystem.Resolve
 
         public event Action<int> OnChoose;
 
-        private void Awake()
+        public DialogueView(DialogueViewConfigSO configSO, UIDocument canvas)
         {
-            Root = canvas.rootVisualElement.Q<VisualElement>("DialoguePanel");
+            _configSO = configSO;
+            _canvas = canvas;
+        }
+
+        public void Start()
+        {
+            Root = _canvas.rootVisualElement.Q<VisualElement>("DialoguePanel");
             
             Hide();
             
@@ -37,7 +43,7 @@ namespace DialogueSystem.Resolve
             
             Root.Q<VisualElement>("IconContainer").Add(_speakerIcon);
         }
-
+        
         public void Show()
         {
             Root.visible = true;
@@ -85,7 +91,7 @@ namespace DialogueSystem.Resolve
         {
             var btnIndex = _choiceBtns.Count;
             
-            var choiceBtn = choiceBtnAsset.CloneTree().Q<Button>("DialogueChoiceBtn");
+            var choiceBtn = _configSO.ChoiceBtnVisualTree.Instantiate().Q<Button>("DialogueChoiceBtn");
             _choiceBtnsContainer.Add(choiceBtn);
             _choiceBtns.Add(choiceBtn);
             _clickedActions.Add(() => OnChoose?.Invoke(btnIndex));

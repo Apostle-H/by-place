@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using ActionSystem;
-using PointNClick.Items.Actions.Data;
-using PointNClick.Items.View;
+using PointNClick.Inventory.Actions.Data;
+using PointNClick.Inventory.View;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace PointNClick.Items.Actions
+namespace PointNClick.Inventory.Actions
 {
     public class ItemActionsCollector : IInitializable, IStartable, IDisposable
     {
@@ -27,7 +27,7 @@ namespace PointNClick.Items.Actions
 
         public void Initialize()
         {
-            var questActionsSO = Resources.LoadAll<ItemActionSO>("Inventory/Actions").ToList();
+            var questActionsSO = Resources.LoadAll<ItemActionSO>("Actions/Inventory").ToList();
 
             foreach (var itemActionSO in questActionsSO)
                 _itemActions.Add(new ItemAction(itemActionSO.Id, itemActionSO.ItemSO, itemActionSO.RemoveAdd, 

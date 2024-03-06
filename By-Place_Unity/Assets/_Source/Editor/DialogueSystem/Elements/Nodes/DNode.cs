@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using DialogueSystem.Data.NodeParams;
+using Dialogue.Data.NodeParams;
 using DialogueSystem.Utils;
 using DialogueSystem.Windows;
 using UnityEditor.Experimental.GraphView;

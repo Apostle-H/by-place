@@ -1,24 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Core.Loaders;
 using PointNClick.Cursor.Sensitive;
 using PointNClick.Cursor.Sensitive.Data;
-using PointNClick.Items.Data;
+using PointNClick.Inventory.Data;
+using PointNClick.Inventory.View.Data;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
+using VContainer.Unity;
+using Object = UnityEngine.Object;
 
-namespace PointNClick.Items.View
+namespace PointNClick.Inventory.View
 {
-    public class InventoryView : MonoBehaviour
+    public class InventoryView : IStartable, IDisposable
     {
-        [SerializeField] private UIDocument canvas;
-        [SerializeField] private VisualTreeAsset itemSlotTree;
-        [SerializeField] private CursorConfigSO toggleCursorConfigSO;
-        [SerializeField] private Sprite closedInventorySprite;
-        [SerializeField] private Sprite openedInventorySprite;
-
-        private ItemInfoView _itemInfoView;
+        private InventoryViewConfigSO _configSO;
         
+        private UIDocument _canvas;
+        private ItemInfoView _itemInfoView;
         private UICursorSensitive.Factory _cursorSensitiveFactory;
+
         private UICursorSensitive _toggleCursorSensitive;
         
         private VisualElement _root;
@@ -31,28 +33,30 @@ namespace PointNClick.Items.View
 
         private bool _showItems;
 
-        [Inject]
-        private void Inject(ItemInfoView itemInfoView, UICursorSensitive.Factory cursorSensitiveFactory)
+        public InventoryView(InventoryViewConfigSO configSO, UIDocument canvas, ItemInfoView itemInfoView, 
+            UICursorSensitive.Factory cursorSensitiveFactory)
         {
-            _itemInfoView = itemInfoView;
+            _configSO = configSO;
             
+            _canvas = canvas;
+            _itemInfoView = itemInfoView;
             _cursorSensitiveFactory = cursorSensitiveFactory;
         }
-
-        private void Awake()
+        
+        public void Start()
         {
-            _root = canvas.rootVisualElement.Q<VisualElement>("InventoryPanel");
+            _root = _canvas.rootVisualElement.Q<VisualElement>("InventoryPanel");
 
             _toggleBtn = _root.Q<VisualElement>("ToggleBtn");
             _itemSlotsHolder = _root.Q<VisualElement>("ItemSlotsHolder");
 
-            _toggleCursorSensitive = _cursorSensitiveFactory.Build(toggleCursorConfigSO, _toggleBtn);
-            _toggleBtn.style.backgroundImage = Background.FromSprite(closedInventorySprite);
+            _toggleCursorSensitive = _cursorSensitiveFactory.Build(_configSO.ToggleCursorConfigSO, _toggleBtn);
+            _toggleBtn.style.backgroundImage = Background.FromSprite(_configSO.ClosedInventorySprite);
+            
+            Bind();
         }
 
-        private void Start() => Bind();
-
-        private void OnDestroy() => Expose();
+        public void Dispose() => Expose();
 
         private void Bind()
         {
@@ -92,7 +96,7 @@ namespace PointNClick.Items.View
 
         private void ShowItems()
         {
-            _toggleBtn.style.backgroundImage = Background.FromSprite(openedInventorySprite);
+            _toggleBtn.style.backgroundImage = Background.FromSprite(_configSO.OpenedInventorySprite);
             foreach (var kvp in _itemsViews)
             {
                 kvp.Value.Show();
@@ -104,7 +108,7 @@ namespace PointNClick.Items.View
 
         private void HideItems()
         {
-            _toggleBtn.style.backgroundImage = Background.FromSprite(closedInventorySprite);
+            _toggleBtn.style.backgroundImage = Background.FromSprite(_configSO.ClosedInventorySprite);
             foreach (var kvp in _itemsViews)
             {
                 kvp.Value.Hide();
@@ -119,7 +123,7 @@ namespace PointNClick.Items.View
             ItemView itemView;
             if (_freeItemViews.Count == 0)
             {
-                var itemRoot = itemSlotTree.CloneTree().Q<VisualElement>("Item");
+                var itemRoot = _configSO.ItemSlotVisualTree.Instantiate().Q<VisualElement>("Item");
                 itemView = new ItemView(itemRoot, itemSO);
                 _itemSlotsHolder.Add(itemView.Root);
             }

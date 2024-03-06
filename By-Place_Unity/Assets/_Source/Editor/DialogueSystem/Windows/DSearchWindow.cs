@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DialogueSystem.Data;
 using DialogueSystem.Elements;
 using DialogueSystem.Elements.Nodes;
 using UnityEditor.Experimental.GraphView;
@@ -36,6 +35,11 @@ namespace DialogueSystem.Windows
                     userData = new DActionNode(default, default),
                     level = 1
                 },
+                new SearchTreeEntry(new GUIContent("Animation", _indentationIcon))
+                {
+                    userData = new DAnimationNode(default, default),
+                    level = 1
+                },
                 new SearchTreeEntry(new GUIContent("Set Variable", _indentationIcon))
                 {
                     userData = new DSetVariableNode(default, default),
@@ -63,13 +67,16 @@ namespace DialogueSystem.Windows
             switch (searchTreeEntry.userData)
             {
                 case DDialogueNode _:
-                    var dialogueNode = new DDialogueNode(localMousePosition);
-                    dialogueNode.GraphView = _graphView;
+                    var dialogueNode = new DDialogueNode(localMousePosition) { GraphView = _graphView };
                     _graphView.AddNode(dialogueNode);
                     return true;
                 case DActionNode _:
                     var actionNode = new DActionNode(localMousePosition);
                     _graphView.AddNode(actionNode);
+                    return true;
+                case DAnimationNode _:
+                    var animationNode = new DAnimationNode(localMousePosition);
+                    _graphView.AddNode(animationNode);
                     return true;
                 case DSetVariableNode _:
                     var setVariableNode = new DSetVariableNode(localMousePosition);

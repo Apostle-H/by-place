@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Core.Loaders;
-using QuestSystem.Data;
 using QuestSystem.View.Data;
-using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
 using VContainer.Unity;
@@ -14,25 +11,23 @@ namespace QuestSystem.View
 {
     public class QuestManagerView : IStartable, IDisposable
     {
-        private UIDocument _canvas;
+        private QuestManagerViewConfigSO _configSO;
         
-        private VisualTreeAsset _questVisualTree;
+        private UIDocument _canvas;
 
         private QuestManager _questManager;
 
         private Dictionary<int, QuestView> _questViews = new();
         private List<QuestView> _freeQuestViews = new();
-
+        
         public VisualElement Root { get; private set; }
 
         [Inject]
-        public QuestManagerView(QuestManagerViewConfigSO configSO, UIDocument canvas, QuestManager questManager,
-            ILoader<Object> resourcesLoader)
+        public QuestManagerView(QuestManagerViewConfigSO configSO, UIDocument canvas, QuestManager questManager)
         {
+            _configSO = configSO;
             _canvas = canvas;
             _questManager = questManager;
-
-            _questVisualTree = configSO.QuestVisualTree;
         }
 
         public void Start()
@@ -85,7 +80,7 @@ namespace QuestSystem.View
 
         private void Add()
         {
-            var freeQuestView = new QuestView(_questVisualTree);
+            var freeQuestView = new QuestView(_configSO.QuestVisualTree.Instantiate().Q<VisualElement>("Quest"));
             Root.Add(freeQuestView.Root);
             freeQuestView.Hide();
                 

@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using ActionSystem;
-using DialogueSystem.Data;
-using DialogueSystem.Data.NodeParams;
-using DialogueSystem.Data.Save;
-using DialogueSystem.Resolve.Data;
-using NPC.View;
-using UnityEngine;
+using Animate;
+using Dialogue.Data;
+using Dialogue.Data.NodeParams;
+using Dialogue.Data.Save;
+using Dialogue.Resolve.Data;
 using VContainer;
 
-namespace DialogueSystem.Resolve
+namespace Dialogue.Resolve
 {
     public class DialogueController
     {
@@ -18,25 +17,26 @@ namespace DialogueSystem.Resolve
         
         private ActionResolver _actionResolver;
         private DVariablesContainer _variablesContainer;
-        private NPCsAnimators _npcsAnimators;
+        private AnimationResolver _animationResolver;
         
         private int _afterActionGuid;
         
-        private DDialogue _dialogue;
+        private DDialogue _dialogue = new();
+        private DAnimation _animation = new();
         private List<int> _nextGuids = new();
         
         public event Action OnQuit;
 
         [Inject]
         private void Inject(DialogueData dialogueData, DialogueView dialogueView, 
-            ActionResolver actionResolver, DVariablesContainer variablesContainer, NPCsAnimators npcsAnimators)
+            ActionResolver actionResolver, DVariablesContainer variablesContainer, AnimationResolver animationResolver)
         {
             _dialogueData = dialogueData;
             _dialogueView = dialogueView;
             
             _actionResolver = actionResolver;
             _variablesContainer = variablesContainer;
-            _npcsAnimators = npcsAnimators;
+            _animationResolver = animationResolver;
         }
 
         public void Load(DGroupSO dsGroup)
@@ -69,18 +69,21 @@ namespace DialogueSystem.Resolve
             
             while (guid != -1)
             {
-                switch (_dialogueData.Choose(guid, ref _dialogue, ref _nextGuids, ref actionId, 
-                            ref variableId, ref variableSet))
+                switch (_dialogueData.Choose(guid, ref _dialogue, ref _animation, ref actionId, 
+                            ref variableId, ref variableSet, ref _nextGuids))
                 {
                     case DNodeType.DIALOGUE:
                         _dialogueView.DisplayDialogue(_dialogue);
-                        if (_dialogue.PlayAnimation)
-                            _npcsAnimators.PlayClip(_dialogue.SpeakerId, _dialogue.AnimationName);
+                        _animationResolver.Resolve(_animation.AnimatableId, _animation.AnimationStateHash);
                         return;
                     case DNodeType.ACTION:
                         _afterActionGuid = _nextGuids[0];
                         _actionResolver.Resolve(actionId);   
                         return;
+                    case DNodeType.ANIMATION:
+                        guid = _nextGuids[0];
+                        _animationResolver.Resolve(_animation.AnimatableId, _animation.AnimationStateHash);
+                        break;
                     case DNodeType.SET_VARIABLE:
                         guid = _nextGuids[0];
                         _variablesContainer.Set(variableId, variableSet);

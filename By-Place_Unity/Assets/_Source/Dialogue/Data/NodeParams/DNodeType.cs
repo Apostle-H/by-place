@@ -1,10 +1,11 @@
-﻿namespace DialogueSystem.Data.NodeParams
+﻿namespace Dialogue.Data.NodeParams
 {
     public enum DNodeType
     {
         DIALOGUE = 0,
         ACTION = 1,
-        SET_VARIABLE = 2,
-        BRANCH = 3
+        ANIMATION = 2,
+        SET_VARIABLE = 3,
+        BRANCH = 4
     }
 }

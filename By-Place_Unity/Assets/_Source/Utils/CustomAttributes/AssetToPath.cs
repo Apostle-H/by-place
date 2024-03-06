@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Journal.Quest.View
+namespace Utils.CustomAttributes
 {
     public class AssetToPathAttribute : PropertyAttribute
     {

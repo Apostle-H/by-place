@@ -1,14 +1,16 @@
-﻿using UnityEngine;
+﻿using Animate.Data;
+using UnityEngine;
 
-namespace DialogueSystem.Data.NodeParams
+namespace Dialogue.Data.NodeParams
 {
     [CreateAssetMenu(menuName = "SO/DS/SpeakerSO", fileName = "NewDSpeakerSO")]
-    public class DSpeakerSO : ScriptableObject
+    public class DSpeakerSO : AAnimatableLink
     {
-        [field: SerializeField] public int Id => GetInstanceID();
         [field: SerializeField] public string Name { get; private set; }
         [field: SerializeField] public Sprite Icon  { get; private set; }
 
+        public override int Id => GetInstanceID();
+        
 #if UNITY_EDITOR
         [field: SerializeField] public Color NodeColor { get; private set; }
 #endif

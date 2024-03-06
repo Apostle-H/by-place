@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DialogueSystem.Data
+namespace Dialogue.Data
 {
     [CreateAssetMenu(menuName = "SO/DS/VariableSO", fileName = "NewVariableSO")]
     public class DVariableSO : ScriptableObject

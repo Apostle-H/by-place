@@ -10,9 +10,9 @@ namespace QuestSystem.View
         
         public VisualElement Root { get; private set; }
 
-        public QuestView(VisualTreeAsset questTree)
+        public QuestView(VisualElement root)
         {
-            Root = questTree.CloneTree().Q<VisualElement>("Quest");
+            Root = root;
 
             _title = Root.Q<Label>("TitleLabel");
             _task = Root.Q<Label>("TaskLabel");

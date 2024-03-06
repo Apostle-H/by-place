@@ -1,13 +1,13 @@
 using System.Collections.Generic;
-using DialogueSystem.Data;
-using DialogueSystem.Data.NodeParams;
-using DialogueSystem.Utils.Extensions;
+using Dialogue.Data;
+using Dialogue.Data.NodeParams;
 using DialogueSystem.Windows;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Utils.Extensions;
 
 namespace DialogueSystem.Elements.Nodes
 {

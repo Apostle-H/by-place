@@ -26,7 +26,7 @@ namespace QuestSystem.Actions
         
         public void Initialize()
         {
-            var questActionsSO = Resources.LoadAll<QuestActionSO>("QuestSystem/Actions").ToList();
+            var questActionsSO = Resources.LoadAll<QuestActionSO>("Actions/Quest").ToList();
 
             foreach (var questActionSO in questActionsSO)
             {

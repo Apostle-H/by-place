@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DialogueSystem.Data;
-using DialogueSystem.Data.NodeParams;
-using DialogueSystem.Data.Save;
-using DialogueSystem.Data.Save.Nodes;
-using DialogueSystem.Resolve.Data;
+using Dialogue.Data;
+using Dialogue.Data.NodeParams;
+using Dialogue.Data.Save;
+using Dialogue.Data.Save.Nodes;
+using Dialogue.Resolve.Data;
 using UnityEngine;
 using VContainer;
 
-namespace DialogueSystem.Resolve
+namespace Dialogue.Resolve
 {
     public class DialogueData
     {
@@ -22,60 +22,55 @@ namespace DialogueSystem.Resolve
 
         public void Load(DContainerSO container) => _container = container;
 
-        public DNodeType Choose(int guid, ref DDialogue dialogue, ref List<int> nextGuids, ref int actionId,
-            ref int variableId, ref bool variableSet)
+        public DNodeType Choose(int guid, ref DDialogue dialogue, ref DAnimation animation, ref int actionId,
+            ref int variableId, ref bool variableSet, ref List<int> nextGuids)
         {
             var targetNodeSO = _container.Nodes.First(node => node.Guid == guid);
             nextGuids.Clear();
 
             switch (targetNodeSO)
             {
-                case DDialogueSO dialogueNodeSO:
-                    dialogue = ConvertDialogueNode(dialogueNodeSO, ref nextGuids);
+                case DDialogueSO dialogueSO:
+                    ConvertDialogue(dialogueSO, ref dialogue, ref animation, ref nextGuids);
                     return DNodeType.DIALOGUE;
-                case DActionSO actionNodeSO:
-                    actionId = ConvertActionNode(actionNodeSO, ref nextGuids);
+                case DActionSO actionSO:
+                    ConvertAction(actionSO, ref actionId, ref nextGuids);
                     return DNodeType.ACTION;
-                case DSetVariableSO setVariableNodeSO:
-                    (variableId, variableSet) = ConvertSetVariableNode(setVariableNodeSO, ref nextGuids);
+                case DAnimationSO animationSO:
+                    ConvertAnimation(animationSO, ref animation, ref nextGuids);
+                    return DNodeType.ANIMATION;
+                case DSetVariableSO setVariableSO:
+                    ConvertSetVariable(setVariableSO, ref variableId, ref variableSet, ref nextGuids);
                     return DNodeType.SET_VARIABLE;
-                case DBranchSO branchNodeSO:
-                    variableId = ConvertBranchNoe(branchNodeSO, ref nextGuids);
-                    return DNodeType.BRANCH;
+                case DBranchSO branchSO:
+                    ConvertBranch(branchSO, ref variableId, ref nextGuids);
+                    return DNodeType.BRANCH; ;
                 default:
                     throw new NotImplementedException("Unexpected Node Type");
             }
         }
 
-        private DDialogue ConvertDialogueNode(DDialogueSO nodeSO, ref List<int> nextGuids)
+        private void ConvertDialogue(DDialogueSO nodeSO, ref DDialogue dialogue, ref DAnimation animation, ref List<int> nextGuids)
         {
-            var dialogue = new DDialogue();
-
-            dialogue.SpeakerId = nodeSO.SpeakerSO.Id;
             dialogue.SpeakerName = nodeSO.SpeakerSO.Name;
             dialogue.SpeakerIcon = nodeSO.SpeakerSO.Icon;
-            
-            dialogue.SpeakerText = nodeSO.Texts[0].Text;
-            if (nodeSO.Texts[0].Animation != default)
+
+            animation.AnimatableId = int.MaxValue;
+            for (var i = 0; i < nodeSO.Texts.Count; i++)
             {
-                dialogue.PlayAnimation = true;
-                dialogue.AnimationName = nodeSO.Texts[0].Animation.name;
-            }
-            
-            for (var i = 1; i < nodeSO.Texts.Count; i++)
-            {
-                if (!_variablesContainer.Get(nodeSO.Texts[i].VariableSO.Id, out var variable)
-                    || !variable)
+                if (i != 0 && 
+                    (!_variablesContainer.Get(nodeSO.Texts[i].VariableSO.Id, out var variable) || !variable))
                     continue;
 
                 dialogue.SpeakerText = nodeSO.Texts[i].Text;
                 if (nodeSO.Texts[i].Animation == default)
                     continue;
-                dialogue.PlayAnimation = true;
-                dialogue.AnimationName = nodeSO.Texts[i].Animation.name;
+                
+                animation.AnimatableId = nodeSO.SpeakerSO.Id;
+                animation.AnimationStateHash = Animator.StringToHash(nodeSO.Texts[0].Animation.name);
             }
 
-            dialogue.Choices = new List<string>();
+            dialogue.Choices.Clear();
             for (var i = 0; i < nodeSO.Choices.Count; i++)
             {
                 if (nodeSO.Choices[i].CheckVariableSO != default
@@ -86,26 +81,33 @@ namespace DialogueSystem.Resolve
                 dialogue.Choices.Add(nodeSO.Choices[i].Text);
                 nextGuids.Add(nodeSO.OutputData[i].NextGuid);
             }
-
-            return dialogue;
         }
 
-        private int ConvertActionNode(DActionSO nodeSO, ref List<int> nextGuids)
+        private void ConvertAction(DActionSO nodeSO, ref int actionId, ref List<int> nextGuids)
         {
+            actionId = nodeSO.ActionSO.Id;
             nextGuids.Add(nodeSO.OutputData[0].NextGuid);
-            return nodeSO.ActionSO.Id;
         }
 
-        private (int, bool) ConvertSetVariableNode(DSetVariableSO nodeSO, ref List<int> nextGuids)
+        private void ConvertSetVariable(DSetVariableSO nodeSO, ref int variableId, ref bool variableSet, 
+            ref List<int> nextGuids)
         {
+            variableId = nodeSO.VariableSO.Id;
+            variableSet = nodeSO.SetValue;
             nextGuids.Add(nodeSO.OutputData[0].NextGuid);
-            return (nodeSO.VariableSO.Id, nodeSO.SetValue);
         }
 
-        private int ConvertBranchNoe(DBranchSO nodeSO, ref List<int> nextGuids)
+        private void ConvertBranch(DBranchSO nodeSO, ref int variableId, ref List<int> nextGuids)
         {
+            variableId = nodeSO.VariableSO.Id;
             nextGuids.AddRange(nodeSO.OutputData.Select(nextGuid => nextGuid.NextGuid));
-            return nodeSO.VariableSO.Id;
+        }
+
+        private void ConvertAnimation(DAnimationSO nodeSO, ref DAnimation animation, ref List<int> nextGuids)
+        {
+            animation.AnimatableId = nodeSO.AnimatableLink?.Id ?? int.MaxValue;
+            animation.AnimationStateHash = Animator.StringToHash(nodeSO.Animation?.name ?? "-");
+            nextGuids.Add(nodeSO.OutputData[0].NextGuid);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace DialogueSystem.Data
+namespace Dialogue.Data
 {
     public class DVariablesContainer
     {
@@ -10,7 +10,7 @@ namespace DialogueSystem.Data
         
         public DVariablesContainer()
         {
-            var _variablesSOs = Resources.LoadAll<DVariableSO>("DS/Variables");
+            var _variablesSOs = Resources.LoadAll<DVariableSO>("Variables");
             foreach (var variable in _variablesSOs)
                 _variables.Add(variable.Id, variable.Value);
         }

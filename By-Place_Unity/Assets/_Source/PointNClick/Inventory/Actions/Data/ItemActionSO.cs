@@ -1,8 +1,8 @@
 ﻿using ActionSystem.Data;
-using PointNClick.Items.Data;
+using PointNClick.Inventory.Data;
 using UnityEngine;
 
-namespace PointNClick.Items.Actions.Data
+namespace PointNClick.Inventory.Actions.Data
 {
     [CreateAssetMenu(menuName = "SO/Inventory/ItemActionSO", fileName = "NewItemActionSO")]
     public class ItemActionSO : ActionSO

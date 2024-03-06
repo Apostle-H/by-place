@@ -1,11 +1,11 @@
 ﻿using System;
-using DialogueSystem.Data.Save;
-using DialogueSystem.Resolve;
+using Dialogue.Data.Save;
+using Dialogue.Resolve;
 using PointNClick.Interactions;
 using UnityEngine;
 using VContainer;
 
-namespace DialogueSystem
+namespace Dialogue.Interaction
 {
     public class DialogueInteractable : MonoBehaviour, IInteractable
     {

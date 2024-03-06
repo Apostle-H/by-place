@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer.Unity;
 
-namespace PointNClick.Items.View
+namespace PointNClick.Inventory.View
 {
     public class ItemInfoView : IStartable
     {

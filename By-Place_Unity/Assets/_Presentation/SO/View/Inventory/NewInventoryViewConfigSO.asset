@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eec49f689e1449c891554b1b84cf76f, type: 3}
+  m_Name: NewInventoryViewConfigSO
+  m_EditorClassIdentifier: 
+  <ItemSlotVisualTree>k__BackingField: {fileID: 9197481963319205126, guid: 18e1404aa9759b44c9a9759906ddb4dc, type: 3}
+  <ToggleCursorConfigSO>k__BackingField: {fileID: 11400000, guid: 59558b7d14d8b5f4aacfd82ee227cfd7, type: 2}
+  <ClosedInventorySprite>k__BackingField: {fileID: 21300000, guid: 4d2011bc5b737a349a06558feb0d2062, type: 3}
+  <OpenedInventorySprite>k__BackingField: {fileID: 21300000, guid: 7ecddadda09bec5459cfa0cb7b6fcff3, type: 3}

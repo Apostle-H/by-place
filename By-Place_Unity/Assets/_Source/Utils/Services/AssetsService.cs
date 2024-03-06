@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -85,7 +86,23 @@ namespace Utils.Services
         }
 
         public static void MoveAsset(int instanceId, string newPath) => 
-            AssetDatabase.MoveAsset(InstanceIdToPath(instanceId), newPath);  
+            AssetDatabase.MoveAsset(InstanceIdToPath(instanceId), newPath);
+
+        public static bool PathToResources(int instanceId, out string resourcesPath) => 
+            PathToResources(AssetsService.InstanceIdToPath(instanceId), out resourcesPath);
+
+        public static bool PathToResources(string path, out string resourcesPath)
+        {
+            resourcesPath = path;
+            if (!path.Contains("Resources"))
+                return false;
+
+            resourcesPath = resourcesPath.Split("Resources")[1][1..];
+            if (Path.HasExtension(resourcesPath))
+                resourcesPath = resourcesPath.Split('.')[0];
+
+            return true;
+        }
 #endif
     }
 }

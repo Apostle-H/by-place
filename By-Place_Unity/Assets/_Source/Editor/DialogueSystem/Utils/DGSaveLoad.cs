@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DialogueSystem.Data.NodeParams;
-using DialogueSystem.Data.Save;
-using DialogueSystem.Data.Save.Nodes;
+using Dialogue.Data.NodeParams;
+using Dialogue.Data.Save;
+using Dialogue.Data.Save.Nodes;
 using DialogueSystem.Elements;
 using DialogueSystem.Elements.Nodes;
 using DialogueSystem.Windows;
@@ -164,6 +164,14 @@ namespace DialogueSystem.Utils
                 
                 nodeSO = actionNodeSO;
             }
+            else if (node is DAnimationNode animationNode)
+            {
+                var animationNodeSO = AssetsService.CreateSubAsset<DAnimationSO>(parent, animationNode.Guid.ToString());
+                animationNodeSO.AnimatableLink = animationNode.AnimatableLink;
+                animationNodeSO.Animation = animationNode.Animation;
+
+                nodeSO = animationNodeSO;
+            }
             else if (node is DSetVariableNode setVariableNode)
             {
                 var setVariableNodeSO = AssetsService.CreateSubAsset<DSetVariableSO>(parent, setVariableNode.Guid.ToString());
@@ -230,36 +238,55 @@ namespace DialogueSystem.Utils
             {
                 case DDialogueSO dialogueNodeSO:
                 {
-                    var dialogueNode = new DDialogueNode(nodeSO.Position, dialogueNodeSO.Guid);
-                    dialogueNode.SpeakerSO = dialogueNodeSO.SpeakerSO;
-                    dialogueNode.Choices = dialogueNodeSO.Choices.ToList();
-                    dialogueNode.Texts = dialogueNodeSO.Texts.ToList();
-                    dialogueNode.GraphView = graphView;
+                    var dialogueNode = new DDialogueNode(nodeSO.Position, nodeSO.Guid)
+                    {
+                        SpeakerSO = dialogueNodeSO.SpeakerSO,
+                        Choices = dialogueNodeSO.Choices.ToList(),
+                        Texts = dialogueNodeSO.Texts.ToList(),
+                        GraphView = graphView
+                    };
 
                     node = dialogueNode;
                     break;
                 }
                 case DActionSO actionNodeSO:
                 {
-                    var actionNode = new DActionNode(nodeSO.Position, actionNodeSO.Guid);
-                    actionNode.ActionSO = actionNodeSO.ActionSO;
+                    var actionNode = new DActionNode(nodeSO.Position, nodeSO.Guid)
+                    {
+                        ActionSO = actionNodeSO.ActionSO
+                    };
 
                     node = actionNode;
                     break;
                 }
+                case DAnimationSO animationNodeSO:
+                {
+                    var animationNode = new DAnimationNode(nodeSO.Position, nodeSO.Guid)
+                    {
+                        AnimatableLink = animationNodeSO.AnimatableLink,
+                        Animation = animationNodeSO.Animation
+                    };
+
+                    node = animationNode;
+                    break;
+                }
                 case DSetVariableSO setVariableNodeSO:
                 {
-                    var setVariableNode = new DSetVariableNode(nodeSO.Position, setVariableNodeSO.Guid);
-                    setVariableNode.VariableSO = setVariableNodeSO.VariableSO;
-                    setVariableNode.SetValue = setVariableNodeSO.SetValue;
+                    var setVariableNode = new DSetVariableNode(nodeSO.Position, nodeSO.Guid)
+                    {
+                        VariableSO = setVariableNodeSO.VariableSO,
+                        SetValue = setVariableNodeSO.SetValue
+                    };
 
                     node = setVariableNode;
                     break;
                 }
                 case DBranchSO branchNodeSO:
                 {
-                    var branchNode = new DBranchNode(nodeSO.Position, branchNodeSO.Guid);
-                    branchNode.VariableSO = branchNodeSO.VariableSO;
+                    var branchNode = new DBranchNode(nodeSO.Position, nodeSO.Guid)
+                    {
+                        VariableSO = branchNodeSO.VariableSO
+                    };
 
                     node = branchNode;
                     break;

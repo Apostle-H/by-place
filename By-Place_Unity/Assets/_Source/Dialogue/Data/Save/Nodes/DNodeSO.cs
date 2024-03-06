@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using DialogueSystem.Data.NodeParams;
+using Dialogue.Data.NodeParams;
 using UnityEngine;
 
-namespace DialogueSystem.Data.Save.Nodes
+namespace Dialogue.Data.Save.Nodes
 {
     public class DNodeSO : ScriptableObject
     {

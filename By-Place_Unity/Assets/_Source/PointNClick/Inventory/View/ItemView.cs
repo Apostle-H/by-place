@@ -1,9 +1,9 @@
 ﻿using System;
-using PointNClick.Items.Data;
+using PointNClick.Inventory.Data;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PointNClick.Items.View
+namespace PointNClick.Inventory.View
 {
     public class ItemView
     {

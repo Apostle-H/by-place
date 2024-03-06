@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using DialogueSystem.Data.Save.Nodes;
-using UnityEditor;
+using Dialogue.Data.Save.Nodes;
 using UnityEngine;
 
-namespace DialogueSystem.Data.Save
+namespace Dialogue.Data.Save
 {
     public class DGroupSO : ScriptableObject
     {

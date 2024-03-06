@@ -1,5 +1,5 @@
-﻿using DialogueSystem.Data;
-using DialogueSystem.Data.NodeParams;
+﻿using Dialogue.Data;
+using Dialogue.Data.NodeParams;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;

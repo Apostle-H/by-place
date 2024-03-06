@@ -1,11 +1,13 @@
 ﻿using ActionSystem;
+using Animate;
 using Character;
 using Character.Data;
 using Character.States;
 using Character.View;
 using Core.Loaders;
-using DialogueSystem.Data;
-using DialogueSystem.Resolve;
+using Dialogue.Data;
+using Dialogue.Resolve;
+using Dialogue.Resolve.Data;
 using Input;
 using InputSystem;
 using Journal.Quest;
@@ -15,13 +17,13 @@ using Journal.View;
 using Journal.View.Data;
 using Movement;
 using Movement.Data;
-using NPC.View;
 using PointNClick.Cursor.Manager;
 using PointNClick.Cursor.Sensitive;
 using PointNClick.Data;
 using PointNClick.Interactions;
-using PointNClick.Items.Actions;
-using PointNClick.Items.View;
+using PointNClick.Inventory.Actions;
+using PointNClick.Inventory.View;
+using PointNClick.Inventory.View.Data;
 using QuestSystem;
 using QuestSystem.Actions;
 using QuestSystem.View;
@@ -43,6 +45,12 @@ namespace Core.DI
         [SerializeField] private PointNClickConfigSO pointNClickConfigSO;
         [SerializeField] private MoverConfigSO moverConfigSO;
         
+        [Header("DialogueSystem")]
+        [SerializeField] private DialogueViewConfigSO dialogueViewConfigSO;
+
+        [Header("Inventory")] 
+        [SerializeField] private InventoryViewConfigSO inventoryViewConfigSO;
+        
         [Header("QuestSystem")]
         [SerializeField] private QuestManagerViewConfigSO questManagerViewConfigSO;
         
@@ -57,11 +65,12 @@ namespace Core.DI
             ConfigureInput(builder);
             ConfigurePointNClick(builder);
             ConfigureCharacter(builder);
+            ConfigureActionSystem(builder);
+            ConfigureAnimate(builder);
             ConfigureDialogueSystem(builder);
             ConfigureQuestSystem(builder);
             ConfigureJournal(builder);
             ConfigureInventory(builder);
-            ConfigureNPC(builder);
             ConfigureCharacterStateMachine(builder);
         }
 
@@ -109,14 +118,28 @@ namespace Core.DI
             builder.Register<CharacterComponents>(Lifetime.Singleton);
         }
 
+        private void ConfigureActionSystem(IContainerBuilder builder)
+        {
+            builder.Register<ActionResolver>(Lifetime.Singleton);
+        }
+
+        private void ConfigureAnimate(IContainerBuilder builder)
+        {
+            builder.Register<AnimationResolver>(Lifetime.Singleton);
+        }
+        
         private void ConfigureDialogueSystem(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<DialogueView>();
+            builder.RegisterInstance(dialogueViewConfigSO);
             
             builder.Register<DVariablesContainer>(Lifetime.Singleton);
-            builder.Register<ActionResolver>(Lifetime.Singleton);
             builder.Register<DialogueData>(Lifetime.Singleton);
             builder.Register<DialogueController>(Lifetime.Singleton);
+            
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<DialogueView>().AsSelf();
+            });
         }
 
         private void ConfigureQuestSystem(IContainerBuilder builder)
@@ -134,12 +157,13 @@ namespace Core.DI
         
         private void ConfigureInventory(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<InventoryView>();
+            builder.RegisterInstance(inventoryViewConfigSO);
             
             builder.UseEntryPoints(entryPoints =>
             {
-                entryPoints.Add<ItemInfoView>().AsSelf();
                 entryPoints.Add<ItemActionsCollector>();
+                entryPoints.Add<InventoryView>().AsSelf();
+                entryPoints.Add<ItemInfoView>().AsSelf();
             });
         }
 
@@ -155,11 +179,6 @@ namespace Core.DI
                 entryPoints.Add<JournalView>();
                 entryPoints.Add<QuestPageView>();
             });
-        }
-
-        private void ConfigureNPC(IContainerBuilder builder)
-        {
-            builder.Register<NPCsAnimators>(Lifetime.Singleton);
         }
 
         private void ConfigureCharacterStateMachine(IContainerBuilder builder)

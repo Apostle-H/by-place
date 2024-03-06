@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21189c656a594250a4e538a8daf7cc92, type: 3}
+  m_Name: NewDialogueViewConfigSO
+  m_EditorClassIdentifier: 
+  <ChoiceBtnVisualTree>k__BackingField: {fileID: 9197481963319205126, guid: a4119edcdbff07c4aa3ce9d0a693683e, type: 3}
