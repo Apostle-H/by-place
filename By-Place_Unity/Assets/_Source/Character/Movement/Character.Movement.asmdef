@@ -1,0 +1,8 @@
+﻿{
+  "name": "Character.Movement",
+  "references": [ 
+    "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+    "GUID:14ef01661e3bb8144b152058ce0da1a2",
+    "GUID:3967d4083e0901749902fbe40adff021" 
+  ]
+}

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Animate.Data;
+using Animate.Animatable;
 
-namespace Animate
+namespace Animate.Resolve
 {
     public class AnimationResolver
     {

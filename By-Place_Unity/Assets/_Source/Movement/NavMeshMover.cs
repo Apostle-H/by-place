@@ -1,19 +1,14 @@
 using System;
-using Movement.Data;
-using PointNClick.Cursor.Manager;
 using UnityEngine;
 using UnityEngine.AI;
 using Utils.Extensions;
-using VContainer;
 
 namespace Movement
 {
-    public class NavMeshMover : MonoBehaviour, IMover
+    public class NavMeshMover : AMover
     {
         [SerializeField] private NavMeshAgent navMeshAgent;
-
-        private MoverConfigSO _configSO;
-        private ICursorManager _cursorManager;
+        [SerializeField] private float angleToWait;
         
         private bool _hasTarget;
         private Vector3 _targetPos;
@@ -22,32 +17,26 @@ namespace Movement
         private Quaternion _toRotation;
         private float _rotationValue = 0f;
 
-        public float Speed => _configSO.Speed;
+        public override float Speed => navMeshAgent.speed;
 
-        public float CurrentSpeed { get; private set; }
+        public override float CurrentSpeed { get; protected set; }
 
-        public event Action OnArrived;
-        public event Action<float> OnSpeedUpdate;
+        public override event System.Action OnArrived;
+        public override event Action<float> OnSpeedUpdate;
         
-        [Inject]
-        private void Inject(MoverConfigSO configSO) => _configSO = configSO;
-
         public void Awake()
         {
-            navMeshAgent.speed = Speed;
-            navMeshAgent.angularSpeed = _configSO.AngularSpeed;
-
             navMeshAgent.updateUpAxis = false;
         }
 
-        public void Move(Vector3 target)
+        public override void Move(Vector3 target)
         {
             navMeshAgent.SetDestination(target);
             _hasTarget = true;
             _targetPos = target;
         }
 
-        public void Stop()
+        public override void Stop()
         {
             if (!_hasTarget)
                 return;
@@ -84,7 +73,7 @@ namespace Movement
         {
             var direction = navMeshAgent.steeringTarget - navMeshAgent.transform.position;
             _toRotation = Quaternion.LookRotation(direction);
-            if (Quaternion.Angle(navMeshAgent.transform.rotation, _toRotation) < _configSO.AngleToWait)
+            if (Quaternion.Angle(navMeshAgent.transform.rotation, _toRotation) < angleToWait)
                 return;
 
             navMeshAgent.isStopped = true;
@@ -105,15 +94,6 @@ namespace Movement
             _rotationValue = 0f;
             
             CurrentSpeed = Speed;
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(navMeshAgent.transform.position, navMeshAgent.transform.forward * 2);
-            
-            Gizmos.color = Color.black;
-            Gizmos.DrawSphere(navMeshAgent.steeringTarget, .2f);
         }
     }
 }

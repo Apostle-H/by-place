@@ -1,7 +1,7 @@
 ﻿using System;
 using Dialogue.Data.Save;
 using Dialogue.Resolve;
-using PointNClick.Interactions;
+using Interactions;
 using UnityEngine;
 using VContainer;
 

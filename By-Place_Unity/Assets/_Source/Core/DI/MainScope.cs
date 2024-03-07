@@ -1,15 +1,22 @@
 ﻿using ActionSystem;
 using Animate;
+using Animate.Resolve;
 using Character;
 using Character.Data;
 using Character.States;
 using Character.View;
 using Core.Loaders;
+using Cursor.Manager;
+using Cursor.Sensitive;
 using Dialogue.Data;
 using Dialogue.Resolve;
 using Dialogue.Resolve.Data;
 using Input;
 using InputSystem;
+using Interactions;
+using Inventory.Actions;
+using Inventory.View;
+using Inventory.View.Data;
 using Journal.Quest;
 using Journal.Quest.View;
 using Journal.Quest.View.Data;
@@ -17,13 +24,7 @@ using Journal.View;
 using Journal.View.Data;
 using Movement;
 using Movement.Data;
-using PointNClick.Cursor.Manager;
-using PointNClick.Cursor.Sensitive;
 using PointNClick.Data;
-using PointNClick.Interactions;
-using PointNClick.Inventory.Actions;
-using PointNClick.Inventory.View;
-using PointNClick.Inventory.View.Data;
 using QuestSystem;
 using QuestSystem.Actions;
 using QuestSystem.View;
@@ -102,11 +103,8 @@ namespace Core.DI
         private void ConfigurePointNClick(IContainerBuilder builder)
         {
             builder.RegisterInstance(pointNClickConfigSO);
-            builder.RegisterInstance(moverConfigSO);
 
             builder.RegisterComponentInHierarchy<UIElementsCursorManager>().As<ICursorManager>();
-
-            builder.RegisterComponentInHierarchy<NavMeshMover>().As<IMover>();
 
             builder.Register<UICursorSensitive.Factory>(Lifetime.Singleton);
             builder.Register<IInteracter, Interacter>(Lifetime.Singleton);
@@ -114,6 +112,10 @@ namespace Core.DI
 
         private void ConfigureCharacter(IContainerBuilder builder)
         {
+            builder.RegisterInstance(moverConfigSO);
+            
+            builder.RegisterComponentInHierarchy<CharacterNavMeshMover>().As<ICharacterMover>();
+            
             builder.RegisterComponentInHierarchy<CharacterAnimationParams>();
             builder.Register<CharacterComponents>(Lifetime.Singleton);
         }

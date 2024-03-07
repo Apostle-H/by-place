@@ -1,8 +1,9 @@
-﻿using VContainer;
-using Animate.Data;
+﻿using Animate.Data;
+using Animate.Resolve;
 using UnityEngine;
+using VContainer;
 
-namespace Animate
+namespace Animate.Animatable
 {
     public class MonoAnimatable : MonoBehaviour, IAnimatable
     {

@@ -1,7 +1,8 @@
 ﻿using System;
+using Character.Data;
+using Interactions;
 using Movement;
 using Navigation.Location;
-using PointNClick.Interactions;
 using UnityEngine;
 using VContainer;
 
@@ -15,10 +16,10 @@ namespace Navigation.TravelPoint
         [SerializeField] private Transform targetPos;
         [SerializeField] private bool isOpen;
 
-        private IMover _characterMover;
+        private ICharacterMover _characterMover;
 
         [Inject]
-        private void Inject(IMover characterMover) => _characterMover = characterMover;
+        private void Inject(ICharacterMover characterMover) => _characterMover = characterMover;
 
         public Vector3 Position => transform.position;
         

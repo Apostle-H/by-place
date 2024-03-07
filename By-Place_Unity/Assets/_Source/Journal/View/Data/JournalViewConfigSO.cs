@@ -1,4 +1,4 @@
-﻿using PointNClick.Cursor.Sensitive.Data;
+﻿using Cursor.Sensitive.Data;
 using UnityEngine;
 
 namespace Journal.View.Data

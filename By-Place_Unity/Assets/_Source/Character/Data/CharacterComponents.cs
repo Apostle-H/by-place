@@ -1,19 +1,19 @@
-﻿using Movement;
-using PointNClick.Interactions;
+﻿using Interactions;
+using Movement;
 using VContainer;
 
 namespace Character.Data
 {
     public class CharacterComponents
     {
-        public IMover Mover { get; private set; }
+        public ICharacterMover Mover { get; private set; }
         
         public IInteracter Interacter { get; private set; }
         
         public IInteractable TargetInteractable { get; set; }
 
         [Inject]
-        public CharacterComponents(IMover mover, IInteracter interacter)
+        public CharacterComponents(ICharacterMover mover, IInteracter interacter)
         {
             Mover = mover;
             Interacter = interacter;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using ActionSystem;
 using Animate;
+using Animate.Resolve;
 using Dialogue.Data;
 using Dialogue.Data.NodeParams;
 using Dialogue.Data.Save;

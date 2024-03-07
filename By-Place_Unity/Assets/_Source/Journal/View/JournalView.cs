@@ -1,6 +1,6 @@
 ﻿using System;
+using Cursor.Sensitive;
 using Journal.View.Data;
-using PointNClick.Cursor.Sensitive;
 using UnityEngine.UIElements;
 using VContainer.Unity;
 

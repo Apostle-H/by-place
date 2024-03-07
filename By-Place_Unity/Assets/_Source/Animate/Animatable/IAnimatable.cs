@@ -1,7 +1,6 @@
 ﻿using Identity.Data;
-using UnityEngine;
 
-namespace Animate.Data
+namespace Animate.Animatable
 {
     public interface IAnimatable : IIdentity
     {
