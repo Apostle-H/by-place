@@ -33,8 +33,10 @@ namespace Movement
         {
             navMeshAgent.SetDestination(target);
             _hasTarget = true;
-            _rotating = false;
             _targetPos = target;
+            
+            _rotating = false;
+            _rotationValue = 0f;
         }
 
         public override void Rotate(Quaternion rotation)
