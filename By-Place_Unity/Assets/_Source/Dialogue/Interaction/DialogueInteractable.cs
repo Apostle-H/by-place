@@ -15,6 +15,7 @@ namespace Dialogue.Interaction
         private DialogueController _dialogueController;
         
         public Vector3 Position => interactPoint.position;
+        public Quaternion Rotation => interactPoint.rotation;
         
         public event Action OnStarted;
         public event Action OnFinished;

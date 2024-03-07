@@ -11,6 +11,8 @@ namespace Movement
         public abstract event Action<float> OnSpeedUpdate;
 
         public abstract void Move(Vector3 target);
+        public abstract void Rotate(Quaternion rotation);
+
         public abstract void Stop();
     }
 }

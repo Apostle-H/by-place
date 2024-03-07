@@ -44,7 +44,6 @@ namespace Core.DI
     {
         [Header("PointNClick")]
         [SerializeField] private PointNClickConfigSO pointNClickConfigSO;
-        [SerializeField] private MoverConfigSO moverConfigSO;
         
         [Header("DialogueSystem")]
         [SerializeField] private DialogueViewConfigSO dialogueViewConfigSO;
@@ -112,8 +111,6 @@ namespace Core.DI
 
         private void ConfigureCharacter(IContainerBuilder builder)
         {
-            builder.RegisterInstance(moverConfigSO);
-            
             builder.RegisterComponentInHierarchy<CharacterNavMeshMover>().As<ICharacterMover>();
             
             builder.RegisterComponentInHierarchy<CharacterAnimationParams>();

@@ -39,7 +39,8 @@ namespace Movement.Action
         private void Finished()
         {
             movePath.mover.OnArrived -= Finished;
-
+            movePath.mover.Rotate(movePath.target.rotation);
+            
             OnFinished?.Invoke(this);
         }
     }

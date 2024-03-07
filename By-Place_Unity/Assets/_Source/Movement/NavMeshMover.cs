@@ -12,7 +12,7 @@ namespace Movement
         
         private bool _hasTarget;
         private Vector3 _targetPos;
-        
+
         private bool _rotating;
         private Quaternion _toRotation;
         private float _rotationValue = 0f;
@@ -33,7 +33,14 @@ namespace Movement
         {
             navMeshAgent.SetDestination(target);
             _hasTarget = true;
+            _rotating = false;
             _targetPos = target;
+        }
+
+        public override void Rotate(Quaternion rotation)
+        {
+            _rotating = true;
+            _toRotation = rotation;
         }
 
         public override void Stop()
@@ -48,21 +55,21 @@ namespace Movement
         private void FixedUpdate()
         {
             CurrentSpeed = navMeshAgent.velocity.magnitude;
+            OnSpeedUpdate?.Invoke(CurrentSpeed / Speed);
 
-            if (_hasTarget)
-            {
-                if (!_rotating)
-                    CheckAngle();
-                else
-                    Rotate();
-            }
+            if (_rotating)
+                Rotate();
             
+            if (!_hasTarget)
+                return;
+            
+            if (!_rotating)
+                CheckAngle();
             
             if (navMeshAgent.isOnOffMeshLink)
                 navMeshAgent.CompleteOffMeshLink();
             
-            OnSpeedUpdate?.Invoke(CurrentSpeed);
-            if (!_hasTarget || (transform.position.ReplaceY(_targetPos) - _targetPos).magnitude > .05f)
+            if ((transform.position.ReplaceY(_targetPos) - _targetPos).magnitude > .01f)
                 return;
             
             _hasTarget = false;
@@ -72,13 +79,12 @@ namespace Movement
         private void CheckAngle()
         {
             var direction = navMeshAgent.steeringTarget - navMeshAgent.transform.position;
-            _toRotation = Quaternion.LookRotation(direction);
-            if (Quaternion.Angle(navMeshAgent.transform.rotation, _toRotation) < angleToWait)
+            var toRotation = Quaternion.LookRotation(direction);
+            if (Quaternion.Angle(navMeshAgent.transform.rotation, toRotation) < angleToWait)
                 return;
 
             navMeshAgent.isStopped = true;
-            CurrentSpeed = Speed / 2;
-            _rotating = true;
+            Rotate(toRotation);
         }
 
         private void Rotate()
@@ -92,8 +98,6 @@ namespace Movement
 
             _rotating = false;
             _rotationValue = 0f;
-            
-            CurrentSpeed = Speed;
         }
     }
 }

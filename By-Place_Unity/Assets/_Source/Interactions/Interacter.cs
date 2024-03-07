@@ -37,6 +37,7 @@ namespace Interactions
         private void StartInteraction()
         {
             _mover.OnArrived -= StartInteraction;
+            _mover.Rotate(_targetInteractable.Rotation);
             _targetInteractable.Interact();
             _onTheWay = false;
         }

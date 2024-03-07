@@ -18,13 +18,14 @@ namespace Navigation.TravelPoint
 
         private ICharacterMover _characterMover;
 
-        [Inject]
-        private void Inject(ICharacterMover characterMover) => _characterMover = characterMover;
-
         public Vector3 Position => transform.position;
+        public Quaternion Rotation => transform.rotation;
         
         public event Action OnStarted;
         public event Action OnFinished;
+        
+        [Inject]
+        private void Inject(ICharacterMover characterMover) => _characterMover = characterMover;
         
         public void Lock() => isOpen = false;
 
