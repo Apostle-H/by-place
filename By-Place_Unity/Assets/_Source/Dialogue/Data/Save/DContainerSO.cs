@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
 using Dialogue.Data.Save.Nodes;
-using UnityEditor.Callbacks;
 using UnityEngine;
 using Utils.Services;
 #if UNITY_EDITOR
+using UnityEditor.Callbacks;
 #endif
 
 namespace Dialogue.Data.Save
 {
-    public partial class DContainerSO : ScriptableObject
+    public class DContainerSO : ScriptableObject
     {
         [field: SerializeField] public string FileName { get; set; }
         [field: SerializeField] public List<DGroupSO> Groups { get; private set; } = new();

@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Registration;
 
 namespace ActionSystem
 {
-    public class ActionResolver
+    public class ActionResolver : IRegistrator<IAction>
     {
         private Dictionary<int, IAction> _actions = new();
 
         public event Action OnFinished;
 
-        public void AddAction(IAction action)
+        public void Register(IAction action)
         {
             if (_actions.ContainsKey(action.Id))
                 return;
@@ -17,18 +18,18 @@ namespace ActionSystem
             _actions.Add(action.Id, action);
         }
 
-        public void RemoveAction(IAction action) => _actions.Remove(action.Id);
+        public void Unregister(IAction action) => _actions.Remove(action.Id);
 
         public void Resolve(int id)
         {
-            if (!_actions.ContainsKey(id) || !_actions[id].Resolve)
+            if (!_actions.ContainsKey(id) || !_actions[id].Resolvable)
             {
                 OnFinished?.Invoke();
                 return;
             }
 
             _actions[id].OnFinished += Finished;
-            _actions[id].Perform();
+            _actions[id].Resolve();
         }
 
         private void Finished(IAction action)

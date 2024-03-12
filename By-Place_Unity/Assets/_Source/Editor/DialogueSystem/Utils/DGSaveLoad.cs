@@ -160,7 +160,7 @@ namespace DialogueSystem.Utils
             else if (node is DActionNode actionNode)
             {
                 var actionNodeSO = AssetsService.CreateSubAsset<DActionSO>(parent, actionNode.Guid.ToString());
-                actionNodeSO.ActionSO = actionNode.ActionSO;
+                actionNodeSO.ActionSO = actionNode.Value;
                 
                 nodeSO = actionNodeSO;
             }
@@ -171,6 +171,13 @@ namespace DialogueSystem.Utils
                 animationNodeSO.Animation = animationNode.Animation;
 
                 nodeSO = animationNodeSO;
+            }
+            else if (node is DSoundNode soundNode)
+            {
+                var soundNodeSO = AssetsService.CreateSubAsset<DSoundSO>(parent, soundNode.Guid.ToString());
+                soundNodeSO.Value = soundNode.Value;
+
+                nodeSO = soundNodeSO;
             }
             else if (node is DSetVariableNode setVariableNode)
             {
@@ -237,7 +244,6 @@ namespace DialogueSystem.Utils
             switch (nodeSO)
             {
                 case DDialogueSO dialogueNodeSO:
-                {
                     var dialogueNode = new DDialogueNode(nodeSO.Position, nodeSO.Guid)
                     {
                         SpeakerSO = dialogueNodeSO.SpeakerSO,
@@ -248,19 +254,15 @@ namespace DialogueSystem.Utils
 
                     node = dialogueNode;
                     break;
-                }
                 case DActionSO actionNodeSO:
-                {
                     var actionNode = new DActionNode(nodeSO.Position, nodeSO.Guid)
                     {
-                        ActionSO = actionNodeSO.ActionSO
+                        Value = actionNodeSO.ActionSO
                     };
 
                     node = actionNode;
                     break;
-                }
                 case DAnimationSO animationNodeSO:
-                {
                     var animationNode = new DAnimationNode(nodeSO.Position, nodeSO.Guid)
                     {
                         AnimatableLink = animationNodeSO.AnimatableLink,
@@ -269,9 +271,15 @@ namespace DialogueSystem.Utils
 
                     node = animationNode;
                     break;
-                }
+                case DSoundSO soundNodeSO:
+                    var soundNode = new DSoundNode(nodeSO.Position, nodeSO.Guid)
+                    {
+                        Value = soundNodeSO.Value
+                    };
+
+                    node = soundNode;
+                    break;
                 case DSetVariableSO setVariableNodeSO:
-                {
                     var setVariableNode = new DSetVariableNode(nodeSO.Position, nodeSO.Guid)
                     {
                         VariableSO = setVariableNodeSO.VariableSO,
@@ -280,9 +288,7 @@ namespace DialogueSystem.Utils
 
                     node = setVariableNode;
                     break;
-                }
                 case DBranchSO branchNodeSO:
-                {
                     var branchNode = new DBranchNode(nodeSO.Position, nodeSO.Guid)
                     {
                         VariableSO = branchNodeSO.VariableSO
@@ -290,7 +296,6 @@ namespace DialogueSystem.Utils
 
                     node = branchNode;
                     break;
-                }
                 default:
                     throw new ArgumentException($"Unexpected node type in the save");
             }

@@ -14,22 +14,22 @@ namespace ActionSystem.BasicActions
         private ActionResolver _actionResolver;
 
         public int Id => actionSO.Id;
-        public bool Resolve { get; private set; } = true;
+        public bool Resolvable { get; private set; } = true;
         
         public event Action<IAction> OnFinished;
 
         [Inject]
         private void Inject(ActionResolver actionResolver) => _actionResolver = actionResolver;
 
-        public void Start() => _actionResolver.AddAction(this);
+        public void Start() => _actionResolver.Register(this);
 
-        public void OnDestroy() => _actionResolver.RemoveAction(this);
+        public void OnDestroy() => _actionResolver.Unregister(this);
 
-        public void Perform()
+        public void Resolve()
         {
             foreach (var target in targets)
                 target.SetActive(offOn);
-            Resolve = false;
+            Resolvable = false;
             
             OnFinished?.Invoke(this);
         }

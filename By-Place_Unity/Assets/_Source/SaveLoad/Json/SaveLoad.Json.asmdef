@@ -1,0 +1,16 @@
+{
+    "name": "SaveLoad.Json",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3aa2c95ae5924590b93e1068eed6e4c1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

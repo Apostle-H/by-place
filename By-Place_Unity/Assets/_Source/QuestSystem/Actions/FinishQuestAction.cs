@@ -12,7 +12,7 @@ namespace QuestSystem.Actions
         private QuestManager _questManager;
 
         public int Id { get; private set; }
-        public bool Resolve { get; private set; } = true;
+        public bool Resolvable { get; private set; } = true;
         
         public event Action<IAction> OnFinished;
 
@@ -26,10 +26,10 @@ namespace QuestSystem.Actions
         [Inject]
         private void Inject(QuestManager questManager) => _questManager = questManager;
         
-        public void Perform()
+        public void Resolve()
         {
             _questManager.Close(_questId, _result);
-            Resolve = false;
+            Resolvable = false;
             
             OnFinished?.Invoke(this);
         }

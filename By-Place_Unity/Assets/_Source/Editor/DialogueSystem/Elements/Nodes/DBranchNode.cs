@@ -1,5 +1,6 @@
 ﻿using Dialogue.Data;
 using Dialogue.Data.NodeParams;
+using DialogueSystem.Windows;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -19,6 +20,8 @@ namespace DialogueSystem.Elements.Nodes
             NextGuids.Add(new DOutputData());
             NextGuids.Add(new DOutputData());
         }
+        
+        public override DNode NewAt(Vector2 position) => new DBranchNode(position);
 
         public override void Draw()
         {

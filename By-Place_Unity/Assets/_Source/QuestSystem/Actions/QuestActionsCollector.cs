@@ -40,13 +40,13 @@ namespace QuestSystem.Actions
         public void Start()
         {
             foreach (var questActionSO in _questActions)
-                _actionResolver.AddAction(questActionSO);
+                _actionResolver.Register(questActionSO);
         }
 
         public void Dispose()
         {
             foreach (var questActionSO in _questActions)
-                _actionResolver.RemoveAction(questActionSO);
+                _actionResolver.Unregister(questActionSO);
         }
     }
 }

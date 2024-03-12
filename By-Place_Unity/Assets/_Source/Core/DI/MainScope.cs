@@ -113,7 +113,7 @@ namespace Core.DI
         {
             builder.RegisterComponentInHierarchy<CharacterNavMeshMover>().As<ICharacterMover>();
             
-            builder.RegisterComponentInHierarchy<CharacterAnimationParams>();
+            builder.RegisterComponentInHierarchy<AnimatorParamsController>();
             builder.Register<CharacterComponents>(Lifetime.Singleton);
         }
 

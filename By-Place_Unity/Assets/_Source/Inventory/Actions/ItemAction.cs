@@ -13,7 +13,7 @@ namespace Inventory.Actions
         private bool _removeAdd;
 
         public int Id { get; private set; }
-        public bool Resolve { get; private set; } = true;
+        public bool Resolvable { get; private set; } = true;
         
         public event Action<IAction> OnFinished;
 
@@ -26,13 +26,13 @@ namespace Inventory.Actions
             _inventoryView = inventoryView;
         }
 
-        public void Perform()
+        public void Resolve()
         {
             if (_removeAdd)
                 _inventoryView.AddItem(_itemSO);
             else
                 _inventoryView.RemoveItem(_itemSO);
-            Resolve = false;
+            Resolvable = false;
             
             OnFinished?.Invoke(this);
         }

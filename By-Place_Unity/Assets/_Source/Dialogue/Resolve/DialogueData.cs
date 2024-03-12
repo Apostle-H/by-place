@@ -22,8 +22,8 @@ namespace Dialogue.Resolve
 
         public void Load(DContainerSO container) => _container = container;
 
-        public DNodeType Choose(int guid, ref DDialogue dialogue, ref DAnimation animation, ref int actionId,
-            ref int variableId, ref bool variableSet, ref List<int> nextGuids)
+        public DNodeType Choose(int guid, ref DDialogue dialogue, ref DAnimation animation, ref AudioClip audioClip,
+            ref int actionId, ref int variableId, ref bool variableSet, ref List<int> nextGuids)
         {
             var targetNodeSO = _container.Nodes.First(node => node.Guid == guid);
             nextGuids.Clear();
@@ -39,12 +39,15 @@ namespace Dialogue.Resolve
                 case DAnimationSO animationSO:
                     ConvertAnimation(animationSO, ref animation, ref nextGuids);
                     return DNodeType.ANIMATION;
+                case DSoundSO soundSO:
+                    ConvertSound(soundSO, ref audioClip, ref nextGuids);
+                    return DNodeType.SOUND;
                 case DSetVariableSO setVariableSO:
                     ConvertSetVariable(setVariableSO, ref variableId, ref variableSet, ref nextGuids);
                     return DNodeType.SET_VARIABLE;
                 case DBranchSO branchSO:
                     ConvertBranch(branchSO, ref variableId, ref nextGuids);
-                    return DNodeType.BRANCH; ;
+                    return DNodeType.BRANCH;
                 default:
                     throw new NotImplementedException("Unexpected Node Type");
             }
@@ -89,6 +92,19 @@ namespace Dialogue.Resolve
             nextGuids.Add(nodeSO.OutputData[0].NextGuid);
         }
 
+        private void ConvertAnimation(DAnimationSO nodeSO, ref DAnimation animation, ref List<int> nextGuids)
+        {
+            animation.AnimatableId = nodeSO.AnimatableLink?.Id ?? int.MaxValue;
+            animation.AnimationStateHash = Animator.StringToHash(nodeSO.Animation?.name ?? "-");
+            nextGuids.Add(nodeSO.OutputData[0].NextGuid);
+        }
+        
+        private void ConvertSound(DSoundSO nodeSO, ref AudioClip audioClip, ref List<int> nextGuids)
+        {
+            audioClip = nodeSO.Value;
+            nextGuids.Add(nodeSO.OutputData[0].NextGuid);
+        }
+        
         private void ConvertSetVariable(DSetVariableSO nodeSO, ref int variableId, ref bool variableSet, 
             ref List<int> nextGuids)
         {
@@ -101,13 +117,6 @@ namespace Dialogue.Resolve
         {
             variableId = nodeSO.VariableSO.Id;
             nextGuids.AddRange(nodeSO.OutputData.Select(nextGuid => nextGuid.NextGuid));
-        }
-
-        private void ConvertAnimation(DAnimationSO nodeSO, ref DAnimation animation, ref List<int> nextGuids)
-        {
-            animation.AnimatableId = nodeSO.AnimatableLink?.Id ?? int.MaxValue;
-            animation.AnimationStateHash = Animator.StringToHash(nodeSO.Animation?.name ?? "-");
-            nextGuids.Add(nodeSO.OutputData[0].NextGuid);
         }
     }
 }

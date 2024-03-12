@@ -20,6 +20,8 @@ namespace DialogueSystem.Elements.Nodes
             title = "Set Variable";
             NextGuids.Add(new DOutputData());
         }
+        
+        public override DNode NewAt(Vector2 position) => new DSetVariableNode(position);
 
         public override void Draw()
         {

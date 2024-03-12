@@ -31,6 +31,8 @@ namespace DialogueSystem.Elements.Nodes
             Choices.Add(new DChoice() { Text = NEW_CHOICE_TEXT });
         }
 
+        public override DNode NewAt(Vector2 position) => new DDialogueNode(position);
+        
         public override void Draw()
         {
             base.Draw();

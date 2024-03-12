@@ -37,13 +37,13 @@ namespace Inventory.Actions
         public void Start()
         {
             foreach (var itemAction in _itemActions)
-                _actionResolver.AddAction(itemAction);
+                _actionResolver.Register(itemAction);
         }
 
         public void Dispose()
         {
             foreach (var itemAction in _itemActions)
-                _actionResolver.RemoveAction(itemAction);
+                _actionResolver.Unregister(itemAction);
         }
     }
 }

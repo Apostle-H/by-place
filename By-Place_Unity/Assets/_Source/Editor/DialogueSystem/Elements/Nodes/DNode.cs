@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dialogue.Data.NodeParams;
+using Dialogue.Data.Save.Nodes;
 using DialogueSystem.Utils;
 using DialogueSystem.Windows;
 using UnityEditor.Experimental.GraphView;
@@ -29,6 +30,8 @@ namespace DialogueSystem.Elements.Nodes
             mainContainer.AddToClassList("ds-node__main-container");
             extensionContainer.AddToClassList("ds-node__extension-container");
         }
+
+        public abstract DNode NewAt(Vector2 position);
 
         public virtual void Draw()
         {

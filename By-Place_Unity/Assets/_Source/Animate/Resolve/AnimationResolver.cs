@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Animate.Animatable;
+using Registration;
 
 namespace Animate.Resolve
 {
-    public class AnimationResolver
+    public class AnimationResolver : IRegistrator<IAnimatable, int>
     {
         private Dictionary<int, IAnimatable> _animatables = new();
 
@@ -11,7 +12,7 @@ namespace Animate.Resolve
         {
             if (_animatables.ContainsKey(animatable.Id))
                 return;
-            
+
             _animatables.Add(animatable.Id, animatable);
         }
 
@@ -22,7 +23,7 @@ namespace Animate.Resolve
             if (!_animatables.ContainsKey(id))
                 return;
 
-            _animatables[id].PlayClip(stateHash);
+            _animatables[id].Resolve(stateHash);
         }
     }
 }

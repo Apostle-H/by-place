@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.github-glitchenzo.nugetforunity": {
+      "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "25dcde8a309d6f273c82699af7967ef46048e5a1"
+    },
     "com.unity.ai.navigation": {
       "version": "1.1.5",
       "depth": 0,
@@ -85,9 +92,20 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+    "com.unity.probuilder": {
+      "version": "5.2.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.settings-manager": "1.0.3",
+        "com.unity.modules.physics": "1.0.0",
+        "com.unity.modules.imgui": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.settings-manager": {
       "version": "2.0.1",
-      "depth": 2,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

@@ -1,9 +1,9 @@
 ﻿using Identity.Data;
+using Registration;
 
 namespace Animate.Animatable
 {
-    public interface IAnimatable : IIdentity
+    public interface IAnimatable : IRegistratable<int>
     {
-        void PlayClip(int stateHash);
     }
 }

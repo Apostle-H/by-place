@@ -7,6 +7,8 @@ using Dialogue.Data;
 using Dialogue.Data.NodeParams;
 using Dialogue.Data.Save;
 using Dialogue.Resolve.Data;
+using Sound;
+using UnityEngine;
 using VContainer;
 
 namespace Dialogue.Resolve
@@ -19,18 +21,20 @@ namespace Dialogue.Resolve
         private ActionResolver _actionResolver;
         private DVariablesContainer _variablesContainer;
         private AnimationResolver _animationResolver;
+        private AudioPlayer _audioPlayer;
         
         private int _afterActionGuid;
         
         private DDialogue _dialogue = new();
         private DAnimation _animation = new();
+        private AudioClip _audioClip = default;
         private List<int> _nextGuids = new();
         
         public event Action OnQuit;
 
         [Inject]
-        private void Inject(DialogueData dialogueData, DialogueView dialogueView, 
-            ActionResolver actionResolver, DVariablesContainer variablesContainer, AnimationResolver animationResolver)
+        public DialogueController(DialogueData dialogueData, DialogueView dialogueView, ActionResolver actionResolver, 
+            DVariablesContainer variablesContainer, AnimationResolver animationResolver, AudioPlayer audioPlayer)
         {
             _dialogueData = dialogueData;
             _dialogueView = dialogueView;
@@ -38,6 +42,7 @@ namespace Dialogue.Resolve
             _actionResolver = actionResolver;
             _variablesContainer = variablesContainer;
             _animationResolver = animationResolver;
+            _audioPlayer = audioPlayer;
         }
 
         public void Load(DGroupSO dsGroup)
@@ -70,7 +75,7 @@ namespace Dialogue.Resolve
             
             while (guid != -1)
             {
-                switch (_dialogueData.Choose(guid, ref _dialogue, ref _animation, ref actionId, 
+                switch (_dialogueData.Choose(guid, ref _dialogue, ref _animation, ref _audioClip, ref actionId, 
                             ref variableId, ref variableSet, ref _nextGuids))
                 {
                     case DNodeType.DIALOGUE:
@@ -84,6 +89,10 @@ namespace Dialogue.Resolve
                     case DNodeType.ANIMATION:
                         guid = _nextGuids[0];
                         _animationResolver.Resolve(_animation.AnimatableId, _animation.AnimationStateHash);
+                        break;
+                    case DNodeType.SOUND:
+                        guid = _nextGuids[0];
+                        _audioPlayer.PlayEffect(_audioClip);
                         break;
                     case DNodeType.SET_VARIABLE:
                         guid = _nextGuids[0];

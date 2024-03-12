@@ -40,6 +40,11 @@ namespace DialogueSystem.Windows
                     userData = new DAnimationNode(default, default),
                     level = 1
                 },
+                new SearchTreeEntry(new GUIContent("Sound", _indentationIcon))
+                {
+                    userData = new DSoundNode(default, default),
+                    level = 1
+                },
                 new SearchTreeEntry(new GUIContent("Set Variable", _indentationIcon))
                 {
                     userData = new DSetVariableNode(default, default),
@@ -66,29 +71,11 @@ namespace DialogueSystem.Windows
 
             switch (searchTreeEntry.userData)
             {
-                case DDialogueNode _:
-                    var dialogueNode = new DDialogueNode(localMousePosition) { GraphView = _graphView };
-                    _graphView.AddNode(dialogueNode);
+                case DNode node:
+                    _graphView.AddNode(node.NewAt(localMousePosition));
                     return true;
-                case DActionNode _:
-                    var actionNode = new DActionNode(localMousePosition);
-                    _graphView.AddNode(actionNode);
-                    return true;
-                case DAnimationNode _:
-                    var animationNode = new DAnimationNode(localMousePosition);
-                    _graphView.AddNode(animationNode);
-                    return true;
-                case DSetVariableNode _:
-                    var setVariableNode = new DSetVariableNode(localMousePosition);
-                    _graphView.AddNode(setVariableNode);
-                    return true;
-                case DBranchNode _:
-                    var branchNode = new DBranchNode(localMousePosition);
-                    _graphView.AddNode(branchNode);
-                    return true;
-                case DGroup _:
-                    var group = new DGroup("Dialogue Group", localMousePosition);
-                    _graphView.AddGroup(group);
+                case DGroup:
+                    _graphView.AddGroup(new DGroup("Dialogue Group", localMousePosition));
                     return true;
                 default:
                     return false;

@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 7856078231087223292}
+  mover: {fileID: 8575512441054057529}
 --- !u!114 &7534377400243045171
 MonoBehaviour:
   m_ObjectHideFlags: 0

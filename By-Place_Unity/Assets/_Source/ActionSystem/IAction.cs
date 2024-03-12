@@ -1,14 +1,12 @@
 ﻿using System;
+using Registration;
 
 namespace ActionSystem
 {
-    public interface IAction
+    public interface IAction : IRegistratable
     {
-        public int Id { get; }
-        public bool Resolve { get; }
+        bool Resolvable { get; }
 
-        public event Action<IAction> OnFinished;
-        
-        public void Perform();
+        event Action<IAction> OnFinished;
     }
 }

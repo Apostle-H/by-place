@@ -1,5 +1,7 @@
 ﻿using Animate.Data;
 using Dialogue.Data.NodeParams;
+using Dialogue.Data.Save.Nodes;
+using DialogueSystem.Windows;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
@@ -21,6 +23,8 @@ namespace DialogueSystem.Elements.Nodes
             title = "Animation";
             NextGuids.Add(new DOutputData());
         }
+        
+        public override DNode NewAt(Vector2 position) => new DAnimationNode(position);
 
         public override void Draw()
         {

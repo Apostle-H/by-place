@@ -21,6 +21,6 @@ namespace Animate.Animatable
 
         private void OnDestroy() => _animationResolver.Unregister(this);
 
-        public void PlayClip(int stateHash) => animator.Play(stateHash);
+        public void Resolve(int stateHash) => animator.Play(stateHash);
     }
 }

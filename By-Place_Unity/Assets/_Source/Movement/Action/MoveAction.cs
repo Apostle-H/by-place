@@ -17,23 +17,23 @@ namespace Movement.Action
         private int _arrivedCount;
         
         public int Id => actionSO.Id;
-        public bool Resolve { get; private set; } = true;
+        public bool Resolvable { get; private set; } = true;
         
         public event Action<IAction> OnFinished;
         
         [Inject]
         private void Inject(ActionResolver actionResolver) => _actionResolver = actionResolver;
 
-        public void Start() => _actionResolver.AddAction(this);
+        public void Start() => _actionResolver.Register(this);
 
-        public void OnDestroy() => _actionResolver.RemoveAction(this);
+        public void OnDestroy() => _actionResolver.Unregister(this);
         
-        public void Perform()
+        public void Resolve()
         {
             movePath.mover.OnArrived += Finished;
             movePath.mover.Move(movePath.target.position);
             
-            Resolve = false;
+            Resolvable = false;
         }
 
         private void Finished()
