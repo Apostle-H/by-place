@@ -1394,6 +1394,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1114370294}
   - component: {fileID: 1114370295}
+  - component: {fileID: 1114370296}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -1437,6 +1438,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 1602920696}
   cameraPosition: {fileID: 587930363}
+--- !u!114 &1114370296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1114370293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3315e92bad346a98be6d4728a0941df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  location: {fileID: 1114370295}
+  music: {fileID: 8300000, guid: a3d7a5dd26e1ce947b477a3b092f8e2e, type: 3}
 --- !u!1 &1125187971
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,6 +1782,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1352028276}
   - component: {fileID: 1352028277}
+  - component: {fileID: 1352028278}
   m_Layer: 0
   m_Name: Street
   m_TagString: Untagged
@@ -1806,6 +1822,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCamera: {fileID: 1602920696}
   cameraPosition: {fileID: 1516648722}
+--- !u!114 &1352028278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352028275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3315e92bad346a98be6d4728a0941df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  location: {fileID: 1352028277}
+  music: {fileID: 8300000, guid: d7a52821ca471a545932e48f4fa001b9, type: 3}
 --- !u!1 &1384547587
 GameObject:
   m_ObjectHideFlags: 0
@@ -1970,6 +2000,8 @@ MonoBehaviour:
   - {fileID: 115826847}
   - {fileID: 1686012669}
   - {fileID: 131307364}
+  visualElementsAudioConfigSO: {fileID: 11400000, guid: a047c85c1c1b320478a8d510b393cb1a, type: 2}
+  defaultStartLocation: {fileID: 1114370295}
   pointNClickConfigSO: {fileID: 11400000, guid: e5daeb0f155c9aa4d84b6a0ac9aaf558, type: 2}
   dialogueViewConfigSO: {fileID: 11400000, guid: 943929839457be04595dff6750647dbe, type: 2}
   inventoryViewConfigSO: {fileID: 11400000, guid: 27e6861e9711d5545b4040f625559b4a, type: 2}
@@ -2181,7 +2213,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

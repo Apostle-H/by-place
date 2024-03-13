@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6051600882135041270}
   - component: {fileID: 8575512441054057529}
+  - component: {fileID: 1496452358812637389}
   - component: {fileID: 6051600882135041258}
   - component: {fileID: 7534377400243045171}
   - component: {fileID: 6051600882135041269}
@@ -52,6 +53,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 6051600882135041269}
   angleToWait: 10
+--- !u!114 &1496452358812637389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6051600882135041266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fd41e6266364b9e9b1c11e7c8dceba7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mover: {fileID: 8575512441054057529}
+  stepVFX: {fileID: 8300000, guid: a1acf3339dceca44192d5f3b9aa0e202, type: 3}
+  stepsFrequency: 0.55
 --- !u!114 &6051600882135041258
 MonoBehaviour:
   m_ObjectHideFlags: 0

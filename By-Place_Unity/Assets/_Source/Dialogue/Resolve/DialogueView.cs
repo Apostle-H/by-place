@@ -21,7 +21,6 @@ namespace Dialogue.Resolve
 
         public VisualElement Root { get; private set; }
         
-
         public event Action<int> OnChoose;
 
         public DialogueView(DialogueViewConfigSO configSO, UIDocument canvas)

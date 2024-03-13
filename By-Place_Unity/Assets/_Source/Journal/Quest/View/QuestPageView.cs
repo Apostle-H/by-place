@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Journal.Quest.View.Data;
+using Sound;
+using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
 using VContainer.Unity;
@@ -13,6 +15,7 @@ namespace Journal.Quest.View
         private UIDocument _canvas;
 
         private JournalQuests _quests;
+        private readonly VisualElementsAudio _visualElementsAudio;
 
         private VisualElement _root;
         private ScrollView _questsContainer;
@@ -20,11 +23,13 @@ namespace Journal.Quest.View
         private Dictionary<int, QuestFoldoutView> _questFoldouts = new();
 
         [Inject]
-        public QuestPageView(QuestPageViewConfigSO configSO, UIDocument canvas, JournalQuests quests)
+        public QuestPageView(QuestPageViewConfigSO configSO, UIDocument canvas, JournalQuests quests, 
+            VisualElementsAudio visualElementsAudio)
         {
             _configSO = configSO;
             _canvas = canvas;
             _quests = quests;
+            _visualElementsAudio = visualElementsAudio;
         }
 
         public void Start()
@@ -35,7 +40,13 @@ namespace Journal.Quest.View
             Bind();
         }
 
-        public void Dispose() => Expose();
+        public void Dispose()
+        {
+            Expose();
+
+            foreach (var kvp in _questFoldouts)
+                _visualElementsAudio.Unregister(kvp.Value.Foldout.Q<Toggle>());
+        }
 
         private void Bind()
         {

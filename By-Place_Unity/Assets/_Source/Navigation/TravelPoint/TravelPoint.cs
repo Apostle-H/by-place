@@ -22,7 +22,7 @@ namespace Navigation.TravelPoint
         public Quaternion Rotation => transform.rotation;
         
         public event Action OnStarted;
-        public event Action OnFinished;
+        public event Action<bool> OnFinished;
         
         [Inject]
         private void Inject(ICharacterMover characterMover) => _characterMover = characterMover;
@@ -35,7 +35,7 @@ namespace Navigation.TravelPoint
         {
             if (!isOpen)
             {
-                OnFinished?.Invoke();
+                OnFinished?.Invoke(false);
                 return;
             }
 
@@ -43,15 +43,15 @@ namespace Navigation.TravelPoint
             toLocation.Enter();
             
             _characterMover.Move(targetPos.position);
-            _characterMover.OnArrived += Finished;
+            _characterMover.OnStopped += Finished;
 
             OnStarted?.Invoke();
         }
 
-        private void Finished()
+        private void Finished(bool result)
         {
-            _characterMover.OnArrived -= Finished;
-            OnFinished?.Invoke();
+            _characterMover.OnStopped -= Finished;
+            OnFinished?.Invoke(result);
         }
     }
 }

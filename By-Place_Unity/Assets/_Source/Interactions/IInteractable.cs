@@ -9,7 +9,7 @@ namespace Interactions
         public Quaternion Rotation { get; }
 
         public event Action OnStarted;
-        public event Action OnFinished;
+        public event Action<bool> OnFinished;
 
         public void Interact();
     }

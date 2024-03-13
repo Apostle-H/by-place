@@ -28,9 +28,10 @@ namespace Character
             var stateType = typeof(T);
             if (!_states.ContainsKey(stateType))
                 return;
-            
+
             _currentState.Exit();
-            _states[stateType].Enter();
+            _currentState = _states[stateType];
+            _currentState.Enter();
         }
 
         public void Tick() => _currentState?.Update();

@@ -30,15 +30,18 @@ namespace Movement.Action
         
         public void Resolve()
         {
-            movePath.mover.OnArrived += Finished;
+            movePath.mover.OnStopped += Finished;
             movePath.mover.Move(movePath.target.position);
             
             Resolvable = false;
         }
 
-        private void Finished()
+        private void Finished(bool result)
         {
-            movePath.mover.OnArrived -= Finished;
+            movePath.mover.OnStopped -= Finished;
+            if (!result)
+                return;
+            
             movePath.mover.Rotate(movePath.target.rotation);
             
             OnFinished?.Invoke(this);

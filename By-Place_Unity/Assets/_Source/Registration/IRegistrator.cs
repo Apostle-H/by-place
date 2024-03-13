@@ -1,16 +1,8 @@
 ﻿namespace Registration
 {
-    public interface IRegistrator<T> where T : IRegistratable
+    public interface IRegistrator<T>
     {
         void Register(T registratable);
         void Unregister(T registratable);
-        void Resolve(int id);
-    }
-    
-    public interface IRegistrator<TRegistratable, TParam> where TRegistratable : IRegistratable<TParam>
-    {
-        void Register(TRegistratable registratable);
-        void Unregister(TRegistratable registratable);
-        void Resolve(int id, TParam value);
     }
 }
