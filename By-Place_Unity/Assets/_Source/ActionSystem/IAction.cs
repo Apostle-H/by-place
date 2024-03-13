@@ -1,6 +1,5 @@
 ﻿using System;
 using Identity.Data;
-using Registration;
 
 namespace ActionSystem
 {
@@ -11,5 +10,6 @@ namespace ActionSystem
         event Action<IAction> OnFinished;
 
         void Resolve();
+        void Skip();
     }
 }

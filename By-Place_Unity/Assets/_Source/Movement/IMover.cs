@@ -15,5 +15,6 @@ namespace Movement
         public void Move(Vector3 target);
         public void Rotate(Quaternion rotation);
         public void Stop();
+        public void Arrive();
     }
 }

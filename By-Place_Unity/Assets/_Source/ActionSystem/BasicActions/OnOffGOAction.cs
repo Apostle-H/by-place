@@ -33,5 +33,7 @@ namespace ActionSystem.BasicActions
             
             OnFinished?.Invoke(this);
         }
+
+        public void Skip() { }
     }
 }

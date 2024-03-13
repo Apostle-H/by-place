@@ -37,5 +37,7 @@ namespace QuestSystem.Actions
             
             OnFinished?.Invoke(this);
         }
+
+        public void Skip() { }
     }
 }

@@ -36,5 +36,7 @@ namespace Inventory.Actions
             
             OnFinished?.Invoke(this);
         }
+
+        public void Skip() { }
     }
 }

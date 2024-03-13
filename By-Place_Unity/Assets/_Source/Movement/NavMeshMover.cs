@@ -55,10 +55,23 @@ namespace Movement
             
             navMeshAgent.ResetPath();
             _hasTarget = false;
+            _rotating = false;
+            _rotationValue = 0f;
 
             OnStopped?.Invoke(false);
         }
-        
+
+        public override void Arrive()
+        {
+            navMeshAgent.ResetPath();
+            _hasTarget = false;
+            _rotating = false;
+            _rotationValue = 0f;
+            
+            navMeshAgent.Warp(navMeshAgent.pathEndPosition);
+            OnStopped?.Invoke(true);
+        }
+
         private void FixedUpdate()
         {
             CurrentSpeed = navMeshAgent.velocity.magnitude;

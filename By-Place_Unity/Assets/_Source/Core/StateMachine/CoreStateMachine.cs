@@ -4,15 +4,15 @@ using StateMachine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Character
+namespace Core.StateMachine
 {
-    public class CharacterStateMachine : IStateMachine, IPostStartable, ITickable
+    public class CoreStateMachine : IStateMachine, IPostStartable, ITickable
     {
         private readonly Dictionary<Type, IState> _states;
         private IState _currentState;
 
         [Inject]
-        public CharacterStateMachine(ICharacterStatesProvider statesProvider)
+        public CoreStateMachine(ICoreStatesProvider statesProvider)
         {
             _states = statesProvider.Get();
             _currentState = statesProvider.StartingState;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Journal.Quest;
-using Journal.Quest.Data;
 using QuestSystem.Data;
+using SaveLoad;
 using VContainer;
 
 namespace QuestSystem
@@ -12,6 +12,8 @@ namespace QuestSystem
         private JournalQuests _journalQuests;
         
         private Dictionary<int, Quest> _quests = new();
+
+        public string Path => "Quests";
         
         public event Action<int> OnOpen;
         /// <summary>
@@ -37,7 +39,7 @@ namespace QuestSystem
 
         public void Close(int questId, string result)
         {
-            _quests.Remove(questId);
+            _quests[questId].Finish();
             _journalQuests.Close(questId, result);
             
             OnClose?.Invoke(questId);

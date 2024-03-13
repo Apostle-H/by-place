@@ -38,5 +38,7 @@ namespace Navigation.TravelPoint
             
             OnFinished?.Invoke(this);
         }
+        
+        public void Skip() { }
     }
 }

@@ -46,5 +46,13 @@ namespace Movement.Action
             
             OnFinished?.Invoke(this);
         }
+
+        public void Skip()
+        {
+            if (!Resolvable)
+                return;
+            
+            movePath.mover.Arrive();
+        }
     }
 }

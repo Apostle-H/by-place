@@ -15,5 +15,6 @@ namespace Movement
         public abstract void Rotate(Quaternion rotation);
 
         public abstract void Stop();
+        public abstract void Arrive();
     }
 }
