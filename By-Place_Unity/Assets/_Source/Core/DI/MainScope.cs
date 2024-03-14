@@ -217,11 +217,11 @@ namespace Core.DI
         {
             builder.RegisterInstance(questManagerViewConfigSO);
             
-            builder.Register<QuestManager>(Lifetime.Singleton);
-            
             builder.UseEntryPoints(entryPoints =>
             {
                 entryPoints.Add<QuestActionsCollector>();
+                entryPoints.Add<QuestManager>().AsSelf();
+                
                 entryPoints.Add<QuestManagerView>();
             });
         }
@@ -243,10 +243,10 @@ namespace Core.DI
             builder.RegisterInstance(journalViewConfigSO);
             builder.RegisterInstance(questPageViewConfigSO);
 
-            builder.Register<JournalQuests>(Lifetime.Singleton);
-            
             builder.UseEntryPoints(entryPoints =>
             {
+                entryPoints.Add<JournalQuests>().AsSelf();
+                
                 entryPoints.Add<JournalView>();
                 entryPoints.Add<QuestPageView>();
             });

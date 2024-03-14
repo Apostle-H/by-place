@@ -72,9 +72,6 @@ namespace Dialogue.Data
 
         public void LoadSaveData(Dictionary<int, bool> saveData)
         {
-            if (saveData.Count < 1)
-                return;
-
             _variables.Clear();
             foreach (var kvp in saveData)
                 _variables.Add(kvp.Key, kvp.Value);

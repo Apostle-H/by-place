@@ -48,10 +48,5 @@ namespace Sound
         }
 
         private void PlayClickSound(MouseDownEvent evt) => _audioPlayer.PlayEffect(_clickVFX);
-        
-        private void PlayClickSound(ChangeEvent<bool> evt)
-        {
-            _audioPlayer.PlayEffect(_clickVFX);
-        }
     }
 }

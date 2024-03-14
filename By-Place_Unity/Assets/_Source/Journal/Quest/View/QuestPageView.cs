@@ -70,14 +70,12 @@ namespace Journal.Quest.View
             _questsContainer.Add(questFoldoutView.Root);
             _questFoldouts.Add(questId, questFoldoutView);
             
+            Debug.Log(title);
             _visualElementsAudio.Register(questFoldout.Q<Label>());
         }
         
         private void LogQuest(int questId, string log) => _questFoldouts[questId].Log(log);
 
-        private void CloseQuest(int questId, string result)
-        {
-            _questFoldouts[questId].Close(result);
-        }
+        private void CloseQuest(int questId, string result) => _questFoldouts[questId].Close(result);
     }
 }

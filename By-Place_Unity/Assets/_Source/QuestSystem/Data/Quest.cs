@@ -9,7 +9,6 @@ namespace QuestSystem.Data
         public string Title { get; private set; }
         public string Task { get; private set; }
         public string Conclusion { get; private set; }
-        public bool Finished { get; private set; }
         
         public Quest(int id) => Id = id;
 
@@ -19,7 +18,5 @@ namespace QuestSystem.Data
             Task = task;
             Conclusion = conclusion;
         }
-
-        public void Finish() => Finished = true;
     }
 }

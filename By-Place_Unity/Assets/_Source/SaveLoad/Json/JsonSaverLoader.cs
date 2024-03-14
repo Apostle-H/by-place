@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using SaveLoad;
 using SaveLoad.Load;
 using SaveLoad.Save;
@@ -22,6 +23,7 @@ namespace DefaultNamespace
             using var file = File.CreateText(fullPath);
             {
                 var serializer = new JsonSerializer();
+                serializer.Converters.Add(new BinaryConverter());
                 serializer.Serialize(file, saveData);
             }
 
