@@ -45,7 +45,7 @@ namespace Journal.Quest.View
             Expose();
 
             foreach (var kvp in _questFoldouts)
-                _visualElementsAudio.Unregister(kvp.Value.Foldout.Q<Toggle>());
+                _visualElementsAudio.Unregister(kvp.Value.Foldout.Q<Label>());
         }
 
         private void Bind()
@@ -69,6 +69,8 @@ namespace Journal.Quest.View
             
             _questsContainer.Add(questFoldoutView.Root);
             _questFoldouts.Add(questId, questFoldoutView);
+            
+            _visualElementsAudio.Register(questFoldout.Q<Label>());
         }
         
         private void LogQuest(int questId, string log) => _questFoldouts[questId].Log(log);

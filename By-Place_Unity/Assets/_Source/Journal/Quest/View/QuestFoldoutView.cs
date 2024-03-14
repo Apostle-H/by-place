@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine.UIElements;
 
 namespace Journal.Quest.View
 {
@@ -28,7 +26,7 @@ namespace Journal.Quest.View
             {
                 name = "LogLabel"
             };
-
+            
             Foldout.Add(logLabel);
         }
 
