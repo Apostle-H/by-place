@@ -209,6 +209,16 @@ namespace DialogueSystem.Windows
         {
             graphElements.ForEach(RemoveElement);
             _groups.Clear();
+            
+            ClearChanges();
+        }
+
+        public void ClearChanges()
+        {
+            movedNodesGuids.Clear();
+            deletedNodesRuntimeIds.Clear();
+            renamedGroupsGuids.Clear();
+            deletedGroupGuids.Clear();
         }
 
         public void GetElements(out List<DNode> nodes, out List<DGroup> groups)

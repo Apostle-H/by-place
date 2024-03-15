@@ -22,7 +22,11 @@ namespace Dialogue.Resolve
 
         public void Dispose() => Expose();
 
-        private void Bind() => _dialogueController.OnQuit += _saveLoadInvoker.InvokeSave;
+        private void Bind()
+        {
+            return;
+            _dialogueController.OnQuit += _saveLoadInvoker.InvokeSave;
+        }
 
         private void Expose() => _dialogueController.OnQuit -= _saveLoadInvoker.InvokeSave;
     }

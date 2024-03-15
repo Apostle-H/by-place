@@ -39,6 +39,8 @@ namespace DialogueSystem.Utils
             
             rContainerSO.FileName = graphName;
             AssetsService.SaveAsset(rContainerSO);
+            
+            graphView.ClearChanges();
         }
         
         public static void Load(DGraphView graphView, string graphName)
