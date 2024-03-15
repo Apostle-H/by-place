@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ds: {fileID: 11400000, guid: 953146fe624c6ed40a2e31942047ebe2, type: 2}
-  interactPoint: {fileID: 0}
+  interactPoint: {fileID: 3221605753068141321}
 --- !u!114 &3221605752829335561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,9 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fd41e6266364b9e9b1c11e7c8dceba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mover: {fileID: 9038234399197828607}
-  stepVFX: {fileID: 8300000, guid: a1acf3339dceca44192d5f3b9aa0e202, type: 3}
-  stepsFrequency: 0.55
 --- !u!114 &6124567684698321717
 MonoBehaviour:
   m_ObjectHideFlags: 0

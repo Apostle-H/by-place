@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4553f56b2363b9d4b924dda785b05977, type: 3}
+  m_Name: Sister
+  m_EditorClassIdentifier: 
+  <Owner>k__BackingField: {fileID: 11400000, guid: 2ba11642a75bf7f479d0aa0169397142, type: 2}
+  <Guid>k__BackingField: -798897574
+  <Name>k__BackingField: Sister
+  <StartingNodeGuid>k__BackingField: -448158206
+  <NodesSOs>k__BackingField:
+  - {fileID: 3088417578772011653}
+  - {fileID: 177952612963901654}
+--- !u!114 &177952612963901654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4e14a0f1a34feb8d8497ecf354e24b, type: 3}
+  m_Name: 1990586307
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: 1990586307
+  <IsStartingNode>k__BackingField: 0
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: 1189379051
+  <Position>k__BackingField: {x: 1058, y: 1406}
+  <VariableSO>k__BackingField: {fileID: 11400000, guid: 8e05ab7ef8ce9dc44be7d02850e24191, type: 2}
+  <SetValue>k__BackingField: 1
+--- !u!114 &3088417578772011653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
+  m_Name: -448158206
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: -448158206
+  <IsStartingNode>k__BackingField: 1
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: 1990586307
+  <Position>k__BackingField: {x: 524, y: 1406}
+  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: e5c7c2dffd49b9c44a561e298db1c236, type: 2}
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: ...
+    <CheckVariableSO>k__BackingField: {fileID: 0}
+    <ExpectedValue>k__BackingField: 0
+  <Texts>k__BackingField:
+  - <Text>k__BackingField: "\u0412\u0430\u043B\u044C\u043A\u0430 \u0432\u0441\u0435\u0433\u0434\u0430
+      \u043A\u0443\u0442\u0430\u0435\u0442\u0441\u044F, \u0434\u0430\u0436\u0435
+      \u043A\u043E\u0433\u0434\u0430 \u0437\u0438\u043C\u043E\u0439 \u0431\u0430\u0442\u0430\u0440\u0435\u0438
+      \u0448\u043F\u0430\u0440\u044F\u0442."
+    <VariableSO>k__BackingField: {fileID: 0}
+    <Animation>k__BackingField: {fileID: 0}
