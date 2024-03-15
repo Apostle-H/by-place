@@ -251,7 +251,6 @@ namespace DialogueSystem.Utils
                         SpeakerSO = dialogueNodeSO.SpeakerSO,
                         Choices = dialogueNodeSO.Choices.ToList(),
                         Texts = dialogueNodeSO.Texts.ToList(),
-                        GraphView = graphView
                     };
 
                     node = dialogueNode;

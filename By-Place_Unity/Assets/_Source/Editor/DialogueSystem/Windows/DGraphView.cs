@@ -83,6 +83,8 @@ namespace DialogueSystem.Windows
 
         public void AddNode(DNode node)
         {
+            node.GraphView = this;
+            
             AddElement(node);
             node.Draw();
             

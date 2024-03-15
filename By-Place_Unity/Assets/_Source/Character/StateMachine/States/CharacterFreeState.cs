@@ -61,7 +61,8 @@ namespace Character.States
                 || hit.collider == default)
                 return;
             
-            if (hit.collider.TryGetComponent<IInteractable>(out var interactable))
+            if (_configSO.InteractableMask.Contains(hit.collider.gameObject.layer) &&
+                hit.collider.TryGetComponent<IInteractable>(out var interactable))
             {
                 _characterComponents.TargetInteractable = interactable;
                 Owner.Switch<CharacterInteractingState>();

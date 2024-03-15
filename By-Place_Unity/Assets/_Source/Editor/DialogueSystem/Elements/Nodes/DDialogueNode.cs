@@ -15,7 +15,6 @@ namespace DialogueSystem.Elements.Nodes
     {
         public const string NEW_CHOICE_TEXT = "New Choice";
 
-        public DGraphView GraphView { get; set; }
         public DSpeakerSO SpeakerSO { get; set; }
         public List<DChoice> Choices { get; set; } = new();
         public List<DText> Texts { get; set; } = new();

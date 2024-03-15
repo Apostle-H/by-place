@@ -19,6 +19,8 @@ namespace DialogueSystem.Elements.Nodes
         public int GroupGuid { get; set; } = -1;
         public List<DOutputData> NextGuids { get; set; } = new();
 
+        public DGraphView GraphView { get; set; }
+        
         public int RuntimeAssetId { get; set; } = int.MaxValue;
 
         public DNode(Vector2 position, int guid = -1)
