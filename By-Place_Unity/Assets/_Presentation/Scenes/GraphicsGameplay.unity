@@ -2620,7 +2620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebbe3deaa848452489955847c5c80db4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetQuestActionSO: {fileID: 11400000, guid: cfe91940351427b458bc85e15f11f986, type: 2}
+  targetQuestActionSO: {fileID: 11400000, guid: a08ed7fbcd308fd4faca7224f0bd43de, type: 2}
 --- !u!135 &1928690486
 SphereCollider:
   m_ObjectHideFlags: 0

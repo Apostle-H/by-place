@@ -4,10 +4,12 @@ using VContainer;
 
 namespace QuestSystem.Actions
 {
-    public class FinishQuestAction : IAction
+    public class StartQuestAction : IAction
     {
         private readonly int _questId;
-        private readonly string _result;
+        private readonly string _title;
+        private readonly string _task;
+        private readonly string _conclusion;
         
         private QuestManager _questManager;
 
@@ -16,11 +18,14 @@ namespace QuestSystem.Actions
         
         public event Action<IAction> OnFinished;
 
-        public FinishQuestAction(int id, int questId, string result)
+        public StartQuestAction(int id, int questId, string title, string task, string conclusion)
         {
             Id = id;
+            
             _questId = questId;
-            _result = result;
+            _title = title;
+            _task = task;
+            _conclusion = conclusion;
         }
 
         [Inject]
@@ -28,12 +33,12 @@ namespace QuestSystem.Actions
         
         public void Resolve()
         {
-            _questManager.Close(_questId, _result);
+            _questManager.Open(_questId, _title, _task, _conclusion);
             Resolvable = false;
             
             OnFinished?.Invoke(this);
         }
-        
+
         public void Skip() { }
     }
 }

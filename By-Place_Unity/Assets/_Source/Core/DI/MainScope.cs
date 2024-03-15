@@ -245,8 +245,6 @@ namespace Core.DI
 
             builder.UseEntryPoints(entryPoints =>
             {
-                entryPoints.Add<JournalQuests>().AsSelf();
-                
                 entryPoints.Add<JournalView>();
                 entryPoints.Add<QuestPageView>();
             });

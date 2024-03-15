@@ -1,5 +1,4 @@
-﻿using Journal.Quest.View;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 using Utils.CustomAttributes;
 

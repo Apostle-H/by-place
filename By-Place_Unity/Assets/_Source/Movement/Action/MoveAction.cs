@@ -17,7 +17,7 @@ namespace Movement.Action
         private int _arrivedCount;
         
         public int Id => actionSO.Id;
-        public bool Resolvable { get; private set; } = true;
+        public bool Resolvable { get; set; } = true;
         
         public event Action<IAction> OnFinished;
         

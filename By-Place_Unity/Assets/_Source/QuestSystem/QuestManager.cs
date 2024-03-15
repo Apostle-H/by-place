@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Journal.Quest;
 using QuestSystem.Data;
 using SaveLoad;
 using SaveLoad.Invoker;
@@ -11,7 +10,6 @@ namespace QuestSystem
 {
     public class QuestManager : ISavableLoadable<Dictionary<int, Quest>>, IStartable, IDisposable
     {
-        private JournalQuests _journalQuests;
         private readonly ISaverLoader _saverLoader;
         private readonly SaveLoadInvoker _saveLoadInvoker;
 
@@ -19,17 +17,13 @@ namespace QuestSystem
 
         public string Path => "Quests";
         
-        public event Action<int> OnOpen;
-        /// <summary>
-        /// -questId, title, task-
-        /// </summary>
-        public event Action<int, string, string> OnUpdate;
-        public event Action<int> OnClose;
+        public event Action<Quest> OnOpen;
+        public event Action<Quest> OnUpdate;
+        public event Action<Quest> OnClose;
 
         [Inject]
-        public QuestManager(JournalQuests journalQuests, ISaverLoader saverLoader, SaveLoadInvoker saveLoadInvoker)
+        public QuestManager(ISaverLoader saverLoader, SaveLoadInvoker saveLoadInvoker)
         {
-            _journalQuests = journalQuests;
             _saverLoader = saverLoader;
             _saveLoadInvoker = saveLoadInvoker;
         }
@@ -50,32 +44,27 @@ namespace QuestSystem
             _saveLoadInvoker.OnLoad -= Load;
         }
 
-        public void Update(int questId, string title, string task, string conclusion)
+        public void Open(int questId, string title, string task, string conclusion)
         {
-            if (!_quests.ContainsKey(questId))
-                Open(questId, title);
-            else
-                _journalQuests.Log(questId, _quests[questId].Conclusion);
+            _quests.Add(questId, new Quest(questId, title, task, conclusion));
             
-            _quests[questId].Update(title, task, conclusion);
+            OnOpen?.Invoke(_quests[questId]);
+        }
+        
+        public void Update(int questId, string task, string conclusion)
+        {
+            _quests[questId].Update(task, conclusion);
             
-            OnUpdate?.Invoke(questId, title, task);
+            OnUpdate?.Invoke(_quests[questId]);
         }
 
         public void Close(int questId, string result)
         {
+            var quest = _quests[questId];
+            quest.Close(result);
             _quests.Remove(questId);
-            _journalQuests.Close(questId, result);
             
-            OnClose?.Invoke(questId);
-        }
-        
-        private void Open(int questId, string title)
-        {
-            _quests.Add(questId, new Quest(questId));
-            _journalQuests.Open(questId, title);
-            
-            OnOpen?.Invoke(questId);
+            OnClose?.Invoke(quest);
         }
 
         private void Save() => _saverLoader.Save(this);
@@ -88,7 +77,12 @@ namespace QuestSystem
         {
             _quests.Clear();
             foreach (var kvp in saveData)
-                Update(kvp.Key, kvp.Value.Title, kvp.Value.Task, kvp.Value.Conclusion);
+            {
+                var quest = kvp.Value;
+                Open(quest.Id, quest.Title, quest.Task, quest.NextConclusion);
+                foreach (var conclusion in quest.Conclusions)
+                    Update(quest.Id, quest.Task, conclusion);
+            }
         }
     }
 }

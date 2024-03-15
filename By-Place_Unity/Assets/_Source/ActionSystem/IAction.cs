@@ -5,7 +5,7 @@ namespace ActionSystem
 {
     public interface IAction : IIdentity
     {
-        bool Resolvable { get; }
+        bool Resolvable { get; set; }
 
         event Action<IAction> OnFinished;
 

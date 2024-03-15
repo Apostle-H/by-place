@@ -22,10 +22,8 @@ namespace Journal.Quest.View
 
         public void Log(string log)
         {
-            var logLabel = new Label(log)
-            {
-                name = "LogLabel"
-            };
+            var logLabel = new Label(log) { name = "LogLabel" };
+            logLabel.style.whiteSpace = WhiteSpace.Normal;
             
             Foldout.Add(logLabel);
         }

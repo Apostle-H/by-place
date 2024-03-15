@@ -13,7 +13,7 @@ namespace Inventory.Actions
         private bool _removeAdd;
 
         public int Id { get; private set; }
-        public bool Resolvable { get; private set; } = true;
+        public bool Resolvable { get; set; } = true;
         
         public event Action<IAction> OnFinished;
 

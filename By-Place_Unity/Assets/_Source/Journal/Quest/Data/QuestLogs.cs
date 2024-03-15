@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using Newtonsoft.Json;
 
 namespace Journal.Quest.Data
 {
@@ -20,6 +21,15 @@ namespace Journal.Quest.Data
             Title = title;
             
             Opened = true;
+        }
+
+        [JsonConstructor]
+        private QuestLogs(int questId, string title, List<string> logs, bool opened)
+        {
+            QuestId = questId;
+            Title = title;
+            _logs = logs;
+            Opened = opened;
         }
 
         public void AddLog(string log) => _logs.Add(log);
