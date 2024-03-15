@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cursor.Sensitive;
 using Inventory.Data;
 using Inventory.View.Data;
+using Sound;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer.Unity;
@@ -16,6 +17,7 @@ namespace Inventory.View
         private UIDocument _canvas;
         private ItemInfoView _itemInfoView;
         private UICursorSensitive.Factory _cursorSensitiveFactory;
+        private readonly VisualElementsAudio _visualElementsAudio;
 
         private UICursorSensitive _toggleCursorSensitive;
         
@@ -30,13 +32,14 @@ namespace Inventory.View
         private bool _showItems;
 
         public InventoryView(InventoryViewConfigSO configSO, UIDocument canvas, ItemInfoView itemInfoView, 
-            UICursorSensitive.Factory cursorSensitiveFactory)
+            UICursorSensitive.Factory cursorSensitiveFactory, VisualElementsAudio visualElementsAudio)
         {
             _configSO = configSO;
             
             _canvas = canvas;
             _itemInfoView = itemInfoView;
             _cursorSensitiveFactory = cursorSensitiveFactory;
+            _visualElementsAudio = visualElementsAudio;
         }
         
         public void Start()
@@ -58,12 +61,16 @@ namespace Inventory.View
         {
             _toggleBtn.RegisterCallback<MouseDownEvent>(ToggleItems);
             _toggleCursorSensitive.Bind();
+
+            _visualElementsAudio.Register(_toggleBtn);
         }
 
         private void Expose()
         {
             _toggleBtn.UnregisterCallback<MouseDownEvent>(ToggleItems);
             _toggleCursorSensitive.Expose();
+            
+            _visualElementsAudio.Unregister(_toggleBtn);
         }
 
         private void BindItemView(ItemView itemView)

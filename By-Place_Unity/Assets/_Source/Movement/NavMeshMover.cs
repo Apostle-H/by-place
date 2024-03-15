@@ -21,7 +21,8 @@ namespace Movement
 
         public override float CurrentSpeed { get; protected set; }
 
-        public override event System.Action OnArrived;
+        public override event System.Action OnDeparted;
+        public override event Action<bool> OnStopped;
         public override event Action<float> OnSpeedUpdate;
         
         public void Awake()
@@ -37,6 +38,8 @@ namespace Movement
             
             _rotating = false;
             _rotationValue = 0f;
+            
+            OnDeparted?.Invoke();
         }
 
         public override void Rotate(Quaternion rotation)
@@ -52,8 +55,23 @@ namespace Movement
             
             navMeshAgent.ResetPath();
             _hasTarget = false;
+            _rotating = false;
+            _rotationValue = 0f;
+
+            OnStopped?.Invoke(false);
         }
-        
+
+        public override void Arrive()
+        {
+            navMeshAgent.ResetPath();
+            _hasTarget = false;
+            _rotating = false;
+            _rotationValue = 0f;
+            
+            navMeshAgent.Warp(navMeshAgent.pathEndPosition);
+            OnStopped?.Invoke(true);
+        }
+
         private void FixedUpdate()
         {
             CurrentSpeed = navMeshAgent.velocity.magnitude;
@@ -75,7 +93,7 @@ namespace Movement
                 return;
             
             _hasTarget = false;
-            OnArrived?.Invoke();
+            OnStopped?.Invoke(true);
         }
 
         private void CheckAngle()

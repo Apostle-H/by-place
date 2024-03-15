@@ -50,6 +50,6 @@ namespace Character.States
             ToFreeState();
         }
         
-        private void ToFreeState() => Owner.Switch<CharacterFreeState>();
+        private void ToFreeState(bool _ = default) => Owner.Switch<CharacterFreeState>();
     }
 }

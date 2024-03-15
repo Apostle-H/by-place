@@ -3,7 +3,8 @@ using Registration;
 
 namespace Animate.Animatable
 {
-    public interface IAnimatable : IRegistratable<int>
+    public interface IAnimatable : IIdentity
     {
+        void Resolve(int stateHash);
     }
 }

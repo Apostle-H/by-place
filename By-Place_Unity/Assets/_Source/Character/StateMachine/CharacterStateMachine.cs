@@ -6,13 +6,13 @@ using VContainer.Unity;
 
 namespace Character
 {
-    public class CharacterStateMachine : IStateMachine, ITickable, IInitializable
+    public class CharacterStateMachine : IStateMachine, IPostStartable, ITickable
     {
         private readonly Dictionary<Type, IState> _states;
         private IState _currentState;
 
         [Inject]
-        public CharacterStateMachine(IStatesProvider statesProvider)
+        public CharacterStateMachine(ICharacterStatesProvider statesProvider)
         {
             _states = statesProvider.Get();
             _currentState = statesProvider.StartingState;
@@ -21,16 +21,17 @@ namespace Character
                 kvp.Value.Owner = this;
         }
 
-        public void Initialize() => _currentState.Enter();
+        public void PostStart() => _currentState.Enter();
 
         public void Switch<T>() where T : IState
         {
             var stateType = typeof(T);
             if (!_states.ContainsKey(stateType))
                 return;
-            
+
             _currentState.Exit();
-            _states[stateType].Enter();
+            _currentState = _states[stateType];
+            _currentState.Enter();
         }
 
         public void Tick() => _currentState?.Update();

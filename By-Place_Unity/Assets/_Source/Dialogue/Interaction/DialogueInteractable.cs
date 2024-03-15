@@ -18,7 +18,7 @@ namespace Dialogue.Interaction
         public Quaternion Rotation => interactPoint.rotation;
         
         public event Action OnStarted;
-        public event Action OnFinished;
+        public event Action<bool> OnFinished;
 
         [Inject]
         public void Inject(DialogueController dialogueController) => _dialogueController = dialogueController;
@@ -33,7 +33,7 @@ namespace Dialogue.Interaction
         private void Finished()
         {
             _dialogueController.OnQuit -= Finished;
-            OnFinished?.Invoke();
+            OnFinished?.Invoke(true);
         }
     }
 }

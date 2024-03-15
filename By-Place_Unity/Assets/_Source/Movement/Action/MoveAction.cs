@@ -17,7 +17,7 @@ namespace Movement.Action
         private int _arrivedCount;
         
         public int Id => actionSO.Id;
-        public bool Resolvable { get; private set; } = true;
+        public bool Resolvable { get; set; } = true;
         
         public event Action<IAction> OnFinished;
         
@@ -30,18 +30,29 @@ namespace Movement.Action
         
         public void Resolve()
         {
-            movePath.mover.OnArrived += Finished;
+            movePath.mover.OnStopped += Finished;
             movePath.mover.Move(movePath.target.position);
             
             Resolvable = false;
         }
 
-        private void Finished()
+        private void Finished(bool result)
         {
-            movePath.mover.OnArrived -= Finished;
+            movePath.mover.OnStopped -= Finished;
+            if (!result)
+                return;
+            
             movePath.mover.Rotate(movePath.target.rotation);
             
             OnFinished?.Invoke(this);
+        }
+
+        public void Skip()
+        {
+            if (!Resolvable)
+                return;
+            
+            movePath.mover.Arrive();
         }
     }
 }

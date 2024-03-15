@@ -1,8 +1,10 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using SaveLoad;
 using SaveLoad.Load;
 using SaveLoad.Save;
+using UnityEngine;
 using Application = UnityEngine.Application;
 
 namespace DefaultNamespace
@@ -21,6 +23,7 @@ namespace DefaultNamespace
             using var file = File.CreateText(fullPath);
             {
                 var serializer = new JsonSerializer();
+                serializer.Converters.Add(new BinaryConverter());
                 serializer.Serialize(file, saveData);
             }
 
@@ -40,7 +43,7 @@ namespace DefaultNamespace
                 var serializer = new JsonSerializer();
                 saveData = (T)serializer.Deserialize(file, typeof(T));
             }
-            
+
             loadable.LoadSaveData(saveData);
             return true;
         }

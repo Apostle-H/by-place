@@ -6,12 +6,14 @@ using Character.Data;
 using Character.States;
 using Character.View;
 using Core.Loaders;
+using Core.StateMachine;
+using Core.StateMachine.States;
 using Cursor.Manager;
 using Cursor.Sensitive;
+using DefaultNamespace;
 using Dialogue.Data;
 using Dialogue.Resolve;
 using Dialogue.Resolve.Data;
-using Input;
 using InputSystem;
 using Interactions;
 using Inventory.Actions;
@@ -24,11 +26,16 @@ using Journal.View;
 using Journal.View.Data;
 using Movement;
 using Movement.Data;
+using Navigation.Location;
 using PointNClick.Data;
 using QuestSystem;
 using QuestSystem.Actions;
 using QuestSystem.View;
 using QuestSystem.View.Data;
+using SaveLoad;
+using SaveLoad.Invoker;
+using Sound;
+using Sound.UI.Data;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
@@ -42,6 +49,12 @@ namespace Core.DI
 {
     public class MainScope : LifetimeScope
     {
+        [Header("Sound")] 
+        [SerializeField] private VisualElementsAudioConfigSO visualElementsAudioConfigSO;
+        
+        [Header("Navigation")] 
+        [SerializeField] private ALocation defaultStartLocation;
+        
         [Header("PointNClick")]
         [SerializeField] private PointNClickConfigSO pointNClickConfigSO;
         
@@ -60,10 +73,14 @@ namespace Core.DI
 
         protected override void Configure(IContainerBuilder builder)
         {
+            ConfigureCore(builder);
+            ConfigureSaveLoad(builder);
             ConfigureCommon(builder);
             ConfigureServices(builder);
             ConfigureInput(builder);
+            ConfigureAudio(builder);
             ConfigurePointNClick(builder);
+            ConfigureNavigation(builder);
             ConfigureCharacter(builder);
             ConfigureActionSystem(builder);
             ConfigureAnimate(builder);
@@ -71,7 +88,29 @@ namespace Core.DI
             ConfigureQuestSystem(builder);
             ConfigureJournal(builder);
             ConfigureInventory(builder);
-            ConfigureCharacterStateMachine(builder);
+        }
+
+        private void ConfigureCore(IContainerBuilder builder)
+        {
+            builder.Register<WaitingState>(Lifetime.Singleton);
+            builder.Register<CoreLoadState>(Lifetime.Singleton);
+            builder.Register<ICoreStatesProvider, CoreStatesProvider>(Lifetime.Singleton);
+            
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<CoreStateMachine>();
+            });
+        }
+
+        private void ConfigureSaveLoad(IContainerBuilder builder)
+        {
+            builder.Register<ISaverLoader, JsonSaverLoader>(Lifetime.Singleton);
+            builder.Register<SaveLoadInvoker>(Lifetime.Singleton);
+            
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<OnDialogueSaver>();
+            });
         }
 
         private void ConfigureCommon(IContainerBuilder builder)
@@ -99,6 +138,16 @@ namespace Core.DI
             });
         }
 
+        private void ConfigureAudio(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(visualElementsAudioConfigSO);
+            
+            builder.RegisterComponentInHierarchy<SourcesCollector>();
+            
+            builder.Register<AudioPlayer>(Lifetime.Singleton);
+            builder.Register<VisualElementsAudio>(Lifetime.Singleton);
+        }
+
         private void ConfigurePointNClick(IContainerBuilder builder)
         {
             builder.RegisterInstance(pointNClickConfigSO);
@@ -109,12 +158,34 @@ namespace Core.DI
             builder.Register<IInteracter, Interacter>(Lifetime.Singleton);
         }
 
+        private void ConfigureNavigation(IContainerBuilder builder)
+        {
+            builder.RegisterComponent(defaultStartLocation).As<ALocation>();
+
+            builder.Register<LocationsProvider>(Lifetime.Singleton);
+            builder.Register<StartLocationProvider>(Lifetime.Singleton);
+            
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<LocationsManager>();
+            });
+        }
+
         private void ConfigureCharacter(IContainerBuilder builder)
         {
             builder.RegisterComponentInHierarchy<CharacterNavMeshMover>().As<ICharacterMover>();
             
             builder.RegisterComponentInHierarchy<AnimatorParamsController>();
             builder.Register<CharacterComponents>(Lifetime.Singleton);
+            
+            builder.Register<CharacterFreeState>(Lifetime.Singleton);
+            builder.Register<CharacterInteractingState>(Lifetime.Singleton);
+            builder.Register<ICharacterStatesProvider, CharacterStatesProvider>(Lifetime.Singleton);
+            
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<CharacterStateMachine>();
+            });
         }
 
         private void ConfigureActionSystem(IContainerBuilder builder)
@@ -131,12 +202,13 @@ namespace Core.DI
         {
             builder.RegisterInstance(dialogueViewConfigSO);
             
-            builder.Register<DVariablesContainer>(Lifetime.Singleton);
             builder.Register<DialogueData>(Lifetime.Singleton);
             builder.Register<DialogueController>(Lifetime.Singleton);
             
             builder.UseEntryPoints(entryPoints =>
             {
+                entryPoints.Add<DVariablesContainer>().AsSelf();
+                
                 entryPoints.Add<DialogueView>().AsSelf();
             });
         }
@@ -145,11 +217,11 @@ namespace Core.DI
         {
             builder.RegisterInstance(questManagerViewConfigSO);
             
-            builder.Register<QuestManager>(Lifetime.Singleton);
-            
             builder.UseEntryPoints(entryPoints =>
             {
                 entryPoints.Add<QuestActionsCollector>();
+                entryPoints.Add<QuestManager>().AsSelf();
+                
                 entryPoints.Add<QuestManagerView>();
             });
         }
@@ -171,24 +243,10 @@ namespace Core.DI
             builder.RegisterInstance(journalViewConfigSO);
             builder.RegisterInstance(questPageViewConfigSO);
 
-            builder.Register<JournalQuests>(Lifetime.Singleton);
-            
             builder.UseEntryPoints(entryPoints =>
             {
                 entryPoints.Add<JournalView>();
                 entryPoints.Add<QuestPageView>();
-            });
-        }
-
-        private void ConfigureCharacterStateMachine(IContainerBuilder builder)
-        {
-            builder.Register<CharacterFreeState>(Lifetime.Singleton);
-            builder.Register<CharacterInteractingState>(Lifetime.Singleton);
-            builder.Register<IStatesProvider, CharacterStatesProvider>(Lifetime.Singleton);
-            
-            builder.UseEntryPoints(entryPoints =>
-            {
-                entryPoints.Add<CharacterStateMachine>();
             });
         }
     }

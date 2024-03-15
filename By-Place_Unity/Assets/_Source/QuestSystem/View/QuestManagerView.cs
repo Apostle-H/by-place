@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Core.Loaders;
+using QuestSystem.Data;
 using QuestSystem.View.Data;
 using UnityEngine.UIElements;
 using VContainer;
 using VContainer.Unity;
-using Object = UnityEngine.Object;
 
 namespace QuestSystem.View
 {
@@ -53,26 +52,26 @@ namespace QuestSystem.View
             _questManager.OnClose -= Close;
         }
 
-        private void Open(int questId)
+        private void Open(Quest quest)
         {
             if (_freeQuestViews.Count < 1)
-            {
                 Add();
-            }
             
             var questView = _freeQuestViews[^1];
             _freeQuestViews.RemoveAt(_freeQuestViews.Count - 1);
             
-            _questViews.Add(questId, questView);
+            _questViews.Add(quest.Id, questView);
+            questView.Update(quest.Title, quest.Task);
+            
             questView.Show();
         }
         
-        private void UpdateQuest(int questId, string title, string task) => _questViews[questId].Update(title, task);
+        private void UpdateQuest(Quest quest) => _questViews[quest.Id].Update(quest.Title, quest.Task);
 
-        private void Close(int questId)
+        private void Close(Quest quest)
         {
-            var questView = _questViews[questId];
-            _questViews.Remove(questId);
+            var questView = _questViews[quest.Id];
+            _questViews.Remove(quest.Id);
             
             _freeQuestViews.Add(questView);
             questView.Hide();

@@ -16,7 +16,7 @@ namespace Navigation.TravelPoint
         private ActionResolver _actionResolver;
 
         public int Id => actionSO.Id;
-        public bool Resolvable { get; private set; } = true;
+        public bool Resolvable { get; set; } = true;
         
         public event Action<IAction> OnFinished;
 
@@ -38,5 +38,7 @@ namespace Navigation.TravelPoint
             
             OnFinished?.Invoke(this);
         }
+        
+        public void Skip() { }
     }
 }

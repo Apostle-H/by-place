@@ -12,7 +12,7 @@ namespace QuestSystem.Actions
         private QuestManager _questManager;
 
         public int Id { get; private set; }
-        public bool Resolvable { get; private set; } = true;
+        public bool Resolvable { get; set; } = true;
         
         public event Action<IAction> OnFinished;
 
@@ -33,5 +33,7 @@ namespace QuestSystem.Actions
             
             OnFinished?.Invoke(this);
         }
+        
+        public void Skip() { }
     }
 }

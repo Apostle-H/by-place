@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Registration;
+using SaveLoad;
 
 namespace ActionSystem
 {
     public class ActionResolver : IRegistrator<IAction>
     {
         private Dictionary<int, IAction> _actions = new();
+
+        public string Path => "Actions";
 
         public event Action OnFinished;
 

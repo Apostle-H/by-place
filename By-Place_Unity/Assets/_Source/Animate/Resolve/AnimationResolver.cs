@@ -4,7 +4,7 @@ using Registration;
 
 namespace Animate.Resolve
 {
-    public class AnimationResolver : IRegistrator<IAnimatable, int>
+    public class AnimationResolver : IRegistrator<IAnimatable>
     {
         private Dictionary<int, IAnimatable> _animatables = new();
 

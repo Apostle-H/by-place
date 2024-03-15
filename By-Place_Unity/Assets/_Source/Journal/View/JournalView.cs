@@ -1,6 +1,7 @@
 ﻿using System;
 using Cursor.Sensitive;
 using Journal.View.Data;
+using Sound;
 using UnityEngine.UIElements;
 using VContainer.Unity;
 
@@ -13,6 +14,8 @@ namespace Journal.View
         private UIDocument _canvas;
 
         private UICursorSensitive.Factory _cursorSensitiveFactory;
+        private readonly VisualElementsAudio _visualElementsAudio;
+        
         private UICursorSensitive _toggleCursorSensitive;
 
         private VisualElement _root;
@@ -22,12 +25,14 @@ namespace Journal.View
 
         private bool _show;
 
-        public JournalView(JournalViewConfigSO configSO, UIDocument canvas, UICursorSensitive.Factory cursorSensitiveFactory)
+        public JournalView(JournalViewConfigSO configSO, UIDocument canvas, 
+            UICursorSensitive.Factory cursorSensitiveFactory, VisualElementsAudio visualElementsAudio)
         {
             _configSO = configSO;
             _canvas = canvas;
 
             _cursorSensitiveFactory = cursorSensitiveFactory;
+            _visualElementsAudio = visualElementsAudio;
         }
 
         public void Start()
@@ -46,16 +51,20 @@ namespace Journal.View
 
         public void Dispose() => Expose();
 
-       private void Bind()
+        private void Bind()
         {
             _toggleBtn.RegisterCallback<MouseDownEvent>(ToggleItems);
             _toggleCursorSensitive.Bind();
+            
+            _visualElementsAudio.Register(_toggleBtn);
         }
 
         private void Expose()
         {
             _toggleBtn.UnregisterCallback<MouseDownEvent>(ToggleItems);
             _toggleCursorSensitive.Expose();
+            
+            _visualElementsAudio.Unregister(_toggleBtn);
         }
 
         private void ToggleItems(MouseDownEvent evt)

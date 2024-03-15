@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Journal.Quest.View.Data;
+using QuestSystem;
+using Sound;
+using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;
 using VContainer.Unity;
@@ -12,7 +15,8 @@ namespace Journal.Quest.View
         private QuestPageViewConfigSO _configSO;
         private UIDocument _canvas;
 
-        private JournalQuests _quests;
+        private QuestManager _questManager;
+        private readonly VisualElementsAudio _visualElementsAudio;
 
         private VisualElement _root;
         private ScrollView _questsContainer;
@@ -20,11 +24,13 @@ namespace Journal.Quest.View
         private Dictionary<int, QuestFoldoutView> _questFoldouts = new();
 
         [Inject]
-        public QuestPageView(QuestPageViewConfigSO configSO, UIDocument canvas, JournalQuests quests)
+        public QuestPageView(QuestPageViewConfigSO configSO, UIDocument canvas, QuestManager questManager, 
+            VisualElementsAudio visualElementsAudio)
         {
             _configSO = configSO;
             _canvas = canvas;
-            _quests = quests;
+            _questManager = questManager;
+            _visualElementsAudio = visualElementsAudio;
         }
 
         public void Start()
@@ -35,36 +41,46 @@ namespace Journal.Quest.View
             Bind();
         }
 
-        public void Dispose() => Expose();
+        public void Dispose()
+        {
+            Expose();
+
+            foreach (var kvp in _questFoldouts)
+                _visualElementsAudio.Unregister(kvp.Value.Foldout.Q<Label>());
+        }
 
         private void Bind()
         {
-            _quests.OnQuestOpened += OpenQuest;
-            _quests.OnLogAdded += LogQuest;
-            _quests.OnQuestClosed += CloseQuest;
+            _questManager.OnOpen += OpenQuest;
+            _questManager.OnUpdate += LogQuest;
+            _questManager.OnClose += CloseQuest;
         }
         
         private void Expose()
         {
-            _quests.OnQuestOpened -= OpenQuest;
-            _quests.OnLogAdded -= LogQuest;
-            _quests.OnQuestClosed -= CloseQuest;
+            _questManager.OnOpen -= OpenQuest;
+            _questManager.OnUpdate -= LogQuest;
+            _questManager.OnClose -= CloseQuest;
         }
 
-        private void OpenQuest(int questId, string title)
+        private void OpenQuest(QuestSystem.Data.Quest quest)
         {
             var questFoldout = _configSO.QuestDropDown.Instantiate().Q<Foldout>("QuestFoldout");
-            var questFoldoutView = new QuestFoldoutView(questFoldout, title);
+            var questFoldoutView = new QuestFoldoutView(questFoldout, quest.Title);
             
             _questsContainer.Add(questFoldoutView.Root);
-            _questFoldouts.Add(questId, questFoldoutView);
+            _questFoldouts.Add(quest.Id, questFoldoutView);
+            
+            _visualElementsAudio.Register(questFoldout.Q<Label>());
         }
         
-        private void LogQuest(int questId, string log) => _questFoldouts[questId].Log(log);
-
-        private void CloseQuest(int questId, string result)
+        private void LogQuest(QuestSystem.Data.Quest quest)
         {
-            _questFoldouts[questId].Close(result);
+            Debug.Log(quest.Conclusions);
+            
+            _questFoldouts[quest.Id].Log(quest.Conclusions[^1]);
         }
+
+        private void CloseQuest(QuestSystem.Data.Quest quest) => _questFoldouts[quest.Id].Close(quest.Result);
     }
 }

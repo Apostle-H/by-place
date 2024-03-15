@@ -18,6 +18,7 @@ namespace Sound
         public void PlayMusic(AudioClip clip)
         {
             _musicSource.clip = clip;
+            _musicSource.Play();
         }
 
         public void PlayEffect(AudioClip clip)

@@ -1,12 +1,15 @@
 ﻿using System;
-using Registration;
+using Identity.Data;
 
 namespace ActionSystem
 {
-    public interface IAction : IRegistratable
+    public interface IAction : IIdentity
     {
-        bool Resolvable { get; }
+        bool Resolvable { get; set; }
 
         event Action<IAction> OnFinished;
+
+        void Resolve();
+        void Skip();
     }
 }

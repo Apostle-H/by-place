@@ -3,7 +3,7 @@ using InputSystem;
 using VContainer;
 using VContainer.Unity;
 
-namespace Input
+namespace InputSystem
 {
     public class InputHandler : IStartable, IDisposable
     {

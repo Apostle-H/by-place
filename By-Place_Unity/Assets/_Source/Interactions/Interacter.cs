@@ -18,7 +18,7 @@ namespace Interactions
         public void Interact(IInteractable interactable)
         {
             _targetInteractable = interactable;
-            _mover.OnArrived += StartInteraction;
+            _mover.OnStopped += StartInteraction;
                 
             _mover.Move(_targetInteractable.Position);
             _onTheWay = true;
@@ -29,14 +29,17 @@ namespace Interactions
             if (!_onTheWay)
                 return;
             
-            _mover.OnArrived -= StartInteraction;
+            _mover.OnStopped -= StartInteraction;
             _mover.Stop();
             _onTheWay = false;
         }
 
-        private void StartInteraction()
+        private void StartInteraction(bool result)
         {
-            _mover.OnArrived -= StartInteraction;
+            _mover.OnStopped -= StartInteraction;
+            if (!result)
+                return;
+            
             _mover.Rotate(_targetInteractable.Rotation);
             _targetInteractable.Interact();
             _onTheWay = false;

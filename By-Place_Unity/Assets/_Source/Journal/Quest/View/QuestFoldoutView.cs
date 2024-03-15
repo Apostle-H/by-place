@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine.UIElements;
 
 namespace Journal.Quest.View
 {
@@ -10,40 +8,38 @@ namespace Journal.Quest.View
 
         private VisualTreeAsset _logLabelTree;
 
-        private Foldout _foldout;
+        public Foldout Foldout { get; private set; }
 
         public QuestFoldoutView(VisualElement root, string title)
         {
             Root = root;
 
-            _foldout = Root.Q<Foldout>("QuestFoldout");
-            _foldout.text = title;
+            Foldout = Root.Q<Foldout>("QuestFoldout");
+            Foldout.text = title;
             
-            _foldout.AddToClassList("quest-foldout");
+            Foldout.AddToClassList("quest-foldout");
         }
 
         public void Log(string log)
         {
-            var logLabel = new Label(log)
-            {
-                name = "LogLabel"
-            };
-
-            _foldout.Add(logLabel);
+            var logLabel = new Label(log) { name = "LogLabel" };
+            logLabel.style.whiteSpace = WhiteSpace.Normal;
+            
+            Foldout.Add(logLabel);
         }
 
         public void Close(string result)
         {
-            _foldout.RemoveFromClassList("quest-foldout");
-            _foldout.AddToClassList("completed-quest-foldout");
+            Foldout.RemoveFromClassList("quest-foldout");
+            Foldout.AddToClassList("completed-quest-foldout");
             
-            _foldout.Clear();
+            Foldout.Clear();
             var resultLabel = new Label(result)
             {
                 name = "Result Label"
             };
 
-            _foldout.Add(resultLabel);
+            Foldout.Add(resultLabel);
         }
     }
 }

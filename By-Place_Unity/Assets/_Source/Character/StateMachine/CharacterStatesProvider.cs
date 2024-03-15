@@ -6,7 +6,7 @@ using VContainer;
 
 namespace Character
 {
-    public class CharacterStatesProvider : IStatesProvider
+    public class CharacterStatesProvider : ICharacterStatesProvider
     {
         private readonly Dictionary<Type, IState> _states = new();
         
