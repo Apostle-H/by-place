@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Dialogue.Resolve.Data;
+using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer.Unity;
 
@@ -61,13 +62,13 @@ namespace Dialogue.Resolve
         private void Bind()
         {
             for (var i = 0; i < _choiceBtns.Count; i++)
-                _choiceBtns[i].clicked += _clickedActions[i].Invoke;
+                _choiceBtns[i].clicked += _clickedActions[i];
         }
 
         private void Expose()
         {
             for (var i = 0; i < _choiceBtns.Count; i++)
-                _choiceBtns[i].clicked -= _clickedActions[i].Invoke;
+                _choiceBtns[i].clicked -= _clickedActions[i];
         }
 
         public void DisplayDialogue(DDialogue dialogue)

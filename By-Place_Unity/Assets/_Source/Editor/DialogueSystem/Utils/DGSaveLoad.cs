@@ -250,7 +250,7 @@ namespace DialogueSystem.Utils
                     {
                         SpeakerSO = dialogueNodeSO.SpeakerSO,
                         Choices = dialogueNodeSO.Choices.ToList(),
-                        Texts = dialogueNodeSO.Texts.ToList(),
+                        Texts = dialogueNodeSO.Texts.ToList()
                     };
 
                     node = dialogueNode;
