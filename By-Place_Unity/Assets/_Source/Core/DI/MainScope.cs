@@ -116,6 +116,8 @@ namespace Core.DI
                 entryPoints.Add<OnDialogueSaver>();
 
                 entryPoints.Add<SceneSavableLoadableCollector>().AsSelf();
+
+                entryPoints.Add<ResetSaves>();
             });
         }
 
@@ -196,7 +198,10 @@ namespace Core.DI
 
         private void ConfigureActionSystem(IContainerBuilder builder)
         {
-            builder.Register<ActionResolver>(Lifetime.Singleton);
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<ActionResolver>().AsSelf();
+            });
         }
 
         private void ConfigureAnimate(IContainerBuilder builder)

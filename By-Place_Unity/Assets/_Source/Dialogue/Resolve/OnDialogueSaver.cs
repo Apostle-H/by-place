@@ -24,7 +24,6 @@ namespace Dialogue.Resolve
 
         private void Bind()
         {
-            return;
             _dialogueController.OnQuit += _saveLoadInvoker.InvokeSave;
         }
 

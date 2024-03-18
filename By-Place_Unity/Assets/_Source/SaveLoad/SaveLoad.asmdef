@@ -1,4 +1,17 @@
-﻿{
-  "name": "SaveLoad",
-  "references":[ "GUID:650f6a14d2e74c09982753de1841e8b9" ]
+{
+    "name": "SaveLoad",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:650f6a14d2e74c09982753de1841e8b9"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
