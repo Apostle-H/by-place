@@ -1,25 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4553f56b2363b9d4b924dda785b05977, type: 3}
-  m_Name: Brother
-  m_EditorClassIdentifier: 
-  <Owner>k__BackingField: {fileID: 11400000, guid: 2ba11642a75bf7f479d0aa0169397142, type: 2}
-  <Guid>k__BackingField: -316511190
-  <Name>k__BackingField: Brother
-  <StartingNodeGuid>k__BackingField: 1142659212
-  <NodesSOs>k__BackingField:
-  - {fileID: 605706159866662712}
-  - {fileID: 3049962241768604710}
---- !u!114 &605706159866662712
+--- !u!114 &-5521492466935748018
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,7 +27,7 @@ MonoBehaviour:
       \u044D\u0442\u043E \u043C\u043E\u0439 \u0431\u0440\u0430\u0442?"
     <VariableSO>k__BackingField: {fileID: 0}
     <Animation>k__BackingField: {fileID: 0}
---- !u!114 &3049962241768604710
+--- !u!114 &-1666144843698368856
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,3 +46,22 @@ MonoBehaviour:
   <Position>k__BackingField: {x: 1058, y: 1814}
   <VariableSO>k__BackingField: {fileID: 11400000, guid: 6a83133c3021b594c9de5d566fa85a40, type: 2}
   <SetValue>k__BackingField: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4553f56b2363b9d4b924dda785b05977, type: 3}
+  m_Name: Brother
+  m_EditorClassIdentifier: 
+  <Owner>k__BackingField: {fileID: 11400000, guid: 2ba11642a75bf7f479d0aa0169397142, type: 2}
+  <Guid>k__BackingField: -316511190
+  <Name>k__BackingField: Brother
+  <StartingNodeGuid>k__BackingField: 1142659212
+  <NodesSOs>k__BackingField:
+  - {fileID: -5521492466935748018}
+  - {fileID: -1666144843698368856}

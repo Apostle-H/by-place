@@ -17,8 +17,8 @@ MonoBehaviour:
   <Name>k__BackingField: Familytalk
   <StartingNodeGuid>k__BackingField: 0
   <NodesSOs>k__BackingField:
-  - {fileID: 8228677686338856737}
---- !u!114 &8228677686338856737
+  - {fileID: 2798548963669996371}
+--- !u!114 &2798548963669996371
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -34,7 +34,7 @@ MonoBehaviour:
   <IsStartingNode>k__BackingField: 0
   <OutputData>k__BackingField:
   - <NextGuid>k__BackingField: -1
-  <Position>k__BackingField: {x: 2907, y: 883}
+  <Position>k__BackingField: {x: 3082, y: 883}
   <SpeakerSO>k__BackingField: {fileID: 11400000, guid: e5c7c2dffd49b9c44a561e298db1c236, type: 2}
   <Choices>k__BackingField:
   - <Text>k__BackingField: ...
