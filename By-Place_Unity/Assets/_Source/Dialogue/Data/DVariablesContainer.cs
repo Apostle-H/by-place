@@ -82,9 +82,6 @@ namespace Dialogue.Data
             var variablesSOs = Resources.LoadAll<DVariableSO>("Variables");
             foreach (var variable in variablesSOs)
                 _variables.Add(variable.Id, variable.Value);
-
-            foreach (var variableSO in variablesSOs)
-                Resources.UnloadAsset(variableSO);
         }
     }
 }
