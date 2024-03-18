@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e792f53a0ab44e63bd6d6c4506605a01, type: 3}
   m_Name: Uncle
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: 
+  <Name>k__BackingField: "\u0414\u044F\u0434\u044F"
   <Icon>k__BackingField: {fileID: 0}
   <NodeColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e792f53a0ab44e63bd6d6c4506605a01, type: 3}
   m_Name: MainCharacter
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Gabe
+  <Name>k__BackingField: "\u0415\u0432\u0433\u0435\u043D\u0438\u0439"
   <Icon>k__BackingField: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   <NodeColor>k__BackingField: {r: 0.29423285, g: 0.4204293, b: 0.7169812, a: 1}

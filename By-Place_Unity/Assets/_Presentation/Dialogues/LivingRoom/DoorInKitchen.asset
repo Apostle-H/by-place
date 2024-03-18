@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3206592038754818545
+--- !u!114 &-8876048460313635008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4e14a0f1a34feb8d8497ecf354e24b, type: 3}
-  m_Name: -1221881574
+  m_Script: {fileID: 11500000, guid: 018763a5676a422b80c06febeeab0287, type: 3}
+  m_Name: -2056663741
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: -1221881574
+  <Guid>k__BackingField: -2056663741
   <IsStartingNode>k__BackingField: 0
   <OutputData>k__BackingField:
-  - <NextGuid>k__BackingField: 1189379051
-  <Position>k__BackingField: {x: 1058, y: 1814}
-  <VariableSO>k__BackingField: {fileID: 11400000, guid: 6a83133c3021b594c9de5d566fa85a40, type: 2}
-  <SetValue>k__BackingField: 1
+  - <NextGuid>k__BackingField: -1
+  <Position>k__BackingField: {x: 2253, y: 267}
+  <ActionSO>k__BackingField: {fileID: 11400000, guid: 76e2d5e0778a61947b517eabc9272d6f, type: 2}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29,16 +28,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4553f56b2363b9d4b924dda785b05977, type: 3}
-  m_Name: Brother
+  m_Name: DoorInKitchen
   m_EditorClassIdentifier: 
   <Owner>k__BackingField: {fileID: 11400000, guid: 2ba11642a75bf7f479d0aa0169397142, type: 2}
-  <Guid>k__BackingField: -316511190
-  <Name>k__BackingField: Brother
-  <StartingNodeGuid>k__BackingField: 1142659212
+  <Guid>k__BackingField: 1140779818
+  <Name>k__BackingField: DoorInKitchen
+  <StartingNodeGuid>k__BackingField: 345657262
   <NodesSOs>k__BackingField:
-  - {fileID: 3138219503393771062}
-  - {fileID: -3206592038754818545}
---- !u!114 &3138219503393771062
+  - {fileID: 659121660640414889}
+  - {fileID: -8876048460313635008}
+--- !u!114 &659121660640414889
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,20 +47,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
-  m_Name: 1142659212
+  m_Name: 345657262
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: 1142659212
+  <Guid>k__BackingField: 345657262
   <IsStartingNode>k__BackingField: 1
   <OutputData>k__BackingField:
-  - <NextGuid>k__BackingField: -1221881574
-  <Position>k__BackingField: {x: 526, y: 1814}
-  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4c9eccb44f6c77941883c7bd7fdeb7de, type: 2}
+  - <NextGuid>k__BackingField: -1
+  - <NextGuid>k__BackingField: -2056663741
+  <Position>k__BackingField: {x: 1742, y: 218}
+  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4be7c3df4cdfee54e97bb83db6057bda, type: 2}
   <Choices>k__BackingField:
-  - <Text>k__BackingField: ...
+  - <Text>k__BackingField: "\u041C\u043D\u0435 \u043D\u0435 \u043D\u0443\u0436\u043D\u043E
+      \u043D\u0430 \u043A\u0443\u0445\u043D\u044E"
     <CheckVariableSO>k__BackingField: {fileID: 0}
     <ExpectedValue>k__BackingField: 0
+  - <Text>k__BackingField: "\u041E\u0442\u043A\u0440\u044B\u0442\u044C \u0434\u0432\u0435\u0440\u044C"
+    <CheckVariableSO>k__BackingField: {fileID: 11400000, guid: 9cc0b06e1847a2a4995abce41d172f6d, type: 2}
+    <ExpectedValue>k__BackingField: 1
   <Texts>k__BackingField:
-  - <Text>k__BackingField: "\u041D\u0443 \u0438 \u0440\u043E\u0436\u0430. \u041D\u0435\u0443\u0436\u0435\u043B\u0438
-      \u044D\u0442\u043E \u043C\u043E\u0439 \u0431\u0440\u0430\u0442?"
+  - <Text>k__BackingField: "\u0414\u0432\u0435\u0440\u044C \u0432\u0435\u0434\u0443\u0449\u0430\u044F
+      \u043D\u0430 \u043A\u0443\u0445\u043D\u044E"
     <VariableSO>k__BackingField: {fileID: 0}
     <Animation>k__BackingField: {fileID: 0}

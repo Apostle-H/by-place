@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e792f53a0ab44e63bd6d6c4506605a01, type: 3}
-  m_Name: Sister
+  m_Script: {fileID: 11500000, guid: 1826a766845b4885a3e8e2ae8416bfaf, type: 3}
+  m_Name: OpenDoorInKithen
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: "\u0421\u0435\u0441\u0442\u0440\u0430"
-  <Icon>k__BackingField: {fileID: 0}
-  <NodeColor>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
