@@ -8,7 +8,7 @@ using VContainer.Unity;
 
 namespace SaveLoad.Scene
 {
-    public class SceneSavableLoadableCollector : MonoBehaviour, IRegistrator<SceneSavableLoadable>, IStartable, IDisposable
+    public class SceneSavableLoadableCollector : IRegistrator<SceneSavableLoadable>, IStartable, IDisposable
     {
         private ISaverLoader _saverLoader;
         private SaveLoadInvoker _saveLoadInvoker;
@@ -16,7 +16,7 @@ namespace SaveLoad.Scene
         private Dictionary<int, SceneSavableLoadable> _savableLoadables = new();
 
         [Inject]
-        private void Inject(ISaverLoader saverLoader, SaveLoadInvoker saveLoadInvoker)
+        public SceneSavableLoadableCollector(ISaverLoader saverLoader, SaveLoadInvoker saveLoadInvoker)
         {
             _saverLoader = saverLoader;
             _saveLoadInvoker = saveLoadInvoker;
