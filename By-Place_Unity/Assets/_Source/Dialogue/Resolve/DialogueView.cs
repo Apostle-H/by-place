@@ -42,6 +42,7 @@ namespace Dialogue.Resolve
             _choiceBtnsContainer = Root.Q("ChoiceBtnsContainer");
             
             Root.Q<VisualElement>("IconContainer").Add(_speakerIcon);
+            _speakerIcon.StretchToParentSize();
         }
         
         public void Show()
