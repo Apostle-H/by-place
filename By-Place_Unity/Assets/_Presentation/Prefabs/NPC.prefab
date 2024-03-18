@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2427317650034176987}
   - component: {fileID: 6124567684698321717}
   - component: {fileID: 816773911385301305}
+  - component: {fileID: 6125400298749556837}
   - component: {fileID: 7537015392191785252}
   - component: {fileID: 2525818948455556028}
   m_Layer: 7
@@ -122,6 +123,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatableLink: {fileID: 0}
   animator: {fileID: 3106084833509596536}
+--- !u!114 &6125400298749556837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3221605752829335555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e33bf42b21417f8f82c0e481bfff1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Path>k__BackingField: NPC/
 --- !u!195 &7537015392191785252
 NavMeshAgent:
   m_ObjectHideFlags: 0

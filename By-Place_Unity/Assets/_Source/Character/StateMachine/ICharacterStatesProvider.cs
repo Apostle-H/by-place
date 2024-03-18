@@ -1,6 +1,6 @@
 ﻿using StateMachine;
 
-namespace Character
+namespace Character.StateMachine
 {
     public interface ICharacterStatesProvider : IStatesProvider
     {

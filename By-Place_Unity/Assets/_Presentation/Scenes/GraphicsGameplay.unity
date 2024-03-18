@@ -426,6 +426,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
       objectReference: {fileID: 0}
+    - target: {fileID: 6125400298749556837, guid: 5ee0fce0550367d49b0a1ecfe8911a90, type: 3}
+      propertyPath: <Path>k__BackingField
+      value: NPC/Sanya
+      objectReference: {fileID: 0}
     - target: {fileID: 6563959478379175754, guid: 5ee0fce0550367d49b0a1ecfe8911a90, type: 3}
       propertyPath: m_Extents.x
       value: 0.15
@@ -934,6 +938,7 @@ GameObject:
   - component: {fileID: 894513508}
   - component: {fileID: 894513507}
   - component: {fileID: 894513506}
+  - component: {fileID: 894513509}
   - component: {fileID: 894513505}
   - component: {fileID: 894513504}
   - component: {fileID: 894513503}
@@ -1074,6 +1079,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ds: {fileID: 11400000, guid: 9cbfc4a078ba9c6469c0c60bd0e3d1c5, type: 2}
   interactPoint: {fileID: 40114798}
+--- !u!114 &894513509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894513501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e33bf42b21417f8f82c0e481bfff1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Path>k__BackingField: Items/Forks
 --- !u!1 &1063094272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,6 +1377,7 @@ GameObject:
   - component: {fileID: 1165266193}
   - component: {fileID: 1165266198}
   - component: {fileID: 1165266197}
+  - component: {fileID: 1165266199}
   - component: {fileID: 1165266196}
   - component: {fileID: 1165266195}
   - component: {fileID: 1165266194}
@@ -1483,6 +1502,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ds: {fileID: 11400000, guid: 1d573f80ce98b0843a55dabc0ef71eee, type: 2}
   interactPoint: {fileID: 1792434245}
+--- !u!114 &1165266199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165266192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e33bf42b21417f8f82c0e481bfff1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Path>k__BackingField: Travels/RoomStreetDoor
 --- !u!1 &1170225351 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6051600882135041266, guid: f2326882bfd81aa42bb343763de9b78b, type: 3}
@@ -2088,6 +2120,7 @@ GameObject:
   - component: {fileID: 1928690484}
   - component: {fileID: 1928690485}
   - component: {fileID: 1928690486}
+  - component: {fileID: 1928690487}
   m_Layer: 0
   m_Name: ForkQuestStarter
   m_TagString: Untagged
@@ -2144,6 +2177,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1928690487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1928690483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e33bf42b21417f8f82c0e481bfff1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Path>k__BackingField: GO/ForksQuestStarter
 --- !u!1 &1942777666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2333,6 +2379,10 @@ PrefabInstance:
     - target: {fileID: 7555291818077997706, guid: 14362b4c913f8cf4dbe9c5bc02c28129, type: 3}
       propertyPath: m_Name
       value: Sound
+      objectReference: {fileID: 0}
+    - target: {fileID: 8832830058472616949, guid: 14362b4c913f8cf4dbe9c5bc02c28129, type: 3}
+      propertyPath: m_Volume
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8968586440897994780, guid: 14362b4c913f8cf4dbe9c5bc02c28129, type: 3}
       propertyPath: m_LocalPosition.x

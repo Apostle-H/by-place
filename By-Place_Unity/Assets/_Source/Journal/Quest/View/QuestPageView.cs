@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Journal.Quest.View.Data;
 using QuestSystem;
 using Sound;
+using Sound.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer;

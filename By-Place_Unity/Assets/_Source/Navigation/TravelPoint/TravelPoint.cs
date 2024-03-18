@@ -1,5 +1,5 @@
 ﻿using System;
-using Character.Data;
+using Character.Movement;
 using Interactions;
 using Movement;
 using Navigation.Location;

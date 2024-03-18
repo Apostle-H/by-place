@@ -4,7 +4,7 @@ using StateMachine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Character
+namespace Character.StateMachine
 {
     public class CharacterStateMachine : IStateMachine, IPostStartable, ITickable
     {

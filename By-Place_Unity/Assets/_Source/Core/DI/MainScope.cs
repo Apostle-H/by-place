@@ -3,14 +3,15 @@ using Animate;
 using Animate.Resolve;
 using Character;
 using Character.Data;
-using Character.States;
+using Character.Movement;
+using Character.StateMachine;
+using Character.StateMachine.States;
 using Character.View;
 using Core.Loaders;
 using Core.StateMachine;
 using Core.StateMachine.States;
 using Cursor.Manager;
 using Cursor.Sensitive;
-using DefaultNamespace;
 using Dialogue.Data;
 using Dialogue.Resolve;
 using Dialogue.Resolve.Data;
@@ -34,7 +35,10 @@ using QuestSystem.View;
 using QuestSystem.View.Data;
 using SaveLoad;
 using SaveLoad.Invoker;
+using SaveLoad.Json;
+using SaveLoad.Scene;
 using Sound;
+using Sound.UI;
 using Sound.UI.Data;
 using StateMachine;
 using UnityEngine;
@@ -110,6 +114,8 @@ namespace Core.DI
             builder.UseEntryPoints(entryPoints =>
             {
                 entryPoints.Add<OnDialogueSaver>();
+
+                entryPoints.Add<SceneSavableLoadableCollector>().AsSelf();
             });
         }
 

@@ -5,12 +5,11 @@ using PointNClick.Data;
 using StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 using Utils.Extensions;
 using Utils.Services;
 using VContainer;
 
-namespace Character.States
+namespace Character.StateMachine.States
 {
     public class CharacterFreeState : IState
     {

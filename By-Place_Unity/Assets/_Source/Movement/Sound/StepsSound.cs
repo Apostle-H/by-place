@@ -1,9 +1,8 @@
-﻿using System;
-using Sound;
+﻿using Sound;
 using UnityEngine;
 using VContainer;
 
-namespace Movement
+namespace Movement.Sound
 {
     public class StepsSound : MonoBehaviour
     {

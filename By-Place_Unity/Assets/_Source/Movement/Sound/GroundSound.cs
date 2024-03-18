@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Movement
+namespace Movement.Sound
 {
     public class GroundSound : MonoBehaviour
     {

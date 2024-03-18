@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Character.States;
+using Character.StateMachine.States;
 using StateMachine;
 using VContainer;
 
-namespace Character
+namespace Character.StateMachine
 {
     public class CharacterStatesProvider : ICharacterStatesProvider
     {

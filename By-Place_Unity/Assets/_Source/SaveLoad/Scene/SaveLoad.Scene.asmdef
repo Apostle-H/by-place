@@ -1,0 +1,9 @@
+﻿{
+  "name": "SaveLoad.Scene",
+  "references": [ 
+    "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+    "GUID:3aa2c95ae5924590b93e1068eed6e4c1", 
+    "GUID:650f6a14d2e74c09982753de1841e8b9", 
+    "GUID:19ecde6ce5bc4f12b9cb9fec625f0ca0" 
+  ]
+}

@@ -1,4 +1,5 @@
-﻿using Interactions;
+﻿using Character.Movement;
+using Interactions;
 using Movement;
 using VContainer;
 

@@ -1,13 +1,11 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using SaveLoad;
 using SaveLoad.Load;
 using SaveLoad.Save;
-using UnityEngine;
 using Application = UnityEngine.Application;
 
-namespace DefaultNamespace
+namespace SaveLoad.Json
 {
     public class JsonSaverLoader : ISaverLoader
     {

@@ -2,6 +2,7 @@
 using Cursor.Sensitive;
 using Journal.View.Data;
 using Sound;
+using Sound.UI;
 using UnityEngine.UIElements;
 using VContainer.Unity;
 

@@ -1,6 +1,6 @@
 ﻿using Movement;
 
-namespace Character.Data
+namespace Character.Movement
 {
     public class CharacterNavMeshMover : NavMeshMover, ICharacterMover
     {

@@ -4,6 +4,7 @@ using Cursor.Sensitive;
 using Inventory.Data;
 using Inventory.View.Data;
 using Sound;
+using Sound.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
 using VContainer.Unity;

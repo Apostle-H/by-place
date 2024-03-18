@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Registration;
 using Sound.UI.Data;
 using UnityEngine;
 using UnityEngine.UIElements;
-using VContainer.Unity;
 
-namespace Sound
+namespace Sound.UI
 {
     public class VisualElementsAudio : IRegistrator<VisualElement>
     {

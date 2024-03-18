@@ -1,11 +1,10 @@
 ﻿using Character.Data;
 using InputSystem;
-using PointNClick.Data;
 using StateMachine;
 using UnityEngine.InputSystem;
 using VContainer;
 
-namespace Character.States
+namespace Character.StateMachine.States
 {
     public class CharacterInteractingState : IState
     {

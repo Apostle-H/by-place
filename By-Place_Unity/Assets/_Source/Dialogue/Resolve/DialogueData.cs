@@ -77,8 +77,8 @@ namespace Dialogue.Resolve
             for (var i = 0; i < nodeSO.Choices.Count; i++)
             {
                 if (nodeSO.Choices[i].CheckVariableSO != default
-                    && (!_variablesContainer.Get(nodeSO.Choices[i].CheckVariableSO.Id, out var variable) ||
-                        variable != nodeSO.Choices[i].ExpectedValue))
+                    && (!_variablesContainer.Get(nodeSO.Choices[i].CheckVariableSO.Id, out var variable) 
+                    || variable != nodeSO.Choices[i].ExpectedValue))
                     continue;
 
                 dialogue.Choices.Add(nodeSO.Choices[i].Text);
