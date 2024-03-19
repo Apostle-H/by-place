@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52e33bf42b21417f8f82c0e481bfff1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <Target>k__BackingField: {fileID: 3221605752829335555}
   <Path>k__BackingField: NPC/
 --- !u!195 &7537015392191785252
 NavMeshAgent:
