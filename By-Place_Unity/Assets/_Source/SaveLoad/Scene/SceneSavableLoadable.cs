@@ -8,6 +8,7 @@ namespace SaveLoad.Scene
 {
     public class SceneSavableLoadable : MonoBehaviour, ISavableLoadable<SceneSave>
     {
+        [field: SerializeField] public GameObject Target { get; private set; }
         [field: SerializeField] public string Path { get; private set; }
         
         private SceneSavableLoadableCollector _sceneSavableLoadableCollector;
@@ -26,19 +27,19 @@ namespace SaveLoad.Scene
 
         public SceneSave GetSaveData()
         {
-            var position = transform.position;
-            var rotation = transform.rotation;
+            var position = Target.transform.position;
+            var rotation = Target.transform.rotation;
             var jsonPosition = new JsonVector4(position.x, position.y, position.z, 0f);
             var jsonRotation = new JsonVector4(rotation.x, rotation.y, rotation.z, rotation.w);
-            return new SceneSave(gameObject.activeInHierarchy, jsonPosition, jsonRotation);
+            return new SceneSave(Target.activeInHierarchy, jsonPosition, jsonRotation);
         }
 
         public void LoadSaveData(SceneSave saveData)
         {
-            gameObject.SetActive(saveData.Active);
+            Target.SetActive(saveData.Active);
             
-            transform.position = saveData.Position.GetUnityVector();
-            transform.rotation = saveData.Rotation.GetUnityQuaternion();
+            Target.transform.position = saveData.Position.GetUnityVector();
+            Target.transform.rotation = saveData.Rotation.GetUnityQuaternion();
         }
     }
 }
