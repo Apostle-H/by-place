@@ -1,4 +1,5 @@
 ﻿using System;
+using ActionSystem.BasicActions.Data;
 using ActionSystem.Data;
 using UnityEngine;
 using VContainer;
@@ -8,8 +9,7 @@ namespace ActionSystem.BasicActions
     public class OnOffGOAction : MonoBehaviour, IAction
     {
         [SerializeField] private ActionSO actionSO;
-        [SerializeField] private GameObject[] targets;
-        [SerializeField] private bool offOn;
+        [SerializeField] private GameObjectActive[] targets;
 
         private ActionResolver _actionResolver;
 
@@ -28,7 +28,7 @@ namespace ActionSystem.BasicActions
         public void Resolve()
         {
             foreach (var target in targets)
-                target.SetActive(offOn);
+                target.GameObject.SetActive(target.Active);
             Resolvable = false;
             
             OnFinished?.Invoke(this);
