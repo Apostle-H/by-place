@@ -7,7 +7,7 @@ namespace Inventory.Actions
 {
     public class ItemAction : IAction
     {
-        private InventoryView _inventoryView;
+        private Inventory _inventory;
         
         private ItemSO _itemSO;
         private bool _removeAdd;
@@ -17,21 +17,21 @@ namespace Inventory.Actions
         
         public event Action<IAction> OnFinished;
 
-        public ItemAction(int id, ItemSO itemSO, bool removeAdd, InventoryView inventoryView)
+        public ItemAction(int id, ItemSO itemSO, bool removeAdd, Inventory inventory)
         {
             Id = id;
 
             _itemSO = itemSO;
             _removeAdd = removeAdd;
-            _inventoryView = inventoryView;
+            _inventory = inventory;
         }
 
         public void Resolve()
         {
             if (_removeAdd)
-                _inventoryView.AddItem(_itemSO);
+                _inventory.AddItem(_itemSO.Build());
             else
-                _inventoryView.RemoveItem(_itemSO);
+                _inventory.RemoveItem(_itemSO.Id);
             Resolvable = false;
             
             OnFinished?.Invoke(this);

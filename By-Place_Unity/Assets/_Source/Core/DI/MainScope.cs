@@ -243,6 +243,8 @@ namespace Core.DI
             
             builder.UseEntryPoints(entryPoints =>
             {
+                entryPoints.Add<Inventory.Inventory>().AsSelf();
+                
                 entryPoints.Add<ItemActionsCollector>();
                 entryPoints.Add<InventoryView>().AsSelf();
                 entryPoints.Add<ItemInfoView>().AsSelf();

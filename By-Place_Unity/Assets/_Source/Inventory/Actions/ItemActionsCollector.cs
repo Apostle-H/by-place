@@ -14,14 +14,14 @@ namespace Inventory.Actions
     {
         private List<ItemAction> _itemActions = new();
 
-        private InventoryView _inventoryView;
+        private Inventory _inventory;
         private ActionResolver _actionResolver;
 
 
         [Inject]
-        private void Inject(InventoryView inventoryView, ActionResolver actionResolver)
+        private void Inject(Inventory inventory, ActionResolver actionResolver)
         {
-            _inventoryView = inventoryView;
+            _inventory = inventory;
             _actionResolver = actionResolver;
         }
 
@@ -30,8 +30,7 @@ namespace Inventory.Actions
             var questActionsSO = Resources.LoadAll<ItemActionSO>("Actions/Inventory").ToList();
 
             foreach (var itemActionSO in questActionsSO)
-                _itemActions.Add(new ItemAction(itemActionSO.Id, itemActionSO.ItemSO, itemActionSO.RemoveAdd, 
-                    _inventoryView));
+                _itemActions.Add(new ItemAction(itemActionSO.Id, itemActionSO.ItemSO, itemActionSO.RemoveAdd, _inventory));
         }
 
         public void Start()

@@ -11,21 +11,21 @@ namespace Inventory.View
         
         public VisualElement Root { get; private set; }
 
-        public ItemSO TargetItem { get; private set; }
+        public Item TargetItem { get; private set; }
 
         public event Action<ItemView> OnHover;
         public event Action<ItemView> OnUnhover;
 
-        public ItemView(VisualElement root, ItemSO itemSO)
+        public ItemView(VisualElement root, Item item)
         {
             Root = root;
 
             _icon = Root.Q<VisualElement>("Icon");
             
-            SetTargetItem(itemSO);
+            SetTargetItem(item);
         }
 
-        public void SetTargetItem(ItemSO itemSO)
+        public void SetTargetItem(Item itemSO)
         {
             TargetItem = itemSO;
             

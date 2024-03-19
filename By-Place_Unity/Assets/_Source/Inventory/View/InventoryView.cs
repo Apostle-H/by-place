@@ -7,6 +7,7 @@ using Sound;
 using Sound.UI;
 using UnityEngine;
 using UnityEngine.UIElements;
+using VContainer;
 using VContainer.Unity;
 
 namespace Inventory.View
@@ -14,6 +15,7 @@ namespace Inventory.View
     public class InventoryView : IStartable, IDisposable
     {
         private InventoryViewConfigSO _configSO;
+        private Inventory _inventory;
         
         private UIDocument _canvas;
         private ItemInfoView _itemInfoView;
@@ -32,10 +34,13 @@ namespace Inventory.View
 
         private bool _showItems;
 
-        public InventoryView(InventoryViewConfigSO configSO, UIDocument canvas, ItemInfoView itemInfoView, 
-            UICursorSensitive.Factory cursorSensitiveFactory, VisualElementsAudio visualElementsAudio)
+        [Inject]
+        public InventoryView(InventoryViewConfigSO configSO, Inventory inventory, UIDocument canvas, 
+            ItemInfoView itemInfoView, UICursorSensitive.Factory cursorSensitiveFactory, 
+            VisualElementsAudio visualElementsAudio)
         {
             _configSO = configSO;
+            _inventory = inventory;
             
             _canvas = canvas;
             _itemInfoView = itemInfoView;
@@ -60,6 +65,9 @@ namespace Inventory.View
 
         private void Bind()
         {
+            _inventory.OnAddItem += AddItem;
+            _inventory.OnRemoveItem += RemoveItem;
+            
             _toggleBtn.RegisterCallback<MouseDownEvent>(ToggleItems);
             _toggleCursorSensitive.Bind();
 
@@ -68,6 +76,9 @@ namespace Inventory.View
 
         private void Expose()
         {
+            _inventory.OnAddItem -= AddItem;
+            _inventory.OnRemoveItem -= RemoveItem;
+            
             _toggleBtn.UnregisterCallback<MouseDownEvent>(ToggleItems);
             _toggleCursorSensitive.Expose();
             
@@ -122,13 +133,13 @@ namespace Inventory.View
             _showItems = false;
         }
 
-        public void AddItem(ItemSO itemSO)
+        private void AddItem(Item item)
         {
             ItemView itemView;
             if (_freeItemViews.Count == 0)
             {
                 var itemRoot = _configSO.ItemSlotVisualTree.Instantiate().Q<VisualElement>("Item");
-                itemView = new ItemView(itemRoot, itemSO);
+                itemView = new ItemView(itemRoot, item);
                 _itemSlotsHolder.Add(itemView.Root);
             }
             else
@@ -137,7 +148,7 @@ namespace Inventory.View
                 _freeItemViews.RemoveAt(_freeItemViews.Count - 1);
             }
             
-            _itemsViews.Add(itemSO.Id, itemView);
+            _itemsViews.Add(item.Id, itemView);
             if (_showItems)
             {
                 itemView.Show();
@@ -150,14 +161,14 @@ namespace Inventory.View
             }
         }
 
-        public void RemoveItem(ItemSO itemSO)
+        private void RemoveItem(Item item)
         {
-            if (!_itemsViews.ContainsKey(itemSO.Id))
+            if (!_itemsViews.ContainsKey(item.Id))
                 return;
 
-            var itemView = _itemsViews[itemSO.Id];
+            var itemView = _itemsViews[item.Id];
             _freeItemViews.Add(itemView);
-            _itemsViews.Remove(itemSO.Id);
+            _itemsViews.Remove(item.Id);
             
             itemView.Hide();
             ExposeItemView(itemView);
