@@ -46,14 +46,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CutsceneCore
       objectReference: {fileID: 0}
-    - target: {fileID: 6308321962096871295, guid: ede983c6c11831745a049b64d7765cb3, type: 3}
-      propertyPath: autoInjectGameObjects.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6308321962096871295, guid: ede983c6c11831745a049b64d7765cb3, type: 3}
-      propertyPath: autoInjectGameObjects.Array.data[0]
-      value: 
-      objectReference: {fileID: 8406136809335010005}
     - target: {fileID: 6909498033831341022, guid: ede983c6c11831745a049b64d7765cb3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -164,11 +156,6 @@ PrefabInstance:
 --- !u!4 &6903237437384266434 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7560027865886655870, guid: 2d30d905fd1ad044bbd10a282844504f, type: 3}
-  m_PrefabInstance: {fileID: 3974326159680542652}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8406136809335010005 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4868176200468702569, guid: 2d30d905fd1ad044bbd10a282844504f, type: 3}
   m_PrefabInstance: {fileID: 3974326159680542652}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8605277328824355024
