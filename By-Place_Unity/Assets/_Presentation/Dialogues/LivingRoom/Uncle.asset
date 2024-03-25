@@ -1,6 +1,44 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6970216523846486296
+--- !u!114 &-1156053352375870888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4e14a0f1a34feb8d8497ecf354e24b, type: 3}
+  m_Name: -344164469
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: -344164469
+  <IsStartingNode>k__BackingField: 0
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: 1189379051
+  <Position>k__BackingField: {x: 1160, y: 992}
+  <VariableSO>k__BackingField: {fileID: 11400000, guid: 0f4f5865cfe69d34691c679a4e300faf, type: 2}
+  <SetValue>k__BackingField: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4553f56b2363b9d4b924dda785b05977, type: 3}
+  m_Name: Uncle
+  m_EditorClassIdentifier: 
+  <Owner>k__BackingField: {fileID: 11400000, guid: 2ba11642a75bf7f479d0aa0169397142, type: 2}
+  <Guid>k__BackingField: 825353377
+  <Name>k__BackingField: Uncle
+  <StartingNodeGuid>k__BackingField: 1366428531
+  <NodesSOs>k__BackingField:
+  - {fileID: 7640055428526224652}
+  - {fileID: -1156053352375870888}
+--- !u!114 &7640055428526224652
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -29,41 +67,3 @@ MonoBehaviour:
       \u044F \u0435\u0433\u043E \u0447\u0435\u043C?"
     <VariableSO>k__BackingField: {fileID: 0}
     <Animation>k__BackingField: {fileID: 0}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4553f56b2363b9d4b924dda785b05977, type: 3}
-  m_Name: Uncle
-  m_EditorClassIdentifier: 
-  <Owner>k__BackingField: {fileID: 11400000, guid: 2ba11642a75bf7f479d0aa0169397142, type: 2}
-  <Guid>k__BackingField: 825353377
-  <Name>k__BackingField: Uncle
-  <StartingNodeGuid>k__BackingField: 1366428531
-  <NodesSOs>k__BackingField:
-  - {fileID: -6970216523846486296}
-  - {fileID: 8861917750070671300}
---- !u!114 &8861917750070671300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4e14a0f1a34feb8d8497ecf354e24b, type: 3}
-  m_Name: -344164469
-  m_EditorClassIdentifier: 
-  <Guid>k__BackingField: -344164469
-  <IsStartingNode>k__BackingField: 0
-  <OutputData>k__BackingField:
-  - <NextGuid>k__BackingField: 1189379051
-  <Position>k__BackingField: {x: 1160, y: 992}
-  <VariableSO>k__BackingField: {fileID: 11400000, guid: 0f4f5865cfe69d34691c679a4e300faf, type: 2}
-  <SetValue>k__BackingField: 1

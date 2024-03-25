@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-6632371243986510968
+--- !u!114 &-6480228469371802817
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,17 +9,105 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f4e14a0f1a34feb8d8497ecf354e24b, type: 3}
-  m_Name: 292141763
+  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
+  m_Name: 2086692620
   m_EditorClassIdentifier: 
-  <Guid>k__BackingField: 292141763
+  <Guid>k__BackingField: 2086692620
   <IsStartingNode>k__BackingField: 0
   <OutputData>k__BackingField:
-  - <NextGuid>k__BackingField: -1
-  <Position>k__BackingField: {x: 9163, y: 950}
-  <VariableSO>k__BackingField: {fileID: 11400000, guid: 9cc0b06e1847a2a4995abce41d172f6d, type: 2}
-  <SetValue>k__BackingField: 1
---- !u!114 &-4638286963996196444
+  - <NextGuid>k__BackingField: 11187285
+  <Position>k__BackingField: {x: 7430, y: 874}
+  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4be7c3df4cdfee54e97bb83db6057bda, type: 2}
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: ...
+    <CheckVariableSO>k__BackingField: {fileID: 0}
+    <ExpectedValue>k__BackingField: 0
+  <Texts>k__BackingField:
+  - <Text>k__BackingField: "\u0418 \u043A\u0442\u043E \u0432\u043E\u043E\u0431\u0449\u0435
+      \u0434\u043E\u0434\u0443\u043C\u0430\u043B\u0441\u044F \u043D\u0430 \u043F\u043E\u043C\u0438\u043D\u043A\u0430\u0445
+      \u0433\u043E\u043B\u0443\u0431\u0446\u044B \u043F\u043E\u0434\u0430\u0432\u0430\u0442\u044C?
+      \u0422\u0443\u0442 \u0443\u0436 \u043B\u0438\u0431\u043E \u043B\u043E\u0436\u043A\u0438,
+      \u043B\u0438\u0431\u043E \u0433\u043E\u043B\u0443\u0431\u0446\u044B. \u0418\u043D\u0430\u0447\u0435
+      \u043C\u043E\u0436\u0435\u0442 \u0432\u044B\u0439\u0442\u0438 \u043B\u0430\u0442\u0435\u0440\u0430\u043B\u044C\u043D\u043E. "
+    <VariableSO>k__BackingField: {fileID: 0}
+    <Animation>k__BackingField: {fileID: 0}
+--- !u!114 &-4950155804795589579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
+  m_Name: 11187285
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: 11187285
+  <IsStartingNode>k__BackingField: 0
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: 642693856
+  <Position>k__BackingField: {x: 8312, y: 874}
+  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4be7c3df4cdfee54e97bb83db6057bda, type: 2}
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: ...
+    <CheckVariableSO>k__BackingField: {fileID: 0}
+    <ExpectedValue>k__BackingField: 0
+  <Texts>k__BackingField:
+  - <Text>k__BackingField: "\u0421\u0438\u0434\u0438, \u0412\u0430\u043B\u044C, \u044F
+      \u043F\u0440\u0438\u043D\u0435\u0441\u0443."
+    <VariableSO>k__BackingField: {fileID: 0}
+    <Animation>k__BackingField: {fileID: 0}
+--- !u!114 &-2127846884586247430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 018763a5676a422b80c06febeeab0287, type: 3}
+  m_Name: 642693856
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: 642693856
+  <IsStartingNode>k__BackingField: 0
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: 292141763
+  <Position>k__BackingField: {x: 8798, y: 950}
+  <ActionSO>k__BackingField: {fileID: 11400000, guid: 66b5ba40ef963d54db69fa07b704be58, type: 2}
+--- !u!114 &-1567673441296023128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
+  m_Name: -1545801436
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: -1545801436
+  <IsStartingNode>k__BackingField: 0
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: 692100374
+  <Position>k__BackingField: {x: 4168, y: 874}
+  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4c9eccb44f6c77941883c7bd7fdeb7de, type: 2}
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: ...
+    <CheckVariableSO>k__BackingField: {fileID: 0}
+    <ExpectedValue>k__BackingField: 0
+  <Texts>k__BackingField:
+  - <Text>k__BackingField: "\u0412\u0430\u043B\u0451\u043A, \u043D\u0443 \u043A\u0430\u043A
+      \u044F \u0433\u043E\u043B\u0443\u0431\u0446\u044B \u043B\u043E\u0436\u043A\u043E\u0439
+      \u0435\u0441\u0442\u044C \u0431\u0443\u0434\u0443? \u0414\u0430\u0439 \u043D\u043E\u0436
+      \u0438\u043B\u0438 \u0432\u0438\u043B\u043A\u0443 \u0445\u043E\u0442\u044F\u0431.
+      \u0423\u0441\u0442\u0440\u043E\u0438\u043B\u0430 \u0442\u0443\u0442 \u0445\u0440\u0435\u043D
+      \u043F\u043E\u0439\u043C\u0438 \u0447\u0451."
+    <VariableSO>k__BackingField: {fileID: 0}
+    <Animation>k__BackingField: {fileID: 0}
+--- !u!114 &-467439275930978155
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,7 +133,108 @@ MonoBehaviour:
   - <Text>k__BackingField: "\u0414\u0443\u0448\u0443? \u0425\u0435\u0445!"
     <VariableSO>k__BackingField: {fileID: 0}
     <Animation>k__BackingField: {fileID: 0}
---- !u!114 &-4615848876740221632
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4553f56b2363b9d4b924dda785b05977, type: 3}
+  m_Name: Familytalk
+  m_EditorClassIdentifier: 
+  <Owner>k__BackingField: {fileID: 11400000, guid: 2ba11642a75bf7f479d0aa0169397142, type: 2}
+  <Guid>k__BackingField: -1103644992
+  <Name>k__BackingField: Familytalk
+  <StartingNodeGuid>k__BackingField: 0
+  <NodesSOs>k__BackingField:
+  - {fileID: 3348813827754685221}
+  - {fileID: -467439275930978155}
+  - {fileID: -1567673441296023128}
+  - {fileID: 7643230195060503099}
+  - {fileID: 4646071618376340659}
+  - {fileID: 1633723189834442972}
+  - {fileID: 4881485777279044534}
+  - {fileID: -6480228469371802817}
+  - {fileID: -4950155804795589579}
+  - {fileID: -2127846884586247430}
+  - {fileID: 2594295998742769442}
+--- !u!114 &1633723189834442972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
+  m_Name: -295630424
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: -295630424
+  <IsStartingNode>k__BackingField: 0
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: -1178180651
+  <Position>k__BackingField: {x: 5974, y: 874}
+  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 0548b52266a9cd648a91e4943df64927, type: 2}
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: ...
+    <CheckVariableSO>k__BackingField: {fileID: 0}
+    <ExpectedValue>k__BackingField: 0
+  <Texts>k__BackingField:
+  - <Text>k__BackingField: "\u0426\u044B\u0446, \u0445\u043E\u043B\u0435\u0440\u0430!"
+    <VariableSO>k__BackingField: {fileID: 0}
+    <Animation>k__BackingField: {fileID: 0}
+--- !u!114 &2594295998742769442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f4e14a0f1a34feb8d8497ecf354e24b, type: 3}
+  m_Name: 292141763
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: 292141763
+  <IsStartingNode>k__BackingField: 0
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: -1
+  <Position>k__BackingField: {x: 9163, y: 950}
+  <VariableSO>k__BackingField: {fileID: 11400000, guid: 9cc0b06e1847a2a4995abce41d172f6d, type: 2}
+  <SetValue>k__BackingField: 1
+--- !u!114 &3348813827754685221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
+  m_Name: -360315795
+  m_EditorClassIdentifier: 
+  <Guid>k__BackingField: -360315795
+  <IsStartingNode>k__BackingField: 0
+  <OutputData>k__BackingField:
+  - <NextGuid>k__BackingField: -1163822300
+  <Position>k__BackingField: {x: 3272, y: 874}
+  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: e5c7c2dffd49b9c44a561e298db1c236, type: 2}
+  <Choices>k__BackingField:
+  - <Text>k__BackingField: ...
+    <CheckVariableSO>k__BackingField: {fileID: 0}
+    <ExpectedValue>k__BackingField: 0
+  <Texts>k__BackingField:
+  - <Text>k__BackingField: "\u0414\u0430 \u043D\u0435 \u0441\u0442\u0443\u0447\u0438
+      \u0442\u044B, \u0431\u043B\u0438\u043D. \u0412\u0441\u044E \u0434\u0443\u0448\u0443
+      \u0443\u0436\u0435 \u0432\u044B\u043C\u043E\u0442\u0430\u043B!"
+    <VariableSO>k__BackingField: {fileID: 0}
+    <Animation>k__BackingField: {fileID: 0}
+--- !u!114 &4646071618376340659
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -71,7 +260,7 @@ MonoBehaviour:
   - <Text>k__BackingField: "\u041F\u043E\u043C\u0438\u043D\u043A\u0438! \u0425\u0443\u0438\u043D\u043A\u0438!"
     <VariableSO>k__BackingField: {fileID: 0}
     <Animation>k__BackingField: {fileID: 0}
---- !u!114 &-3836049310680959959
+--- !u!114 &4881485777279044534
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,147 +292,7 @@ MonoBehaviour:
       \u0434\u0435\u043B\u043E, \u0431\u043B\u044F\u0434\u044C, \u0433\u043E\u043B\u0443\u0431\u0446\u044B!"
     <VariableSO>k__BackingField: {fileID: 0}
     <Animation>k__BackingField: {fileID: 0}
---- !u!114 &-3834063467450521315
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
-  m_Name: -1545801436
-  m_EditorClassIdentifier: 
-  <Guid>k__BackingField: -1545801436
-  <IsStartingNode>k__BackingField: 0
-  <OutputData>k__BackingField:
-  - <NextGuid>k__BackingField: 692100374
-  <Position>k__BackingField: {x: 4168, y: 874}
-  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4c9eccb44f6c77941883c7bd7fdeb7de, type: 2}
-  <Choices>k__BackingField:
-  - <Text>k__BackingField: ...
-    <CheckVariableSO>k__BackingField: {fileID: 0}
-    <ExpectedValue>k__BackingField: 0
-  <Texts>k__BackingField:
-  - <Text>k__BackingField: "\u0412\u0430\u043B\u0451\u043A, \u043D\u0443 \u043A\u0430\u043A
-      \u044F \u0433\u043E\u043B\u0443\u0431\u0446\u044B \u043B\u043E\u0436\u043A\u043E\u0439
-      \u0435\u0441\u0442\u044C \u0431\u0443\u0434\u0443? \u0414\u0430\u0439 \u043D\u043E\u0436
-      \u0438\u043B\u0438 \u0432\u0438\u043B\u043A\u0443 \u0445\u043E\u0442\u044F\u0431.
-      \u0423\u0441\u0442\u0440\u043E\u0438\u043B\u0430 \u0442\u0443\u0442 \u0445\u0440\u0435\u043D
-      \u043F\u043E\u0439\u043C\u0438 \u0447\u0451."
-    <VariableSO>k__BackingField: {fileID: 0}
-    <Animation>k__BackingField: {fileID: 0}
---- !u!114 &-3547532705364118549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
-  m_Name: -360315795
-  m_EditorClassIdentifier: 
-  <Guid>k__BackingField: -360315795
-  <IsStartingNode>k__BackingField: 0
-  <OutputData>k__BackingField:
-  - <NextGuid>k__BackingField: -1163822300
-  <Position>k__BackingField: {x: 3272, y: 874}
-  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: e5c7c2dffd49b9c44a561e298db1c236, type: 2}
-  <Choices>k__BackingField:
-  - <Text>k__BackingField: ...
-    <CheckVariableSO>k__BackingField: {fileID: 0}
-    <ExpectedValue>k__BackingField: 0
-  <Texts>k__BackingField:
-  - <Text>k__BackingField: "\u0414\u0430 \u043D\u0435 \u0441\u0442\u0443\u0447\u0438
-      \u0442\u044B, \u0431\u043B\u0438\u043D. \u0412\u0441\u044E \u0434\u0443\u0448\u0443
-      \u0443\u0436\u0435 \u0432\u044B\u043C\u043E\u0442\u0430\u043B!"
-    <VariableSO>k__BackingField: {fileID: 0}
-    <Animation>k__BackingField: {fileID: 0}
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4553f56b2363b9d4b924dda785b05977, type: 3}
-  m_Name: Familytalk
-  m_EditorClassIdentifier: 
-  <Owner>k__BackingField: {fileID: 11400000, guid: 2ba11642a75bf7f479d0aa0169397142, type: 2}
-  <Guid>k__BackingField: -1103644992
-  <Name>k__BackingField: Familytalk
-  <StartingNodeGuid>k__BackingField: 0
-  <NodesSOs>k__BackingField:
-  - {fileID: -3547532705364118549}
-  - {fileID: -4638286963996196444}
-  - {fileID: -3834063467450521315}
-  - {fileID: 6153628797298766086}
-  - {fileID: -4615848876740221632}
-  - {fileID: 5467439787638077865}
-  - {fileID: -3836049310680959959}
-  - {fileID: 6482763186973647608}
-  - {fileID: 5438987116965096018}
-  - {fileID: 7814974591399653277}
-  - {fileID: -6632371243986510968}
---- !u!114 &5438987116965096018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
-  m_Name: 11187285
-  m_EditorClassIdentifier: 
-  <Guid>k__BackingField: 11187285
-  <IsStartingNode>k__BackingField: 0
-  <OutputData>k__BackingField:
-  - <NextGuid>k__BackingField: 642693856
-  <Position>k__BackingField: {x: 8312, y: 874}
-  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4be7c3df4cdfee54e97bb83db6057bda, type: 2}
-  <Choices>k__BackingField:
-  - <Text>k__BackingField: ...
-    <CheckVariableSO>k__BackingField: {fileID: 0}
-    <ExpectedValue>k__BackingField: 0
-  <Texts>k__BackingField:
-  - <Text>k__BackingField: "\u0421\u0438\u0434\u0438, \u0412\u0430\u043B\u044C, \u044F
-      \u043F\u0440\u0438\u043D\u0435\u0441\u0443."
-    <VariableSO>k__BackingField: {fileID: 0}
-    <Animation>k__BackingField: {fileID: 0}
---- !u!114 &5467439787638077865
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
-  m_Name: -295630424
-  m_EditorClassIdentifier: 
-  <Guid>k__BackingField: -295630424
-  <IsStartingNode>k__BackingField: 0
-  <OutputData>k__BackingField:
-  - <NextGuid>k__BackingField: -1178180651
-  <Position>k__BackingField: {x: 5974, y: 874}
-  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 0548b52266a9cd648a91e4943df64927, type: 2}
-  <Choices>k__BackingField:
-  - <Text>k__BackingField: ...
-    <CheckVariableSO>k__BackingField: {fileID: 0}
-    <ExpectedValue>k__BackingField: 0
-  <Texts>k__BackingField:
-  - <Text>k__BackingField: "\u0426\u044B\u0446, \u0445\u043E\u043B\u0435\u0440\u0430!"
-    <VariableSO>k__BackingField: {fileID: 0}
-    <Animation>k__BackingField: {fileID: 0}
---- !u!114 &6153628797298766086
+--- !u!114 &7643230195060503099
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -270,52 +319,3 @@ MonoBehaviour:
       \u041F\u043E\u043C\u0438\u043D\u043A\u0438 \u0436\u0435."
     <VariableSO>k__BackingField: {fileID: 0}
     <Animation>k__BackingField: {fileID: 0}
---- !u!114 &6482763186973647608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f262818b55b0f4418296bad0176bdab, type: 3}
-  m_Name: 2086692620
-  m_EditorClassIdentifier: 
-  <Guid>k__BackingField: 2086692620
-  <IsStartingNode>k__BackingField: 0
-  <OutputData>k__BackingField:
-  - <NextGuid>k__BackingField: 11187285
-  <Position>k__BackingField: {x: 7430, y: 874}
-  <SpeakerSO>k__BackingField: {fileID: 11400000, guid: 4be7c3df4cdfee54e97bb83db6057bda, type: 2}
-  <Choices>k__BackingField:
-  - <Text>k__BackingField: ...
-    <CheckVariableSO>k__BackingField: {fileID: 0}
-    <ExpectedValue>k__BackingField: 0
-  <Texts>k__BackingField:
-  - <Text>k__BackingField: "\u0418 \u043A\u0442\u043E \u0432\u043E\u043E\u0431\u0449\u0435
-      \u0434\u043E\u0434\u0443\u043C\u0430\u043B\u0441\u044F \u043D\u0430 \u043F\u043E\u043C\u0438\u043D\u043A\u0430\u0445
-      \u0433\u043E\u043B\u0443\u0431\u0446\u044B \u043F\u043E\u0434\u0430\u0432\u0430\u0442\u044C?
-      \u0422\u0443\u0442 \u0443\u0436 \u043B\u0438\u0431\u043E \u043B\u043E\u0436\u043A\u0438,
-      \u043B\u0438\u0431\u043E \u0433\u043E\u043B\u0443\u0431\u0446\u044B. \u0418\u043D\u0430\u0447\u0435
-      \u043C\u043E\u0436\u0435\u0442 \u0432\u044B\u0439\u0442\u0438 \u043B\u0430\u0442\u0435\u0440\u0430\u043B\u044C\u043D\u043E. "
-    <VariableSO>k__BackingField: {fileID: 0}
-    <Animation>k__BackingField: {fileID: 0}
---- !u!114 &7814974591399653277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 018763a5676a422b80c06febeeab0287, type: 3}
-  m_Name: 642693856
-  m_EditorClassIdentifier: 
-  <Guid>k__BackingField: 642693856
-  <IsStartingNode>k__BackingField: 0
-  <OutputData>k__BackingField:
-  - <NextGuid>k__BackingField: 292141763
-  <Position>k__BackingField: {x: 8798, y: 950}
-  <ActionSO>k__BackingField: {fileID: 11400000, guid: 66b5ba40ef963d54db69fa07b704be58, type: 2}
