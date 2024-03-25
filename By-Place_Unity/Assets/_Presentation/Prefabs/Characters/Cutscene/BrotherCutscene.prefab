@@ -9,18 +9,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3221605752829335564}
-  - component: {fileID: 3221605752829335560}
-  - component: {fileID: 3221605752829335561}
   - component: {fileID: 9038234399197828607}
   - component: {fileID: 2427317650034176987}
   - component: {fileID: 6124567684698321717}
   - component: {fileID: 816773911385301305}
   - component: {fileID: 2984063450484054543}
-  - component: {fileID: 6125400298749556837}
   - component: {fileID: 7537015392191785252}
   - component: {fileID: 2525818948455556028}
   m_Layer: 7
-  m_Name: Brother
+  m_Name: BrotherCutscene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,33 +40,6 @@ Transform:
   - {fileID: 233109752284421766}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3221605752829335560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3221605752829335555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dc2c628df8c42119a64c14b9135d79d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ds: {fileID: 11400000, guid: 953146fe624c6ed40a2e31942047ebe2, type: 2}
-  interactPoint: {fileID: 3221605753068141321}
---- !u!114 &3221605752829335561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3221605752829335555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f033b9e8c23046a1a492520659b0e57b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  configSO: {fileID: 11400000, guid: e8ef1bb9dc71b5e4bbcf1550b14cd02c, type: 2}
 --- !u!114 &9038234399197828607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,20 +108,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   identitySO: {fileID: 0}
   target: {fileID: 0}
---- !u!114 &6125400298749556837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3221605752829335555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52e33bf42b21417f8f82c0e481bfff1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Target>k__BackingField: {fileID: 3221605752829335555}
-  <Path>k__BackingField: NPC/Brother
 --- !u!195 &7537015392191785252
 NavMeshAgent:
   m_ObjectHideFlags: 0
