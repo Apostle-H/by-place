@@ -1,5 +1,5 @@
 .title {
-    font-size: 20;
+    font-size: 10;
     -unity-font-style: bold;
 }
 

@@ -23,6 +23,8 @@ namespace Popup
         private DefaultPool<PopupElement> _popupsPool;
 
         private PopupElement _currentPopupElement;
+
+        private bool _initializedPosition;
         
         public int Id => identitySO.Id;
 
@@ -46,6 +48,8 @@ namespace Popup
         private void Start() => _resolver.Register(this);
 
         private void OnDestroy() => _resolver.Unregister(this);
+
+        private void Update() => SetPosition(target.position);
 
         public void Popup(string message)
         {
@@ -75,10 +79,14 @@ namespace Popup
         {
             SetPosition(target.position);
             _canvas.rootVisualElement.UnregisterCallback<GeometryChangedEvent>(SetPosition);
+            _initializedPosition = true;
         }
         
         private void SetPosition(Vector3 position)
         {
+            if (!_initializedPosition)
+                return;
+            
             var worldPos = position;
             var screenPosition = Camera.main.WorldToScreenPoint(worldPos);
             var screenPositionClamped = new Vector2(screenPosition.x / Screen.width, screenPosition.y / Screen.height);

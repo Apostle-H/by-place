@@ -1,4 +1,5 @@
-﻿using Popup;
+﻿using Animate.Resolve;
+using Popup;
 using Popup.Data;
 using Popup.Pool;
 using Popup.Timeline;
@@ -20,6 +21,7 @@ namespace Core.DI
         {
             ConfigureUI(builder);
             ConfigureAudio(builder);
+            ConfigureAnimate(builder);
             ConfigurePopup(builder);
         }
 
@@ -33,6 +35,11 @@ namespace Core.DI
             builder.RegisterComponentInHierarchy<SourcesCollector>();
             
             builder.Register<AudioPlayer>(Lifetime.Singleton);
+        }
+        
+        private void ConfigureAnimate(IContainerBuilder builder)
+        {
+            builder.Register<AnimationResolver>(Lifetime.Singleton);
         }
         
         private void ConfigurePopup(IContainerBuilder builder)
