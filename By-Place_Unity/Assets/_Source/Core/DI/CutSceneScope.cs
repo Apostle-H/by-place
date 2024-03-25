@@ -3,6 +3,7 @@ using Popup.Data;
 using Popup.Pool;
 using Popup.Timeline;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Utils.Pooling;
 using VContainer;
 using VContainer.Unity;
@@ -16,7 +17,13 @@ namespace Core.DI
         
         protected override void Configure(IContainerBuilder builder)
         {
+            ConfigureUI(builder);
             ConfigurePopup(builder);
+        }
+
+        private void ConfigureUI(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<UIDocument>();
         }
         
         private void ConfigurePopup(IContainerBuilder builder)
