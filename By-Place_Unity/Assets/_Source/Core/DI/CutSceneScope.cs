@@ -2,6 +2,7 @@
 using Popup.Data;
 using Popup.Pool;
 using Popup.Timeline;
+using Sound;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Utils.Pooling;
@@ -18,12 +19,20 @@ namespace Core.DI
         protected override void Configure(IContainerBuilder builder)
         {
             ConfigureUI(builder);
+            ConfigureAudio(builder);
             ConfigurePopup(builder);
         }
 
         private void ConfigureUI(IContainerBuilder builder)
         {
             builder.RegisterComponentInHierarchy<UIDocument>();
+        }
+        
+        private void ConfigureAudio(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInHierarchy<SourcesCollector>();
+            
+            builder.Register<AudioPlayer>(Lifetime.Singleton);
         }
         
         private void ConfigurePopup(IContainerBuilder builder)
