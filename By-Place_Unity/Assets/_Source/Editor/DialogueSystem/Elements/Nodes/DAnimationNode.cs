@@ -1,7 +1,7 @@
-﻿using Animate.Data;
-using Dialogue.Data.NodeParams;
+﻿using Dialogue.Data.NodeParams;
 using Dialogue.Data.Save.Nodes;
 using DialogueSystem.Windows;
+using Identity.Data;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
@@ -12,7 +12,7 @@ namespace DialogueSystem.Elements.Nodes
 {
     public class DAnimationNode : DNode
     {
-        public AAnimatableLink AnimatableLink { get; set; }
+        public AIdentitySO IdentitySO { get; set; }
         public AnimationClip Animation { get; set; }
 
         private ObjectField _animatableLinkField;
@@ -34,11 +34,11 @@ namespace DialogueSystem.Elements.Nodes
 
             _animatableLinkField = new ObjectField()
             {
-                objectType = typeof(AAnimatableLink),
-                value = AnimatableLink
+                objectType = typeof(AIdentitySO),
+                value = IdentitySO
             };
             _animatableLinkField.RegisterValueChangedCallback(evt => 
-                UpdateAnimatableLink((AAnimatableLink)evt.newValue));
+                UpdateAnimatableLink((AIdentitySO)evt.newValue));
 
             _animationField = new ObjectField()
             {
@@ -61,7 +61,7 @@ namespace DialogueSystem.Elements.Nodes
             RefreshExpandedState();
         }
 
-        private void UpdateAnimatableLink(AAnimatableLink value) => AnimatableLink = value;
+        private void UpdateAnimatableLink(AIdentitySO value) => IdentitySO = value;
 
         private void UpdateAnimation(AnimationClip value) => Animation = value;
     }

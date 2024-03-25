@@ -1,0 +1,11 @@
+﻿.popup {
+    background-color: black;
+    color: white;
+    width: auto;
+    height: auto;
+}
+
+.popup > .title {
+    -unity-text-align: middle-center;
+    white-space: normal;
+}

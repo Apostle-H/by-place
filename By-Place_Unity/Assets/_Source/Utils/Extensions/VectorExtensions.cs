@@ -24,5 +24,21 @@ namespace Utils.Extensions
         
         public static Vector3 ReplaceZ(this Vector3 target, Vector3 replace) =>
             target.ReplaceXYZ(replace, false, false, true);
+
+        public static Vector2 ReplaceXY(this Vector2 target, Vector2 replace, bool getX, bool getY)
+        {
+            if (getX)
+                target.x = replace.x;
+            if (getY)
+                target.y = replace.y;
+
+            return target;
+        }
+        
+        public static Vector2 ReplaceX(this Vector2 target, Vector2 replace) =>
+            target.ReplaceXY(replace, true, false);
+
+        public static Vector2 ReplaceY(this Vector2 target, Vector2 replace) =>
+            target.ReplaceXY(replace, false, true);
     }
 }

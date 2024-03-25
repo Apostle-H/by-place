@@ -169,7 +169,7 @@ namespace DialogueSystem.Utils
             else if (node is DAnimationNode animationNode)
             {
                 var animationNodeSO = AssetsService.CreateSubAsset<DAnimationSO>(parent, animationNode.Guid.ToString());
-                animationNodeSO.AnimatableLink = animationNode.AnimatableLink;
+                animationNodeSO.IdentitySO = animationNode.IdentitySO;
                 animationNodeSO.Animation = animationNode.Animation;
 
                 nodeSO = animationNodeSO;
@@ -266,7 +266,7 @@ namespace DialogueSystem.Utils
                 case DAnimationSO animationNodeSO:
                     var animationNode = new DAnimationNode(nodeSO.Position, nodeSO.Guid)
                     {
-                        AnimatableLink = animationNodeSO.AnimatableLink,
+                        IdentitySO = animationNodeSO.IdentitySO,
                         Animation = animationNodeSO.Animation
                     };
 

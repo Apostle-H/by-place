@@ -1,4 +1,5 @@
-﻿using ActionSystem;
+﻿using System;
+using ActionSystem;
 using Animate;
 using Animate.Resolve;
 using Character;
@@ -29,6 +30,10 @@ using Movement;
 using Movement.Data;
 using Navigation.Location;
 using PointNClick.Data;
+using Popup;
+using Popup.Data;
+using Popup.Pool;
+using Popup.Timeline;
 using QuestSystem;
 using QuestSystem.Actions;
 using QuestSystem.View;
@@ -44,10 +49,12 @@ using StateMachine;
 using UnityEngine;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UIElements;
+using Utils.Pooling;
 using Utils.Runners;
 using Utils.Services;
 using VContainer;
 using VContainer.Unity;
+using Object = UnityEngine.Object;
 
 namespace Core.DI
 {
@@ -75,6 +82,9 @@ namespace Core.DI
         [SerializeField] private JournalViewConfigSO journalViewConfigSO;
         [SerializeField] private QuestPageViewConfigSO questPageViewConfigSO;
 
+        [Header("Popup")] 
+        [SerializeField] private PopupConfigSO popupConfigSO;
+
         protected override void Configure(IContainerBuilder builder)
         {
             ConfigureCore(builder);
@@ -92,6 +102,7 @@ namespace Core.DI
             ConfigureQuestSystem(builder);
             ConfigureJournal(builder);
             ConfigureInventory(builder);
+            ConfigurePopup(builder);
         }
 
         private void ConfigureCore(IContainerBuilder builder)
@@ -261,6 +272,18 @@ namespace Core.DI
                 entryPoints.Add<JournalView>();
                 entryPoints.Add<QuestPageView>();
             });
+        }
+
+        private void ConfigurePopup(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(popupConfigSO);
+            
+            builder.RegisterComponentInHierarchy<TimelinePopupBehaviorsInjector>();
+            
+            builder.Register<PopupManagersResolver>(Lifetime.Singleton);
+            
+            builder.Register<PoolConfig<PopupElement>, PopupPoolConfig>(Lifetime.Singleton);
+            builder.Register<DefaultPool<PopupElement>>(Lifetime.Singleton);
         }
     }
 }

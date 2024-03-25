@@ -1,5 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Presentation/UI/BaseStyles.uss?fileID=7433441132597879392&amp;guid=8b7acfaacd494cb48a72e5be37ac1de6&amp;type=3#BaseStyles" />
     <Style src="project://database/Assets/_Presentation/UI/Journal/JournalStyleSheet.uss?fileID=7433441132597879392&amp;guid=dcde76d5190c3bf4fbfa9bf0bc0bb98b&amp;type=3#JournalStyleSheet" />
+    <Style src="project://database/Assets/_Presentation/UI/Popup/PopupStyles.uss?fileID=7433441132597879392&amp;guid=a5c9146cd93847d3adfea252d66109d7&amp;type=3#PopupStyles" />
     <ui:Label display-tooltip-when-elided="true" name="CursorText" text="some text" style="position: absolute; width: 20%; height: 5%; font-size: 25%; white-space: normal; -unity-text-align: middle-left;" />
     <ui:VisualElement name="QuestPanel" picking-mode="Ignore" style="position: absolute; right: 0; width: 30%; height: 100%;" />
     <ui:VisualElement name="JournalPanel" picking-mode="Ignore" style="width: 100%; height: 100%; position: absolute;">

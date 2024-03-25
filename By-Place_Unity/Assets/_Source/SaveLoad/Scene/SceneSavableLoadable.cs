@@ -36,6 +36,7 @@ namespace SaveLoad.Scene
 
         public void LoadSaveData(SceneSave saveData)
         {
+            Debug.Log($"{Target.name} {saveData.Active}");
             Target.SetActive(saveData.Active);
             
             Target.transform.position = saveData.Position.GetUnityVector();

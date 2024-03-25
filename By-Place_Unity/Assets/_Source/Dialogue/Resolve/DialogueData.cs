@@ -94,7 +94,7 @@ namespace Dialogue.Resolve
 
         private void ConvertAnimation(DAnimationSO nodeSO, ref DAnimation animation, ref List<int> nextGuids)
         {
-            animation.AnimatableId = nodeSO.AnimatableLink?.Id ?? int.MaxValue;
+            animation.AnimatableId = nodeSO.IdentitySO?.Id ?? int.MaxValue;
             animation.AnimationStateHash = Animator.StringToHash(nodeSO.Animation?.name ?? "-");
             nextGuids.Add(nodeSO.OutputData[0].NextGuid);
         }

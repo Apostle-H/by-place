@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="PopupRoot" style="width: 300px; flex-direction: column-reverse; position: absolute; justify-content: flex-start; height: auto;">
+        <ui:VisualElement name="PopupBox" style="position: absolute; bottom: 0; width: 100%;" />
+    </ui:VisualElement>
+</ui:UXML>

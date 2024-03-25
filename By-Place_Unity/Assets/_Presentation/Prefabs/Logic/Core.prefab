@@ -100,6 +100,7 @@ MonoBehaviour:
   questManagerViewConfigSO: {fileID: 11400000, guid: 9e753e61b7970614d84433ab1a72f00e, type: 2}
   journalViewConfigSO: {fileID: 11400000, guid: 18083b2c8b506c045ba9bfdf7213b39a, type: 2}
   questPageViewConfigSO: {fileID: 11400000, guid: 881d574041004bd4fa53ad357df02eb7, type: 2}
+  popupConfigSO: {fileID: 11400000, guid: b6c13701ae282db498053ef8d7e67290, type: 2}
 --- !u!1 &7258492380449199985
 GameObject:
   m_ObjectHideFlags: 0
