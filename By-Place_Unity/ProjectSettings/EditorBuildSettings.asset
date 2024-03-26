@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Presentation/Scenes/MainMenu.unity
+    guid: d156a351f628e69449bbb3465981086d
+  - enabled: 1
+    path: Assets/_Presentation/Scenes/Cutscene.unity
+    guid: a3a7533d6d3efff4384f9e8596ed4c56
+  - enabled: 1
     path: Assets/_Presentation/Scenes/BlockOut.unity
     guid: c5fac761aa1a69f44b0aae2fc03075f4
   m_configObjects: {}

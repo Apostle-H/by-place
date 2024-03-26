@@ -34,8 +34,6 @@ namespace Popup
         {
             _resolver = resolver;
             _canvas = canvas;
-            
-            _canvas.rootVisualElement.RegisterCallback<GeometryChangedEvent>(SetPosition);
 
             _popupRoot = configSO.PopupBoxTreeAsset.Instantiate().Q<VisualElement>("PopupRoot");
             _popupBox = _popupRoot.Q<VisualElement>("PopupBox");
@@ -45,7 +43,11 @@ namespace Popup
 
         private void Awake() => _canvas.rootVisualElement.Add(_popupRoot);
 
-        private void Start() => _resolver.Register(this);
+        private void Start()
+        {
+            _canvas.rootVisualElement.RegisterCallback<GeometryChangedEvent>(SetPosition);
+            _resolver.Register(this);
+        }
 
         private void OnDestroy() => _resolver.Unregister(this);
 

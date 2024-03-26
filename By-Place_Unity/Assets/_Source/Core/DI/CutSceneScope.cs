@@ -7,6 +7,7 @@ using Sound;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Utils.Pooling;
+using Utils.Services;
 using VContainer;
 using VContainer.Unity;
 
@@ -19,12 +20,18 @@ namespace Core.DI
         
         protected override void Configure(IContainerBuilder builder)
         {
+            ConfigureServices(builder);
             ConfigureUI(builder);
             ConfigureAudio(builder);
             ConfigureAnimate(builder);
             ConfigurePopup(builder);
         }
 
+        private void ConfigureServices(IContainerBuilder builder)
+        {
+            builder.Register<SceneService>(Lifetime.Singleton);
+        }
+        
         private void ConfigureUI(IContainerBuilder builder)
         {
             builder.RegisterComponentInHierarchy<UIDocument>();

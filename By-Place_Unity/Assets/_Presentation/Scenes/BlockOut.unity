@@ -2739,10 +2739,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
-    - target: {fileID: 4785224941468999459, guid: 5ee0fce0550367d49b0a1ecfe8911a90, type: 3}
-      propertyPath: identitySO
-      value: 
-      objectReference: {fileID: 11400000, guid: e5c7c2dffd49b9c44a561e298db1c236, type: 2}
     - target: {fileID: 6125400298749556837, guid: 5ee0fce0550367d49b0a1ecfe8911a90, type: 3}
       propertyPath: <Path>k__BackingField
       value: NPC/Sister
@@ -4254,10 +4250,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
-    - target: {fileID: 4785224941468999459, guid: 5ee0fce0550367d49b0a1ecfe8911a90, type: 3}
-      propertyPath: identitySO
-      value: 
-      objectReference: {fileID: 11400000, guid: 0548b52266a9cd648a91e4943df64927, type: 2}
     - target: {fileID: 6125400298749556837, guid: 5ee0fce0550367d49b0a1ecfe8911a90, type: 3}
       propertyPath: <Path>k__BackingField
       value: NPC/Uncle
@@ -24918,10 +24910,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 105
       objectReference: {fileID: 0}
-    - target: {fileID: 4785224941468999459, guid: 5ee0fce0550367d49b0a1ecfe8911a90, type: 3}
-      propertyPath: identitySO
-      value: 
-      objectReference: {fileID: 11400000, guid: 4c9eccb44f6c77941883c7bd7fdeb7de, type: 2}
     - target: {fileID: 6125400298749556837, guid: 5ee0fce0550367d49b0a1ecfe8911a90, type: 3}
       propertyPath: <Path>k__BackingField
       value: NPC/Brother
@@ -30843,7 +30831,7 @@ PrefabInstance:
       objectReference: {fileID: 18910976}
     - target: {fileID: 622873274617593408, guid: 0e4a1a30b4a8cd042a26f19f9130f930, type: 3}
       propertyPath: autoInjectGameObjects.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 622873274617593408, guid: 0e4a1a30b4a8cd042a26f19f9130f930, type: 3}
       propertyPath: autoInjectGameObjects.Array.data[0]

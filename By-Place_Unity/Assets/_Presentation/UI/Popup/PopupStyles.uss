@@ -5,7 +5,7 @@
     height: auto;
 }
 
-.popup > .title {
+.popup > .text {
     -unity-text-align: middle-center;
     white-space: normal;
 }

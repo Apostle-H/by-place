@@ -1,8 +1,5 @@
-﻿using System;
-using ActionSystem;
-using Animate;
+﻿using ActionSystem;
 using Animate.Resolve;
-using Character;
 using Character.Data;
 using Character.Movement;
 using Character.StateMachine;
@@ -21,13 +18,10 @@ using Interactions;
 using Inventory.Actions;
 using Inventory.View;
 using Inventory.View.Data;
-using Journal.Quest;
 using Journal.Quest.View;
 using Journal.Quest.View.Data;
 using Journal.View;
 using Journal.View.Data;
-using Movement;
-using Movement.Data;
 using Navigation.Location;
 using PointNClick.Data;
 using Popup;
@@ -82,9 +76,6 @@ namespace Core.DI
         [SerializeField] private JournalViewConfigSO journalViewConfigSO;
         [SerializeField] private QuestPageViewConfigSO questPageViewConfigSO;
 
-        [Header("Popup")] 
-        [SerializeField] private PopupConfigSO popupConfigSO;
-
         protected override void Configure(IContainerBuilder builder)
         {
             ConfigureCore(builder);
@@ -102,7 +93,6 @@ namespace Core.DI
             ConfigureQuestSystem(builder);
             ConfigureJournal(builder);
             ConfigureInventory(builder);
-            ConfigurePopup(builder);
         }
 
         private void ConfigureCore(IContainerBuilder builder)
@@ -272,18 +262,6 @@ namespace Core.DI
                 entryPoints.Add<JournalView>();
                 entryPoints.Add<QuestPageView>();
             });
-        }
-
-        private void ConfigurePopup(IContainerBuilder builder)
-        {
-            builder.RegisterInstance(popupConfigSO);
-            
-            builder.RegisterComponentInHierarchy<TimelinePopupBehaviorsInjector>();
-            
-            builder.Register<PopupManagersResolver>(Lifetime.Singleton);
-            
-            builder.Register<PoolConfig<PopupElement>, PopupPoolConfig>(Lifetime.Singleton);
-            builder.Register<DefaultPool<PopupElement>>(Lifetime.Singleton);
         }
     }
 }

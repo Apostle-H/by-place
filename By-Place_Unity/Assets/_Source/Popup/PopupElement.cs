@@ -13,7 +13,7 @@ namespace Popup
             AddToClassList("popup");
 
             TextLabel = new Label() { name = "PopupText"};
-            TextLabel.AddToClassList("title");
+            TextLabel.AddToClassList("text");
             Add(TextLabel);
         }
     }

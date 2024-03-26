@@ -1,0 +1,20 @@
+.main-menu-panel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-menu {
+    width: auto;
+    height: auto;
+    position: absolute;
+    background-color: black;
+    border-color: white;
+    border-width: 5px;
+}
+
+.main-menu > .title {
+    -unity-text-align: middle-center;
+}

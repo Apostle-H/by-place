@@ -1,6 +1,10 @@
 .title {
-    font-size: 10;
+    font-size: 30;
     -unity-font-style: bold;
+}
+
+.text {
+    font-size: 10;
 }
 
 .fade-in {
